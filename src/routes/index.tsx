@@ -1,10 +1,13 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { ArrowDown, ArrowUpRight, Menu } from "lucide-react";
 import { useEffect, useRef } from "react";
 import campaignImage from "@/assets/flux-campaign.jpg";
 import { createFileRoute } from "@tanstack/react-router";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   ["01", "Brand identity", "Naming, systems and the words that make it feel inevitable."],
