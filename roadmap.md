@@ -1,0 +1,3 @@
+- [ ] Recreate the reference-inspired Flux Studio landing page
+- [ ] Add responsive motion and scrolling behavior
+- [ ] Verify the home page at desktop and mobile sizes
