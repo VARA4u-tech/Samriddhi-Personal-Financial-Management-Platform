@@ -1,9 +1,9 @@
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { ArrowDown, ArrowUp, ArrowUpRight, Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { type ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
 import campaignImage from "@/assets/flux-campaign.jpg";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -41,6 +41,33 @@ function BrandMark() {
   return <span className="grid size-8 place-items-center rounded-full bg-flux-orange font-display text-sm font-bold text-primary-foreground">F</span>;
 }
 
+function MagneticLink({ children, className, ...props }: ComponentPropsWithoutRef<"a">) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.a
+      {...props}
+      className={className}
+      style={{ x, y }}
+      onPointerMove={(event) => {
+        if (prefersReducedMotion || event.pointerType === "touch") return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        x.set((event.clientX - rect.left - rect.width / 2) * 0.12);
+        y.set((event.clientY - rect.top - rect.height / 2) * 0.18);
+      }}
+      onPointerLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
 function ProjectTile({ project, index }: { project: (typeof projects)[number]; index: number }) {
   return (
     <motion.a
@@ -51,7 +78,7 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative aspect-[1.45] overflow-hidden rounded-[1.5rem] border border-foreground/10 bg-card transition-transform duration-700 group-hover:-translate-y-2">
+      <div data-tilt className="flux-tilt relative aspect-[1.45] overflow-hidden rounded-[1.5rem] border border-foreground/10 bg-card transition-transform duration-700 group-hover:-translate-y-2">
         {project.image ? (
           <img src={campaignImage} alt="Sonder House campaign packaging" width={1408} height={912} loading="lazy" className="size-full object-cover transition-transform duration-1000 group-hover:scale-105" />
         ) : (
@@ -75,35 +102,83 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
 
 function Index() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollY, scrollYProgress } = useScroll();
   const smoothY = useSpring(scrollY, { stiffness: 80, damping: 22, mass: 0.4 });
   const heroY = useTransform(smoothY, [0, 900], [0, 170]);
 
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    const lenis = prefersReducedMotion ? null : new Lenis({ duration: 1.15, smoothWheel: true });
     let frame = 0;
-    const raf = (time: number) => { lenis.raf(time); frame = requestAnimationFrame(raf); };
-    frame = requestAnimationFrame(raf);
+    const raf = (time: number) => { lenis?.raf(time); frame = requestAnimationFrame(raf); };
+    if (lenis) frame = requestAnimationFrame(raf);
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>("[data-gsap-reveal]").forEach((element) => {
         gsap.fromTo(element, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 82%" } });
       });
     }, heroRef);
-    return () => { cancelAnimationFrame(frame); lenis.destroy(); ctx.revert(); };
-  }, []);
+    return () => { cancelAnimationFrame(frame); lenis?.destroy(); ctx.revert(); };
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const root = heroRef.current;
+    const cursor = cursorRef.current;
+    if (!root || !cursor || prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+    const handlePointerMove = (event: PointerEvent) => {
+      cursor.style.opacity = "1";
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+    };
+    const handlePointerLeave = () => { cursor.style.opacity = "0"; };
+    root.addEventListener("pointermove", handlePointerMove);
+    root.addEventListener("pointerleave", handlePointerLeave);
+    return () => {
+      root.removeEventListener("pointermove", handlePointerMove);
+      root.removeEventListener("pointerleave", handlePointerLeave);
+    };
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const root = heroRef.current;
+    if (!root || prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
+    const tiltCards = Array.from(root.querySelectorAll<HTMLElement>("[data-tilt]"));
+    const cleanups = tiltCards.map((card) => {
+      const handlePointerMove = (event: PointerEvent) => {
+        const rect = card.getBoundingClientRect();
+        const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 7;
+        const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -7;
+        card.style.setProperty("--tilt-x", `${rotateX}deg`);
+        card.style.setProperty("--tilt-y", `${rotateY}deg`);
+      };
+      const resetTilt = () => {
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+      };
+      card.addEventListener("pointermove", handlePointerMove);
+      card.addEventListener("pointerleave", resetTilt);
+      return () => {
+        card.removeEventListener("pointermove", handlePointerMove);
+        card.removeEventListener("pointerleave", resetTilt);
+      };
+    });
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, [prefersReducedMotion]);
 
   return (
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
+      <div ref={cursorRef} aria-hidden="true" className="flux-cursor pointer-events-none fixed left-0 top-0 z-50 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-flux-orange" />
+      <motion.div aria-hidden="true" className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-flux-orange" style={{ scaleX: scrollYProgress }} />
       <header className="relative z-30 px-4 pt-4 sm:px-6 sm:pt-6">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-foreground/10 bg-background/75 p-2 pl-3 backdrop-blur-xl">
+        <motion.nav initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-foreground/10 bg-background/75 p-2 pl-3 backdrop-blur-xl">
           <a href="#top" className="flex items-center gap-2 pr-3"><BrandMark /><span className="font-display text-lg font-bold tracking-tight">Flux Studio</span></a>
           <div className="hidden items-center gap-1 md:flex">
             {[["Work", "#work"], ["Services", "#services"], ["Studio", "#studio"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground">{label}</a>)}
           </div>
-          <a href="#contact" className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:block">Start a project</a>
+          <MagneticLink href="#contact" className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange sm:block">Start a project</MagneticLink>
           <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground sm:hidden">{menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}</button>
-        </nav>
+        </motion.nav>
         {menuOpen && (
           <div className="mx-auto mt-2 max-w-7xl rounded-[1.5rem] border border-foreground/10 bg-background/95 p-3 backdrop-blur-xl sm:hidden">
             <div className="grid gap-1">
@@ -133,13 +208,19 @@ function Index() {
           </div>
         </section>
 
+        <section aria-label="Flux studio specialties" className="overflow-hidden border-y border-foreground/10 py-4">
+          <div className="flux-marquee flex w-max items-center gap-8 whitespace-nowrap font-display text-2xl font-medium uppercase tracking-[-0.03em] text-muted-foreground sm:text-3xl">
+            {Array.from({ length: 2 }).map((_, index) => <span key={index} className="flex items-center gap-8">Brand worlds <span className="text-flux-orange">✳</span> Digital experiences <span className="text-flux-pink">✳</span> Motion systems <span className="text-flux-lime">✳</span></span>)}
+          </div>
+        </section>
+
         <section className="border-y border-foreground/10 py-16 sm:py-24" data-gsap-reveal>
           <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="max-w-5xl font-display text-[clamp(2.2rem,5.4vw,5.4rem)] font-medium leading-[0.95] tracking-[-0.045em]">We treat every project as a piece of <span className="text-flux-orange">editorial</span> — considered, confident and quietly <span className="text-flux-pink">kinetic.</span></p></div>
         </section>
 
         <section id="services" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28" data-gsap-reveal>
           <div className="mb-10 flex items-end justify-between"><h2 className="font-display text-3xl font-medium tracking-tight sm:text-5xl">What we do</h2><span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">04 disciplines</span></div>
-          <div className="divide-y divide-foreground/10 border-y border-foreground/10">{services.map(([number, title, description]) => <div key={number} className="flex flex-col gap-3 py-6 sm:flex-row sm:items-baseline sm:justify-between"><div className="flex items-baseline gap-5"><span className="text-sm tabular-nums text-muted-foreground">{number}</span><h3 className="font-display text-2xl font-medium tracking-tight sm:text-3xl">{title}</h3></div><p className="max-w-sm text-sm text-muted-foreground sm:text-right">{description}</p></div>)}</div>
+           <div className="divide-y divide-foreground/10 border-y border-foreground/10">{services.map(([number, title, description]) => <div key={number} className="group flex flex-col gap-3 py-6 transition-colors hover:bg-foreground/[0.03] sm:flex-row sm:items-baseline sm:justify-between"><div className="flex items-baseline gap-5"><span className="text-sm tabular-nums text-muted-foreground transition-colors group-hover:text-flux-orange">{number}</span><h3 className="font-display text-2xl font-medium tracking-tight transition-transform duration-300 group-hover:translate-x-2 sm:text-3xl">{title}</h3><ArrowUpRight className="size-4 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" /></div><p className="max-w-sm text-sm text-muted-foreground sm:text-right">{description}</p></div>)}</div>
         </section>
 
         <section id="work" className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32" data-gsap-reveal>
@@ -158,8 +239,8 @@ function Index() {
                 <p className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-flux-pink"><span className="size-1.5 animate-pulse rounded-full bg-flux-pink" />Have a project in mind?</p>
                 <a href="mailto:hello@flux.studio" className="group mt-5 block font-display text-[clamp(2.9rem,10.5vw,9rem)] font-medium leading-[0.88] tracking-[-0.06em] transition-colors hover:text-flux-orange">Let&apos;s make<br /><em className="font-normal">it move</em><ArrowUpRight className="ml-3 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" /></a>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <a href="mailto:hello@flux.studio" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5">Start a project</a>
-                  <a href="mailto:hello@flux.studio" className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium transition-colors hover:border-foreground/50">hello@flux.studio</a>
+                   <MagneticLink href="mailto:hello@flux.studio" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange">Start a project</MagneticLink>
+                   <MagneticLink href="mailto:hello@flux.studio" className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium transition-colors hover:border-flux-orange">hello@flux.studio</MagneticLink>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-5 lg:pl-10">
