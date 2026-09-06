@@ -151,8 +151,42 @@ function Index() {
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-12"><div className="md:col-span-7"><blockquote className="max-w-3xl font-display text-4xl font-medium leading-[0.95] tracking-[-0.04em] sm:text-6xl">“Flux took a fuzzy brief and turned it into a brand we genuinely believe in.”</blockquote><p className="mt-8 text-sm text-muted-foreground">Dana Reyes — Founder, Northwind</p></div><div className="md:col-span-5 md:border-l md:border-foreground/10 md:pl-10"><p className="mb-5 text-xs uppercase tracking-[0.2em] text-flux-orange">The studio</p><p className="max-w-sm text-lg leading-relaxed text-muted-foreground">A small, senior team of designers and directors working across three cities. We keep the room close and the work moving.</p></div></div>
         </section>
 
-        <footer id="contact" className="border-t border-foreground/10 px-5 pb-10 pt-20 sm:px-8 sm:pt-28"><div className="mx-auto max-w-7xl"><p className="text-xs uppercase tracking-[0.22em] text-flux-pink">Have a project in mind?</p><a href="mailto:hello@flux.studio" className="group mt-5 block font-display text-[clamp(3.6rem,11.8vw,11rem)] font-medium leading-[0.82] tracking-[-0.065em] transition-colors hover:text-flux-orange">Let&apos;s make<br /><em className="font-normal">it move</em><ArrowUpRight className="ml-3 inline size-[0.55em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" /></a><div className="mt-16 flex flex-col justify-between gap-6 border-t border-foreground/10 pt-7 text-sm sm:flex-row sm:items-center"><span className="font-display text-lg font-semibold">Flux Studio</span><div className="flex gap-5 text-muted-foreground"><a href="#work" className="hover:text-foreground">Work</a><a href="#services" className="hover:text-foreground">Services</a><a href="mailto:hello@flux.studio" className="hover:text-foreground">Email</a></div><span className="text-muted-foreground">© 2026 Flux Studio</span></div></div></footer>
-      </main>
+        <footer id="contact" className="border-t border-foreground/10 px-5 pb-8 pt-20 sm:px-8 sm:pt-28" data-gsap-reveal>
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <p className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-flux-pink"><span className="size-1.5 animate-pulse rounded-full bg-flux-pink" />Have a project in mind?</p>
+                <a href="mailto:hello@flux.studio" className="group mt-5 block font-display text-[clamp(2.9rem,10.5vw,9rem)] font-medium leading-[0.88] tracking-[-0.06em] transition-colors hover:text-flux-orange">Let&apos;s make<br /><em className="font-normal">it move</em><ArrowUpRight className="ml-3 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" /></a>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a href="mailto:hello@flux.studio" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5">Start a project</a>
+                  <a href="mailto:hello@flux.studio" className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium transition-colors hover:border-foreground/50">hello@flux.studio</a>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-5 lg:pl-10">
+                <div>
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Sitemap</p>
+                  <ul className="space-y-2.5 text-sm">{[["Work", "#work"], ["Services", "#services"], ["Studio", "#studio"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="transition-colors hover:text-flux-orange">{label}</a></li>)}</ul>
+                </div>
+                <div>
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Socials</p>
+                  <ul className="space-y-2.5 text-sm">{["Instagram", "Behance", "Dribbble", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 transition-colors hover:text-flux-pink">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Studios</p>
+                  <ul className="space-y-2.5 text-sm text-muted-foreground"><li>Amsterdam</li><li>Lisbon</li><li>Kolkata</li></ul>
+                </div>
+              </div>
+            </div>
+            <div className="mt-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-t border-foreground/10 pt-7 text-sm sm:flex sm:justify-between">
+              <span className="flex min-w-0 items-center gap-2.5"><BrandMark /><span className="truncate font-display text-lg font-semibold">Flux Studio</span></span>
+              <div className="hidden gap-5 text-muted-foreground sm:flex"><a href="#work" className="hover:text-foreground">Work</a><a href="#services" className="hover:text-foreground">Services</a><a href="mailto:hello@flux.studio" className="hover:text-foreground">Email</a></div>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-muted-foreground sm:text-sm">© 2026</span>
+                <a href="#top" aria-label="Back to top" className="grid size-10 shrink-0 place-items-center rounded-full border border-foreground/20 transition-colors hover:bg-foreground hover:text-background"><ArrowUp className="size-4" /></a>
+              </div>
+            </div>
+          </div>
+        </footer>
     </div>
   );
 }
