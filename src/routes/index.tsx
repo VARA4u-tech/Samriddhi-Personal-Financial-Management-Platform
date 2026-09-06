@@ -102,8 +102,16 @@ function Index() {
             {[["Work", "#work"], ["Services", "#services"], ["Studio", "#studio"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground">{label}</a>)}
           </div>
           <a href="#contact" className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:block">Start a project</a>
-          <a href="#contact" aria-label="Start a project" className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground sm:hidden"><Menu className="size-4" /></a>
+          <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground sm:hidden">{menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}</button>
         </nav>
+        {menuOpen && (
+          <div className="mx-auto mt-2 max-w-7xl rounded-[1.5rem] border border-foreground/10 bg-background/95 p-3 backdrop-blur-xl sm:hidden">
+            <div className="grid gap-1">
+              {[["Work", "#work"], ["Services", "#services"], ["Studio", "#studio"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)} className="flex items-center justify-between rounded-2xl px-4 py-3 font-display text-xl font-medium transition-colors hover:bg-foreground/5">{label}<ArrowUpRight className="size-4 text-muted-foreground" /></a>)}
+              <a href="#contact" onClick={() => setMenuOpen(false)} className="mt-2 rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground">Start a project</a>
+            </div>
+          </div>
+        )}
       </header>
 
       <main id="top">
