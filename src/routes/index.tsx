@@ -75,6 +75,7 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
 
 function Index() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const smoothY = useSpring(scrollY, { stiffness: 80, damping: 22, mass: 0.4 });
   const heroY = useTransform(smoothY, [0, 900], [0, 170]);
