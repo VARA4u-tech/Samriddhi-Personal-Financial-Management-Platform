@@ -118,7 +118,7 @@ function Index() {
         <section className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-32">
           <motion.div style={{ y: heroY }} className="mx-auto max-w-7xl">
             <p className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-flux-orange"><span className="size-1.5 rounded-full bg-flux-orange" />Independent creative studio · Est. 2019</p>
-            <h1 className="max-w-6xl font-display text-[clamp(4.1rem,12.3vw,11rem)] font-medium leading-[0.82] tracking-[-0.06em] text-balance">Ideas set<br />in <span className="text-flux-orange">motion</span>,<br /><em className="font-normal text-flux-pink">made human.</em></h1>
+            <h1 className="max-w-6xl font-display text-[clamp(3.1rem,12.3vw,11rem)] font-medium leading-[0.85] tracking-[-0.06em] text-balance">Ideas set<br />in <span className="text-flux-orange">motion</span>,<br /><em className="font-normal text-flux-pink">made human.</em></h1>
             <div className="mt-12 flex flex-col justify-between gap-7 md:flex-row md:items-end">
               <p className="max-w-md text-lg leading-relaxed text-muted-foreground">Strategy, design and motion for ambitious teams. We shape identities that feel warm, considered and quietly unmissable.</p>
               <a href="#work" className="group flex items-center gap-3 text-sm font-semibold"><span className="grid size-11 place-items-center rounded-full border border-foreground/20 transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><ArrowDown className="size-4" /></span>See selected work</a>
