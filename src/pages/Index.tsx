@@ -320,11 +320,11 @@ export default function Index() {
                     <input
                       type="email"
                       placeholder="your@email.com"
-                      className="font-display flex-1 rounded-full border border-foreground/30 bg-foreground/10 backdrop-blur-sm px-5 py-3 text-sm text-foreground outline-none placeholder:opacity-50 focus:border-foreground/60 transition-colors"
+                      className="font-display flex-1 rounded-full border border-black/30 bg-black/20 px-5 py-3 text-sm text-black outline-none placeholder:text-black placeholder:opacity-60 focus:border-black/60 transition-colors"
                     />
                     <button
                       type="submit"
-                      className="font-display rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-80 whitespace-nowrap"
+                      className="font-display rounded-full bg-black px-7 py-3 text-sm font-semibold text-flux-lime transition-opacity hover:opacity-80 whitespace-nowrap"
                     >
                       Subscribe →
                     </button>
