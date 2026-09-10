@@ -282,28 +282,28 @@ export default function Index() {
 
               {/* Sitemap — pink block */}
               <div className="flux-float col-span-1 sm:col-span-2 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-pink p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-0.5s' }}>
-                <span className="font-display text-3xl font-semibold leading-none">Site</span>
+                <span className="font-display text-8xl font-semibold leading-none">Site</span>
                 <div>
                   <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Sitemap</p>
-                  <ul className="space-y-2 font-display text-sm font-medium">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="hover:underline underline-offset-2">{label}</a></li>)}</ul>
+                  <ul className="space-y-2 font-display text-base font-medium">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="hover:underline underline-offset-2">{label}</a></li>)}</ul>
                 </div>
               </div>
 
               {/* Socials — lime block */}
               <div className="flux-float col-span-1 sm:col-span-3 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-lime p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-1.5s' }}>
-                <span className="font-display text-3xl font-semibold leading-none">Social</span>
+                <span className="font-display text-8xl font-semibold leading-none">Social</span>
                 <div>
                   <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Socials</p>
-                  <ul className="space-y-2 font-display text-sm font-medium">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
+                  <ul className="space-y-2 font-display text-base font-medium">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
                 </div>
               </div>
 
               {/* Support — violet block */}
               <div className="flux-float col-span-1 sm:col-span-5 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
-                <span className="font-display text-3xl font-semibold leading-none">Help</span>
+                <span className="font-display text-8xl font-semibold leading-none">Help</span>
                 <div>
                   <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
-                  <div className="flex flex-col gap-2 font-display text-sm font-semibold opacity-90"><a href="#" className="hover:underline">Help Center</a><a href="#" className="hover:underline">Contact Us</a><a href="#" className="hover:underline">Privacy Policy</a></div>
+                  <div className="flex flex-col gap-2 font-display text-base font-semibold opacity-90"><a href="#" className="hover:underline">Help Center</a><a href="#" className="hover:underline">Contact Us</a><a href="#" className="hover:underline">Privacy Policy</a></div>
                 </div>
               </div>
 
