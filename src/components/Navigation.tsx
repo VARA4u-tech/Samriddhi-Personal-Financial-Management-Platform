@@ -45,12 +45,23 @@ export function Navigation() {
   const [isHovered, setIsHovered] = useState(false);
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
       setIsScrolled(latest > 100);
     });
   }, [scrollY]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsAtBottom(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    const footer = document.getElementById("contact");
+    if (footer) observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -90,6 +101,8 @@ export function Navigation() {
       <header className="fixed bottom-6 left-0 right-0 z-[100] px-4 pointer-events-none flex justify-center">
         <motion.nav 
           layout
+          animate={{ y: isAtBottom ? 100 : 0, opacity: isAtBottom ? 0 : 1 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className="pointer-events-auto flex items-center gap-2 rounded-full border border-foreground/10 bg-background/80 p-2 pl-3 backdrop-blur-xl transition-shadow hover:shadow-xl"

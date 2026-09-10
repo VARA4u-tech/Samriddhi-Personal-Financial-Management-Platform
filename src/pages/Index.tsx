@@ -258,9 +258,9 @@ export default function Index() {
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-12"><div className="md:col-span-7"><blockquote className="max-w-3xl font-display text-4xl font-medium leading-[0.95] tracking-[-0.04em] sm:text-6xl">"Samriddhi gave me the clarity I needed to take control of my finances and actually reach my savings goals."</blockquote><p className="mt-8 text-sm text-muted-foreground">Alex Chen — Early Adopter</p></div><div className="md:col-span-5 md:border-l md:border-foreground/10 md:pl-10"><p className="mb-5 text-xs uppercase tracking-[0.2em] text-flux-orange">The Platform</p><p className="max-w-sm text-lg leading-relaxed text-muted-foreground">A comprehensive suite of tools designed to simplify your financial life. From daily transactions to long-term goals, we've got you covered.</p></div></div>
         </section>
 
-        <footer id="contact" className="px-4 pb-32 pt-0 sm:px-6 sm:pb-36" data-gsap-reveal>
-          <div className="w-full">
-            <div className="grid grid-cols-2 gap-2 rounded-[1.5rem] border border-foreground/10 bg-card p-2 sm:grid-cols-12 sm:gap-3 sm:p-3">
+        <footer id="contact" className="p-2 pt-0 sm:p-3" data-gsap-reveal>
+          <div className="w-full h-full">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-12 sm:gap-3">
               
               {/* Main CTA — big orange block */}
               <div className="relative col-span-2 sm:col-span-7 min-h-[280px] overflow-hidden rounded-[1rem] bg-flux-orange p-8 text-primary-foreground sm:min-h-[360px]">
