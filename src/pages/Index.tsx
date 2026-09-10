@@ -2,8 +2,9 @@ import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTran
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { ArrowDown, ArrowUp, ArrowUpRight, Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Navigation, BrandMark, MagneticLink } from "@/components/Navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,37 +21,6 @@ const projects = [
   { name: "Smart Insights", type: "AI / Recommendations", className: "md:col-span-5", color: "bg-flux-green" },
   { name: "Comprehensive Reports", type: "Export / Print", className: "md:col-span-7", color: "bg-flux-pink" },
 ];
-
-function BrandMark() {
-  return <span className="grid size-8 place-items-center rounded-full bg-flux-orange font-display text-sm font-bold text-primary-foreground">S</span>;
-}
-
-function MagneticLink({ children, className, ...props }: HTMLMotionProps<"a">) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const prefersReducedMotion = useReducedMotion();
-
-  return (
-    <motion.a
-      {...props}
-      className={className}
-      style={{ x, y }}
-      onPointerMove={(event) => {
-        if (prefersReducedMotion || event.pointerType === "touch") return;
-        const rect = event.currentTarget.getBoundingClientRect();
-        x.set((event.clientX - rect.left - rect.width / 2) * 0.12);
-        y.set((event.clientY - rect.top - rect.height / 2) * 0.18);
-      }}
-      onPointerLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-      whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
-    >
-      {children}
-    </motion.a>
-  );
-}
 
 function ProjectTile({ project, index }: { project: (typeof projects)[number]; index: number }) {
   return (
@@ -83,7 +53,6 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
 export default function Index() {
   const heroRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
   const smoothY = useSpring(scrollY, { stiffness: 80, damping: 22, mass: 0.4 });
@@ -150,24 +119,7 @@ export default function Index() {
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
       <div ref={cursorRef} aria-hidden="true" className="flux-cursor pointer-events-none fixed left-0 top-0 z-50 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-flux-orange" />
       <motion.div aria-hidden="true" className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-flux-orange" style={{ scaleX: scrollYProgress }} />
-      <header className="relative z-30 px-4 pt-4 sm:px-6 sm:pt-6">
-        <motion.nav initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-foreground/10 bg-background/75 p-2 pl-3 backdrop-blur-xl">
-          <a href="#top" className="flex items-center gap-2 pr-3"><BrandMark /><span className="font-display text-lg font-bold tracking-tight">Samriddhi</span></a>
-          <div className="hidden items-center gap-1 md:flex">
-            {[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground">{label}</a>)}
-          </div>
-          <MagneticLink href="#contact" className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange sm:block">Get Started</MagneticLink>
-          <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground sm:hidden">{menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}</button>
-        </motion.nav>
-        {menuOpen && (
-          <div className="mx-auto mt-2 max-w-7xl rounded-[1.5rem] border border-foreground/10 bg-background/95 p-3 backdrop-blur-xl sm:hidden">
-            <div className="grid gap-1">
-              {[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)} className="flex items-center justify-between rounded-2xl px-4 py-3 font-display text-xl font-medium transition-colors hover:bg-foreground/5">{label}<ArrowUpRight className="size-4 text-muted-foreground" /></a>)}
-              <a href="#contact" onClick={() => setMenuOpen(false)} className="mt-2 rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground">Get Started</a>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       <main id="top">
         <section className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-32">
