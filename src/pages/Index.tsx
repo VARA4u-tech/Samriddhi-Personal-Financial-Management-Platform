@@ -309,7 +309,7 @@ export default function Index() {
 
               {/* Bottom bar — green block spanning full width */}
               <div className="col-span-2 sm:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-                <span className="flex items-center gap-3"><BrandMark /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
+                <span className="flex items-center gap-3"><BrandMark src="/logo-footer.png" /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
                 <div className="flex gap-8 font-display text-sm font-semibold opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
                 <div className="flex items-center gap-4">
                   <span className="font-display text-sm font-medium opacity-70">© 2026</span>

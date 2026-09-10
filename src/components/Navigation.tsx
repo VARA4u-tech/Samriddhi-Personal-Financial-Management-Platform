@@ -2,8 +2,8 @@ import { motion, AnimatePresence, useScroll, useMotionValue, useReducedMotion, t
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
-export function BrandMark() {
-  return <img src="/logo.png" alt="Samriddhi Logo" className="size-8 object-contain shrink-0" />;
+export function BrandMark({ src = "/logo.png", className = "" }: { src?: string; className?: string }) {
+  return <img src={src} alt="Samriddhi Logo" className={`size-8 object-contain shrink-0 ${className}`} />;
 }
 
 export function MagneticLink({ children, className, ...props }: HTMLMotionProps<"a">) {
