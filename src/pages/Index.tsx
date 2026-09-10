@@ -259,61 +259,61 @@ export default function Index() {
         </section>
 
         <footer id="contact" className="px-4 pb-32 pt-0 sm:px-6 sm:pb-36" data-gsap-reveal>
-          <div className="mx-auto max-w-7xl">
+          <div className="w-full">
             <div className="grid grid-cols-2 gap-2 rounded-[1.5rem] border border-foreground/10 bg-card p-2 sm:grid-cols-12 sm:gap-3 sm:p-3">
               
               {/* Main CTA — big orange block */}
-              <div className="relative col-span-2 sm:col-span-7 min-h-[340px] overflow-hidden rounded-[1rem] bg-flux-orange p-7 text-primary-foreground sm:min-h-[420px]">
+              <div className="relative col-span-2 sm:col-span-7 min-h-[280px] overflow-hidden rounded-[1rem] bg-flux-orange p-8 text-primary-foreground sm:min-h-[360px]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_80%,var(--color-flux-sand)_0_8%,transparent_8.5%),linear-gradient(140deg,transparent_0_55%,var(--color-flux-violet)_55%_70%,transparent_70%)] opacity-70" />
                 <div className="relative flex h-full flex-col justify-between">
-                  <p className="flex items-center gap-3 text-xs uppercase tracking-[0.22em]"><span className="size-1.5 rounded-full bg-primary-foreground/60" />Ready to take control?</p>
+                  <p className="font-display flex items-center gap-3 text-xs uppercase tracking-[0.22em]"><span className="size-1.5 rounded-full bg-primary-foreground/60" />Ready to take control?</p>
                   <div>
-                    <a href="mailto:hello@samriddhi.app" className="group block font-display text-[clamp(2.4rem,6vw,5.5rem)] font-semibold leading-[0.88] tracking-[-0.04em] hover:opacity-80 transition-opacity">
+                    <a href="mailto:hello@samriddhi.app" className="group block font-display text-[clamp(2.8rem,7vw,6.5rem)] font-semibold leading-[0.88] tracking-[-0.05em] hover:opacity-80 transition-opacity">
                       Start your<br /><em className="font-normal">journey</em><ArrowUpRight className="ml-2 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" />
                     </a>
-                    <div className="mt-7 flex flex-wrap items-center gap-3">
-                      <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-flux-orange transition-opacity hover:opacity-80">Get Started</MagneticLink>
-                      <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full border border-primary-foreground/40 px-6 py-3 text-sm font-medium transition-colors hover:bg-primary-foreground/10">hello@samriddhi.app</MagneticLink>
+                    <div className="mt-8 flex flex-wrap items-center gap-3">
+                      <MagneticLink href="mailto:hello@samriddhi.app" className="font-display rounded-full bg-primary-foreground px-7 py-3.5 text-sm font-semibold text-flux-orange transition-opacity hover:opacity-80">Get Started</MagneticLink>
+                      <MagneticLink href="mailto:hello@samriddhi.app" className="font-display rounded-full border border-primary-foreground/40 px-7 py-3.5 text-sm font-medium transition-colors hover:bg-primary-foreground/10">hello@samriddhi.app</MagneticLink>
                     </div>
                   </div>
-                  <span className="text-xs uppercase tracking-[0.2em] opacity-70">Personal Financial Management</span>
+                  <span className="font-display text-xs uppercase tracking-[0.2em] opacity-70">Personal Financial Management</span>
                 </div>
               </div>
 
               {/* Sitemap — pink block */}
-              <div className="flux-float col-span-1 sm:col-span-2 min-h-[190px] flex flex-col justify-between rounded-[1rem] bg-flux-pink p-5 text-primary-foreground" style={{ animationDelay: '-0.5s' }}>
-                <span className="font-display text-2xl font-semibold leading-none">Site</span>
+              <div className="flux-float col-span-1 sm:col-span-2 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-pink p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-0.5s' }}>
+                <span className="font-display text-3xl font-semibold leading-none">Site</span>
                 <div>
-                  <p className="mb-2 text-xs uppercase tracking-[0.2em] opacity-60">Sitemap</p>
-                  <ul className="space-y-1.5 text-sm font-medium">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="hover:underline underline-offset-2">{label}</a></li>)}</ul>
+                  <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Sitemap</p>
+                  <ul className="space-y-2 font-display text-sm font-medium">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="hover:underline underline-offset-2">{label}</a></li>)}</ul>
                 </div>
               </div>
 
               {/* Socials — lime block */}
-              <div className="flux-float col-span-1 sm:col-span-3 min-h-[190px] flex flex-col justify-between rounded-[1rem] bg-flux-lime p-5 text-primary-foreground" style={{ animationDelay: '-1.5s' }}>
-                <span className="font-display text-2xl font-semibold leading-none">Social</span>
+              <div className="flux-float col-span-1 sm:col-span-3 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-lime p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-1.5s' }}>
+                <span className="font-display text-3xl font-semibold leading-none">Social</span>
                 <div>
-                  <p className="mb-2 text-xs uppercase tracking-[0.2em] opacity-60">Socials</p>
-                  <ul className="space-y-1.5 text-sm font-medium">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
+                  <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Socials</p>
+                  <ul className="space-y-2 font-display text-sm font-medium">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
                 </div>
               </div>
 
               {/* Support — violet block */}
-              <div className="flux-float col-span-1 sm:col-span-3 min-h-[190px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-5 text-primary-foreground" style={{ animationDelay: '-2.5s' }}>
-                <span className="font-display text-2xl font-semibold leading-none">Help</span>
+              <div className="flux-float col-span-1 sm:col-span-3 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
+                <span className="font-display text-3xl font-semibold leading-none">Help</span>
                 <div>
-                  <p className="mb-2 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
-                  <ul className="space-y-1.5 text-sm font-medium opacity-90"><li>Help Center</li><li>Contact Us</li><li>Privacy Policy</li></ul>
+                  <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
+                  <ul className="space-y-2 font-display text-sm font-medium opacity-90"><li>Help Center</li><li>Contact Us</li><li>Privacy Policy</li></ul>
                 </div>
               </div>
 
               {/* Bottom bar — green block spanning full width */}
-              <div className="col-span-2 sm:col-span-12 rounded-[1rem] bg-flux-green p-5 text-primary-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <span className="flex items-center gap-3"><BrandMark /><span className="font-display text-lg font-semibold tracking-tight">Samriddhi</span></span>
-                <div className="flex gap-6 text-sm font-medium opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
+              <div className="col-span-2 sm:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+                <span className="flex items-center gap-3"><BrandMark /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
+                <div className="flex gap-8 font-display text-sm font-semibold opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm opacity-70">© 2026</span>
-                  <a href="#top" aria-label="Back to top" className="grid size-10 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"><ArrowUp className="size-4" /></a>
+                  <span className="font-display text-sm font-medium opacity-70">© 2026</span>
+                  <a href="#top" aria-label="Back to top" className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"><ArrowUp className="size-4" /></a>
                 </div>
               </div>
             </div>
