@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export function BrandMark() {
-  return <span className="grid size-8 place-items-center rounded-full bg-flux-orange font-display text-sm font-bold text-primary-foreground shrink-0">S</span>;
+  return <img src="/logo.png" alt="Samriddhi Logo" className="size-8 object-contain shrink-0" />;
 }
 
 export function MagneticLink({ children, className, ...props }: HTMLMotionProps<"a">) {
@@ -159,7 +159,7 @@ export function Navigation() {
 
             <div className="flex w-full justify-between items-center mb-10 relative z-10">
                <div className="flex items-center gap-2">
-                 <span className="grid size-8 place-items-center rounded-full bg-flux-orange font-display text-sm font-bold text-foreground">S</span>
+                 <BrandMark />
                  <span className="font-display text-lg font-bold tracking-tight">Samriddhi</span>
                </div>
                <button onClick={() => setMenuOpen(false)} className="text-background/50 hover:text-background transition-colors p-4 group">
