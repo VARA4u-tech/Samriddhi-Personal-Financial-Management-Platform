@@ -122,14 +122,118 @@ export default function Index() {
       <Navigation />
 
       <main id="top">
-        <section className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-32">
-          <motion.div style={{ y: heroY }} className="mx-auto max-w-7xl">
-            <p className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-flux-orange"><span className="size-1.5 rounded-full bg-flux-orange" />Personal Financial Management · Est. 2026</p>
-            <h1 className="max-w-6xl font-display text-[clamp(3.1rem,12.3vw,11rem)] font-medium leading-[0.85] tracking-[-0.06em] text-balance">Take control<br />of your <span className="text-flux-orange">finances</span>,<br /><em className="font-normal text-flux-pink">build wealth.</em></h1>
-            <div className="mt-12 flex flex-col justify-between gap-7 md:flex-row md:items-end">
-              <p className="max-w-md text-lg leading-relaxed text-muted-foreground">Track transactions, manage budgets, and achieve savings goals with smart insights and powerful analytics.</p>
-              <a href="#features" className="group flex items-center gap-3 text-sm font-semibold"><span className="grid size-11 place-items-center rounded-full border border-foreground/20 transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><ArrowDown className="size-4" /></span>Explore features</a>
+        <section className="relative min-h-[90vh] flex items-center px-5 pb-10 pt-20 sm:px-8 sm:pt-32 overflow-hidden">
+          {/* Background Orbs */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+             <motion.div
+               animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
+               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+               className="absolute top-[10%] left-[20%] w-[30vw] h-[30vw] rounded-full bg-flux-violet mix-blend-screen blur-[100px]" 
+             />
+             <motion.div
+               animate={{ x: [0, -40, 0], y: [0, 50, 0] }}
+               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+               className="absolute bottom-[20%] right-[10%] w-[25vw] h-[25vw] rounded-full bg-flux-orange mix-blend-screen blur-[80px]" 
+             />
+             <motion.div
+               animate={{ scale: [1, 1.2, 1] }}
+               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+               className="absolute top-[40%] left-[50%] w-[20vw] h-[20vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-flux-pink mix-blend-screen blur-[90px]" 
+             />
+          </div>
+
+          <motion.div style={{ y: heroY }} className="relative z-10 mx-auto max-w-7xl w-full grid lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left side text content */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-flux-orange"
+              >
+                <span className="size-1.5 rounded-full bg-flux-orange animate-pulse" />
+                Personal Financial Management · Est. 2026
+              </motion.p>
+              
+              <h1 className="max-w-4xl font-display text-[clamp(3.1rem,8vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em] text-balance">
+                <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="block">Take control</motion.span>
+                <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="block">of your <span className="text-flux-orange relative inline-block"><span className="relative z-10">finances</span><motion.span initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1, delay: 1.2, ease: "circOut" }} className="absolute bottom-1 left-0 h-3 bg-flux-orange/30 -z-10" /></span>,</motion.span>
+                <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="block"><em className="font-normal text-flux-pink">build wealth.</em></motion.span>
+              </h1>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-7"
+              >
+                <a href="#features" className="group relative inline-flex items-center justify-center gap-3 rounded-full bg-foreground px-8 py-4 text-sm font-semibold text-background transition-transform hover:scale-105 overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-flux-orange via-flux-pink to-flux-violet opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="relative z-10 flex items-center gap-2">Explore platform <ArrowDown className="size-4 animate-bounce" /></span>
+                </a>
+                <p className="max-w-xs text-sm leading-relaxed text-muted-foreground border-l border-foreground/20 pl-4">
+                  Track transactions, manage budgets, and achieve savings goals with powerful analytics.
+                </p>
+              </motion.div>
             </div>
+
+            {/* Right side 3D element */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+              className="lg:col-span-5 relative"
+              style={{ perspective: "1200px" }}
+            >
+              <div data-tilt className="flux-tilt relative w-full aspect-square rounded-[2rem] border border-foreground/10 bg-card/40 backdrop-blur-xl p-6 shadow-2xl flex flex-col gap-4 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                
+                {/* Mock UI Header */}
+                <div className="flex justify-between items-center pb-4 border-b border-foreground/10">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest">Total Balance</p>
+                    <p className="font-display text-3xl font-medium">$124,592.00</p>
+                  </div>
+                  <div className="size-10 rounded-full bg-flux-green/20 flex items-center justify-center text-flux-green">
+                    <ArrowUpRight className="size-5" />
+                  </div>
+                </div>
+
+                {/* Mock UI Chart */}
+                <div className="flex-1 w-full flex items-end gap-2 pt-4">
+                  {[40, 70, 45, 90, 65, 100, 80].map((h, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ height: 0 }}
+                      animate={{ height: `${h}%` }}
+                      transition={{ duration: 1, delay: 1 + (i * 0.1), ease: "easeOut" }}
+                      className="flex-1 bg-gradient-to-t from-flux-orange/20 to-flux-orange rounded-t-sm"
+                    />
+                  ))}
+                </div>
+
+                {/* Mock UI Recent Activity */}
+                <div className="mt-auto space-y-3">
+                   <div className="flex items-center justify-between p-3 rounded-lg bg-background/50">
+                     <div className="flex items-center gap-3">
+                       <div className="size-8 rounded-md bg-flux-violet/20" />
+                       <div className="space-y-1">
+                         <div className="h-2 w-20 bg-foreground/80 rounded" />
+                         <div className="h-2 w-12 bg-foreground/40 rounded" />
+                       </div>
+                     </div>
+                     <div className="h-3 w-16 bg-foreground/60 rounded" />
+                   </div>
+                </div>
+              </div>
+              
+              {/* Decorative floating badges */}
+              <motion.div animate={{ y: [-10, 10, -10] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-6 -right-6 rounded-2xl border border-foreground/10 bg-card/80 backdrop-blur-md p-4 shadow-xl">
+                 <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Savings</p>
+                 <p className="font-display text-xl text-flux-pink font-medium">+12.4%</p>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </section>
 
