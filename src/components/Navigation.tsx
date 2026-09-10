@@ -87,7 +87,7 @@ export function Navigation() {
   return (
     <>
       {/* Dynamic Island Navbar */}
-      <header className="fixed top-4 left-0 right-0 z-[100] px-4 pointer-events-none flex justify-center">
+      <header className="fixed bottom-6 left-0 right-0 z-[100] px-4 pointer-events-none flex justify-center">
         <motion.nav 
           layout
           onMouseEnter={() => setIsHovered(true)}
