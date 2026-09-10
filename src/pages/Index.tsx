@@ -234,9 +234,9 @@ export default function Index() {
           </div>
         </section>
 
-        <section aria-label="Platform specialties" className="overflow-hidden border-y border-foreground/10 py-4">
+        <section aria-label="Platform specialties" className="relative z-20 my-16 overflow-hidden border-y border-foreground/10 py-4 -rotate-2 scale-[1.05]">
           <div className="flux-marquee flex w-max items-center gap-8 whitespace-nowrap font-display text-2xl font-medium uppercase tracking-[-0.03em] text-muted-foreground sm:text-3xl">
-            {Array.from({ length: 2 }).map((_, index) => <span key={index} className="flex items-center gap-8">Track Transactions <span className="text-flux-orange">✳</span> Set Budgets <span className="text-flux-pink">✳</span> Achieve Goals <span className="text-flux-lime">✳</span> Gain Insights <span className="text-flux-violet">✳</span></span>)}
+            {Array.from({ length: 3 }).map((_, index) => <span key={index} className="flex items-center gap-8">Track Transactions <span className="text-flux-orange">✳</span> Set Budgets <span className="text-flux-pink">✳</span> Achieve Goals <span className="text-flux-lime">✳</span> Gain Insights <span className="text-flux-violet">✳</span></span>)}
           </div>
         </section>
 
