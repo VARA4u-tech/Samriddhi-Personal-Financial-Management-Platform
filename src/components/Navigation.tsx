@@ -114,28 +114,8 @@ export function Navigation() {
             </AnimatePresence>
           </motion.a>
 
-          {/* Collapsible Middle Links */}
-          <AnimatePresence mode="wait">
-            {(!isScrolled || isHovered) && (
-              <motion.div
-                layout
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "auto" }}
-                exit={{ opacity: 0, width: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="hidden items-center gap-1 md:flex overflow-hidden"
-              >
-                {menuLinks.map(([label, href]) => (
-                  <a key={label} href={href} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground whitespace-nowrap">
-                    {label}
-                  </a>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
           {/* Action buttons */}
-          <motion.div layout className="flex items-center gap-2">
+          <motion.div layout className="flex items-center gap-2 ml-4">
              <AnimatePresence mode="wait">
               {(!isScrolled || isHovered) && (
                 <motion.div
