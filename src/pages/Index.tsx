@@ -307,6 +307,31 @@ export default function Index() {
                 </div>
               </div>
 
+              {/* Newsletter Signup Block */}
+              <div className="relative col-span-2 sm:col-span-7 flex flex-col justify-between rounded-[1rem] p-8 text-foreground min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
+                <div className="absolute inset-0 bg-black/30 rounded-[1rem]" />
+                <div className="relative z-10">
+                  <p className="font-display mb-2 text-xs uppercase tracking-[0.22em] opacity-70">Stay in the loop</p>
+                  <h3 className="font-display text-[clamp(1.8rem,4vw,3.2rem)] font-semibold leading-[0.95] tracking-[-0.04em] drop-shadow-sm">Get early access<br /><em className="font-normal opacity-80">& updates.</em></h3>
+                </div>
+                <div className="relative z-10">
+                  <p className="font-display mb-5 text-sm opacity-70 max-w-xs">Join thousands getting smarter about their finances. No spam, ever.</p>
+                  <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      placeholder="your@email.com"
+                      className="font-display flex-1 rounded-full border border-foreground/30 bg-foreground/10 backdrop-blur-sm px-5 py-3 text-sm text-foreground outline-none placeholder:opacity-50 focus:border-foreground/60 transition-colors"
+                    />
+                    <button
+                      type="submit"
+                      className="font-display rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-80 whitespace-nowrap"
+                    >
+                      Subscribe →
+                    </button>
+                  </form>
+                </div>
+              </div>
+
               {/* Bottom bar — green block spanning full width */}
               <div className="col-span-2 sm:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
                 <span className="flex items-center gap-3"><BrandMark src="/logo-footer.png" /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
