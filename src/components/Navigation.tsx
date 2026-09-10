@@ -55,7 +55,9 @@ export function Navigation() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsAtBottom(entry.isIntersecting),
+      (entries) => {
+        if (entries[0]) setIsAtBottom(entries[0].isIntersecting);
+      },
       { threshold: 0.1 }
     );
     const footer = document.getElementById("contact");
