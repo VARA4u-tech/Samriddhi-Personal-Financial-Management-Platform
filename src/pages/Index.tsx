@@ -308,7 +308,7 @@ export default function Index() {
               </div>
 
               {/* Newsletter Signup Block */}
-              <div className="relative col-span-2 sm:col-span-7 flex flex-col justify-between rounded-[1rem] p-8 text-foreground min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
+              <div className="relative col-span-2 sm:col-span-7 flex flex-col justify-between rounded-[1rem] p-8 text-black min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
                 <div className="absolute inset-0 bg-black/30 rounded-[1rem]" />
                 <div className="relative z-10">
                   <p className="font-display mb-2 text-xs uppercase tracking-[0.22em] opacity-70">Stay in the loop</p>
