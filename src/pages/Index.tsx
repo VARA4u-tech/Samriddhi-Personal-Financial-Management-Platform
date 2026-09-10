@@ -299,11 +299,11 @@ export default function Index() {
               </div>
 
               {/* Support — violet block */}
-              <div className="flux-float col-span-1 sm:col-span-3 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
+              <div className="flux-float col-span-1 sm:col-span-5 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-6 text-primary-foreground sm:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
                 <span className="font-display text-3xl font-semibold leading-none">Help</span>
                 <div>
                   <p className="font-display mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
-                  <ul className="space-y-2 font-display text-sm font-medium opacity-90"><li>Help Center</li><li>Contact Us</li><li>Privacy Policy</li></ul>
+                  <div className="flex flex-col gap-2 font-display text-sm font-semibold opacity-90"><a href="#" className="hover:underline">Help Center</a><a href="#" className="hover:underline">Contact Us</a><a href="#" className="hover:underline">Privacy Policy</a></div>
                 </div>
               </div>
 
