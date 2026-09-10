@@ -309,7 +309,7 @@ export default function Index() {
 
               {/* Newsletter Signup Block */}
               <div className="relative col-span-2 sm:col-span-7 flex flex-col justify-between rounded-[1rem] p-8 text-black min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
-                <div className="absolute inset-0 bg-black/30 rounded-[1rem]" />
+                <div className="absolute inset-0 bg-black/10 rounded-[1rem]" />
                 <div className="relative z-10">
                   <p className="font-display mb-2 text-xs uppercase tracking-[0.22em] opacity-70">Stay in the loop</p>
                   <h3 className="font-display text-[clamp(1.8rem,4vw,3.2rem)] font-semibold leading-[0.95] tracking-[-0.04em] drop-shadow-sm">Get early access<br /><em className="font-normal opacity-80">& updates.</em></h3>
