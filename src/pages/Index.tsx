@@ -260,59 +260,36 @@ export default function Index() {
 
         <footer id="contact" className="border-t border-foreground/10 px-5 pb-32 pt-20 sm:px-8 sm:pb-36 sm:pt-28" data-gsap-reveal>
           <div className="mx-auto max-w-7xl">
-            {/* Bento Style Top Section */}
-            <div className="grid gap-4 lg:grid-cols-12">
-              <div className="lg:col-span-7 flex flex-col justify-between rounded-[2rem] border border-foreground/10 bg-card p-10 sm:p-14 overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(circle_at_top_right,var(--color-flux-violet)_0,transparent_60%)] opacity-20 pointer-events-none" />
-                <p className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-flux-pink relative z-10">
-                  <span className="size-1.5 animate-pulse rounded-full bg-flux-pink" />
-                  Ready to take control?
-                </p>
-                <div className="relative z-10 mt-16 sm:mt-24">
-                  <a href="mailto:hello@samriddhi.app" className="group block font-display text-[clamp(2.5rem,7vw,6rem)] font-medium leading-[0.9] tracking-[-0.04em] transition-colors hover:text-flux-orange">
-                    Start your<br /><em className="font-normal text-flux-pink">journey</em>
-                    <ArrowUpRight className="ml-3 inline size-[0.6em] -translate-y-2 align-top transition-transform duration-300 group-hover:translate-x-3 group-hover:-translate-y-4" />
-                  </a>
-                  <div className="mt-10 flex flex-wrap items-center gap-3">
-                    <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange">Get Started</MagneticLink>
-                    <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium transition-colors hover:border-flux-orange bg-background/50 backdrop-blur-sm">hello@samriddhi.app</MagneticLink>
-                  </div>
+            <div className="grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <p className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-flux-pink"><span className="size-1.5 animate-pulse rounded-full bg-flux-pink" />Ready to take control?</p>
+                <a href="mailto:hello@samriddhi.app" className="group mt-5 block font-display text-[clamp(2.9rem,10.5vw,9rem)] font-medium leading-[0.88] tracking-[-0.06em] transition-colors hover:text-flux-orange">Start your<br /><em className="font-normal">journey</em><ArrowUpRight className="ml-3 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" /></a>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange">Get Started</MagneticLink>
+                  <MagneticLink href="mailto:hello@samriddhi.app" className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium transition-colors hover:border-flux-orange">hello@samriddhi.app</MagneticLink>
                 </div>
               </div>
-              
-              <div className="lg:col-span-5 grid grid-cols-2 gap-4 sm:grid-cols-2">
-                <div className="rounded-[2rem] border border-foreground/10 bg-card p-8 sm:p-10">
-                  <p className="mb-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Sitemap</p>
-                  <ul className="space-y-4 text-sm font-medium">
-                    {[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="transition-colors hover:text-flux-orange">{label}</a></li>)}
-                  </ul>
+              <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-5 lg:pl-10">
+                <div>
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Sitemap</p>
+                  <ul className="space-y-2.5 text-sm">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="transition-colors hover:text-flux-orange">{label}</a></li>)}</ul>
                 </div>
-                <div className="rounded-[2rem] border border-foreground/10 bg-card p-8 sm:p-10 flex flex-col justify-between">
-                  <div>
-                    <p className="mb-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Socials</p>
-                    <ul className="space-y-4 text-sm font-medium">
-                      {["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-2 transition-colors hover:text-flux-pink">{label}<ArrowUpRight className="size-3 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" /></a></li>)}
-                    </ul>
-                  </div>
-                  <div className="mt-10">
-                    <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Support</p>
-                    <ul className="space-y-2 text-xs text-muted-foreground"><li>Help Center</li><li>Contact Us</li><li>Privacy Policy</li></ul>
-                  </div>
+                <div>
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Socials</p>
+                  <ul className="space-y-2.5 text-sm">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 transition-colors hover:text-flux-pink">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Support</p>
+                  <ul className="space-y-2.5 text-sm text-muted-foreground"><li>Help Center</li><li>Contact Us</li><li>Privacy Policy</li></ul>
                 </div>
               </div>
             </div>
-            
-            {/* Bottom Section */}
-            <div className="mt-4 flex flex-col items-center justify-between gap-6 rounded-[2rem] border border-foreground/10 bg-card px-8 py-6 sm:flex-row sm:px-10">
-              <span className="flex min-w-0 items-center gap-3"><BrandMark /><span className="truncate font-display text-lg font-semibold tracking-tight">Samriddhi</span></span>
-              <div className="hidden gap-8 text-sm font-medium text-muted-foreground sm:flex">
-                <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-                <a href="#capabilities" className="hover:text-foreground transition-colors">Capabilities</a>
-                <a href="mailto:hello@samriddhi.app" className="hover:text-foreground transition-colors">Email</a>
-              </div>
-              <div className="flex items-center gap-6">
-                <span className="text-xs font-medium text-muted-foreground sm:text-sm">© 2026</span>
-                <a href="#top" aria-label="Back to top" className="grid size-12 shrink-0 place-items-center rounded-full border border-foreground/10 bg-background transition-colors hover:border-flux-orange hover:text-flux-orange"><ArrowUp className="size-5" /></a>
+            <div className="mt-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-t border-foreground/10 pt-7 text-sm sm:flex sm:justify-between">
+              <span className="flex min-w-0 items-center gap-2.5"><BrandMark /><span className="truncate font-display text-lg font-semibold">Samriddhi</span></span>
+              <div className="hidden gap-5 text-muted-foreground sm:flex"><a href="#features" className="hover:text-foreground">Features</a><a href="#capabilities" className="hover:text-foreground">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:text-foreground">Email</a></div>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-muted-foreground sm:text-sm">© 2026</span>
+                <a href="#top" aria-label="Back to top" className="grid size-10 shrink-0 place-items-center rounded-full border border-foreground/20 transition-colors hover:bg-foreground hover:text-background"><ArrowUp className="size-4" /></a>
               </div>
             </div>
           </div>
