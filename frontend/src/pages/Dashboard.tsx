@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-primary-foreground flex overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground flex overflow-hidden">
       
       {/* Mobile Sidebar Overlay */}
       <div 
@@ -97,7 +97,6 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main Chart Placeholder */}
               <div className="lg:col-span-2 rounded-[2rem] bg-zinc-900 border border-white/10 p-6 min-h-[400px] flex flex-col relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-flux-violet/20 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none" />
                 <h3 className="font-display text-lg font-medium opacity-80 mb-6">Cash Flow Analysis</h3>
                 <div className="flex-1 rounded-xl">
                   <ResponsiveContainer width="100%" height="100%">
@@ -107,12 +106,12 @@ const Dashboard = () => {
                     >
                       <defs>
                         <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="var(--color-flux-lime)" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="var(--color-flux-lime)" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#d1ff26" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#d1ff26" stopOpacity={0}/>
                         </linearGradient>
                         <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="var(--color-flux-pink)" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="var(--color-flux-pink)" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#ff33a1" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#ff33a1" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <XAxis 
@@ -141,7 +140,7 @@ const Dashboard = () => {
                       <Area 
                         type="monotone" 
                         dataKey="income" 
-                        stroke="var(--color-flux-lime)" 
+                        stroke="#d1ff26" 
                         fillOpacity={1} 
                         fill="url(#colorIncome)" 
                         strokeWidth={2}
@@ -149,7 +148,7 @@ const Dashboard = () => {
                       <Area 
                         type="monotone" 
                         dataKey="expenses" 
-                        stroke="var(--color-flux-pink)" 
+                        stroke="#ff33a1" 
                         fillOpacity={1} 
                         fill="url(#colorExpenses)" 
                         strokeWidth={2}
@@ -211,7 +210,6 @@ const MetricCard = ({ title, amount, trend, color }: { title: string; amount: st
   const isPositive = trend.startsWith('+');
   return (
     <div className="relative rounded-[2rem] bg-zinc-900 border border-white/10 p-6 overflow-hidden group hover:border-white/20 transition-all duration-300">
-      <div className={`absolute -right-4 -top-4 size-24 rounded-full opacity-20 blur-[30px] transition-transform duration-500 group-hover:scale-150 ${color}`} />
       <p className="font-display text-sm uppercase tracking-wider opacity-60 mb-2">{title}</p>
       <h2 className="font-display text-3xl font-semibold mb-4">{amount}</h2>
       <div className="flex items-center gap-2">
