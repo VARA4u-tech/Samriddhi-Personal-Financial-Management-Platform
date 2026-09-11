@@ -7,26 +7,66 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
-*.local
+# Dependencies
+node_modules/
+jspm_packages/
 
-# Wrangler / Cloudflare
-.wrangler/
-.dev.vars
+# Builds
+build/
+dist/
+dist-ssr/
+.output/
 
-# Editor directories and files
+# OS/Editor Files
+.DS_Store
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vite and Caches
+.vite/
+.eslintcache
+.stylelintcache
+
+# Agent/System directories
+.gemini/
+.agents/
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+*.s3db
+*.sl3
+data/
+
+# Keys, Certificates, and Secrets
+*.pem
+*.key
+*.cert
+*.crt
+*.ca-bundle
+*.p12
+*.pfx
+certs/
+secrets.json
+config.local.json
+credentials.json
+
+# OS specific files
+Thumbs.db
+ehthumbs.db
+*.stackdump
