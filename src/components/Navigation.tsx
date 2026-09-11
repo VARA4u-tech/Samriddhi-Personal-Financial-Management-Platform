@@ -103,7 +103,7 @@ export function Navigation() {
       <header className="fixed bottom-6 left-0 right-0 z-[100] px-4 pointer-events-none flex justify-center">
         <motion.nav 
           layout
-          animate={{ y: isAtBottom ? 100 : 0, opacity: isAtBottom ? 0 : 1 }}
+          animate={{ y: isAtBottom || menuOpen ? 100 : 0, opacity: isAtBottom || menuOpen ? 0 : 1 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
