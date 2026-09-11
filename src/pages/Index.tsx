@@ -260,10 +260,9 @@ export default function Index() {
 
         <footer id="contact" className="p-2 pt-0 sm:p-3" data-gsap-reveal>
           <div className="w-full h-full">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-12 sm:gap-3">
-
+            <div className="grid grid-cols-2 gap-2 lg:grid-cols-12 sm:gap-3">
               {/* Main CTA — big orange block */}
-              <div className="relative col-span-1 sm:col-span-2 lg:col-span-7 min-h-[280px] overflow-hidden rounded-[1rem] bg-flux-orange p-6 sm:p-8 text-primary-foreground lg:min-h-[360px]">
+              <div className="relative col-span-2 lg:col-span-7 min-h-[280px] overflow-hidden rounded-[1rem] bg-flux-orange p-6 sm:p-8 text-primary-foreground lg:min-h-[360px]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_80%,var(--color-flux-sand)_0_8%,transparent_8.5%),linear-gradient(140deg,transparent_0_55%,var(--color-flux-violet)_55%_70%,transparent_70%)] opacity-70" />
                 <div className="relative flex h-full flex-col justify-between">
                   <p className="font-display flex items-center gap-3 text-xs uppercase tracking-[0.22em]"><span className="size-1.5 rounded-full bg-primary-foreground/60" />Ready to take control?</p>
@@ -299,7 +298,7 @@ export default function Index() {
               </div>
 
               {/* Support — violet block */}
-              <div className="flux-float col-span-1 sm:col-span-2 lg:col-span-5 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-5 sm:p-6 text-primary-foreground lg:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
+              <div className="flux-float col-span-2 lg:col-span-5 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-5 sm:p-6 text-primary-foreground lg:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
                 <span className="font-display text-4xl sm:text-7xl lg:text-8xl font-semibold leading-none">Help</span>
                 <div>
                   <p className="font-display mb-2 sm:mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
@@ -308,7 +307,7 @@ export default function Index() {
               </div>
 
               {/* Newsletter Signup Block */}
-              <div className="relative col-span-1 sm:col-span-2 lg:col-span-7 flex flex-col justify-between rounded-[1rem] p-6 sm:p-8 text-black min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
+              <div className="relative col-span-2 lg:col-span-7 flex flex-col justify-between rounded-[1rem] p-6 sm:p-8 text-black min-h-[200px] overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)' }}>
                 <div className="absolute inset-0 bg-black/10 rounded-[1rem]" />
                 <div className="relative z-10">
                   <p className="font-display mb-2 text-xs uppercase tracking-[0.22em] opacity-70">Stay in the loop</p>
@@ -333,7 +332,7 @@ export default function Index() {
               </div>
 
               {/* Bottom bar — green block spanning full width */}
-              <div className="col-span-1 sm:col-span-2 lg:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col md:flex-row items-center md:items-center justify-between gap-6 md:gap-5 text-center md:text-left">
+              <div className="col-span-2 lg:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col md:flex-row items-center md:items-center justify-between gap-6 md:gap-5 text-center md:text-left">
                 <span className="flex items-center justify-center md:justify-start gap-3"><BrandMark src="/logo-footer.png" /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-display text-sm font-semibold opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
                 <div className="flex items-center justify-center gap-4">

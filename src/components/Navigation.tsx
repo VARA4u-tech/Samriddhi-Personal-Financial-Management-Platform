@@ -167,7 +167,10 @@ export function Navigation() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed inset-0 z-[150] bg-foreground text-background flex flex-col p-6 sm:p-10 overflow-hidden"
+            className="fixed right-4 top-4 bottom-4 w-[calc(100%-2rem)] sm:w-[420px] z-[150] rounded-[2rem] shadow-2xl flex flex-col p-6 sm:p-10 overflow-hidden text-black"
+            style={{
+              background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)'
+            }}
           >
             {/* Background noise/texture for premium feel */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')" }} />
@@ -177,7 +180,7 @@ export function Navigation() {
                  <BrandMark />
                  <span className="font-display text-lg font-bold tracking-tight">Samriddhi</span>
                </div>
-               <button onClick={() => setMenuOpen(false)} className="text-background/50 hover:text-background transition-colors p-4 group">
+               <button onClick={() => setMenuOpen(false)} className="text-black/50 hover:text-black transition-colors p-4 group">
                   <X className="size-8 transition-transform group-hover:rotate-90" />
                </button>
             </div>
@@ -189,7 +192,7 @@ export function Navigation() {
                     <a 
                       href={href} 
                       onClick={() => setMenuOpen(false)}
-                      className="group flex items-center text-[clamp(2.5rem,10vw,10rem)] font-display font-medium leading-[0.85] tracking-tight hover:text-flux-orange transition-colors"
+                      className="group flex items-center text-[clamp(2.5rem,10vw,10rem)] font-display font-medium leading-[0.85] tracking-tight hover:opacity-70 transition-opacity"
                     >
                       {label}
                       <ArrowUpRight className="ml-4 size-[0.6em] opacity-0 -translate-x-10 translate-y-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" />
