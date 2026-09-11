@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 import PageTransition from "./components/PageTransition";
 
@@ -23,6 +24,14 @@ export default function App() {
           element={
             <PageTransition>
               <NotFound />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PageTransition>
+              <Dashboard />
             </PageTransition>
           }
         />

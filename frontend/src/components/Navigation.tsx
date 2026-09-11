@@ -6,7 +6,8 @@ import {
   useReducedMotion,
   type HTMLMotionProps,
 } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export function BrandMark({
@@ -170,12 +171,12 @@ export function Navigation() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden hidden sm:block"
                 >
-                  <MagneticLink
-                    href="#contact"
+                  <Link
+                    to="/dashboard"
                     className="whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange block"
                   >
                     Get Started
-                  </MagneticLink>
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
