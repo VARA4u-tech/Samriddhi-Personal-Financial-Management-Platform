@@ -132,7 +132,7 @@ export default function Index() {
                 Personal Financial Management · Est. 2026
               </p>
               
-              <h1 className="max-w-4xl font-display text-[clamp(3.1rem,8vw,7rem)] font-medium leading-[0.85] tracking-[-0.06em] text-balance">
+              <h1 className="max-w-4xl font-display text-[clamp(2.5rem,10vw,7rem)] font-medium leading-[0.85] tracking-[-0.06em] text-balance">
                 <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="block">Take control</motion.span>
                 <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }} className="block">of your <span className="text-flux-orange">finances</span>,</motion.span>
                 <motion.span initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="block"><em className="font-normal text-flux-pink">build wealth.</em></motion.span>
@@ -152,7 +152,7 @@ export default function Index() {
             </div>
 
             {/* Right side Geometric Abstract Graphic */}
-            <div className="lg:col-span-6 xl:col-span-5 h-[400px] sm:h-[500px] lg:h-[600px] relative">
+            <div className="lg:col-span-6 xl:col-span-5 h-[320px] sm:h-[500px] lg:h-[600px] relative">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -229,7 +229,7 @@ export default function Index() {
 
         <section className="px-4 pb-24 sm:px-6" aria-label="Platform capabilities">
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2 rounded-[1.5rem] border border-foreground/10 bg-card p-2 sm:grid-cols-4 sm:gap-3 sm:p-3">
-            <div className="relative col-span-2 row-span-2 min-h-[390px] overflow-hidden rounded-[1rem] bg-flux-orange p-5 text-primary-foreground sm:min-h-[480px]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,var(--color-flux-sand)_0_7%,transparent_7.5%),linear-gradient(140deg,transparent_0_58%,var(--color-flux-violet)_58%_72%,transparent_72%)] opacity-70" /><div className="relative flex h-full flex-col justify-between"><span className="font-display text-5xl font-semibold leading-none sm:text-7xl">Grow<br />your<br /><em className="font-normal">wealth.</em></span><span className="text-xs uppercase tracking-[0.2em]">Complete financial platform</span></div></div>
+            <div className="relative col-span-2 row-span-2 min-h-[320px] overflow-hidden rounded-[1rem] bg-flux-orange p-5 text-primary-foreground sm:min-h-[480px]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,var(--color-flux-sand)_0_7%,transparent_7.5%),linear-gradient(140deg,transparent_0_58%,var(--color-flux-violet)_58%_72%,transparent_72%)] opacity-70" /><div className="relative flex h-full flex-col justify-between"><span className="font-display text-4xl font-semibold leading-none sm:text-7xl">Grow<br />your<br /><em className="font-normal">wealth.</em></span><span className="text-xs uppercase tracking-[0.2em]">Complete financial platform</span></div></div>
             {[['Secure', 'Authentication', 'bg-flux-pink text-primary-foreground'], ['Automated', 'Recurring Expenses', 'bg-flux-lime text-primary-foreground'], ['Categorized', 'Smart labeling', 'bg-flux-violet text-primary-foreground'], ['Analytics', 'Financial Reports', 'bg-flux-green text-primary-foreground']].map(([title, caption, classes], index) => <div key={title} className={`flux-float flex min-h-[190px] flex-col justify-between rounded-[1rem] p-5 ${classes}`} style={{ animationDelay: `${index * -1.2}s` }}><span className="font-display text-3xl font-semibold leading-none">{title}</span><span className="text-xs uppercase tracking-[0.16em] opacity-75">{caption}</span></div>)}
           </div>
         </section>
@@ -268,7 +268,7 @@ export default function Index() {
                 <div className="relative flex h-full flex-col justify-between">
                   <p className="font-display flex items-center gap-3 text-xs uppercase tracking-[0.22em]"><span className="size-1.5 rounded-full bg-primary-foreground/60" />Ready to take control?</p>
                   <div>
-                    <a href="mailto:hello@samriddhi.app" className="group block font-display text-[clamp(2.2rem,7vw,6.5rem)] font-semibold leading-[0.88] tracking-[-0.05em] hover:opacity-80 transition-opacity">
+                    <a href="mailto:hello@samriddhi.app" className="group block font-display text-[clamp(2rem,8vw,6.5rem)] font-semibold leading-[0.88] tracking-[-0.05em] hover:opacity-80 transition-opacity">
                       Start your<br /><em className="font-normal">journey</em><ArrowUpRight className="ml-2 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" />
                     </a>
                     <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -282,7 +282,7 @@ export default function Index() {
 
               {/* Sitemap — pink block */}
               <div className="flux-float col-span-1 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-pink p-5 sm:p-6 text-primary-foreground lg:col-span-2 lg:min-h-[200px]" style={{ animationDelay: '-0.5s' }}>
-                <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-semibold leading-none">Site</span>
+                <span className="font-display text-4xl sm:text-7xl lg:text-8xl font-semibold leading-none">Site</span>
                 <div>
                   <p className="font-display mb-2 sm:mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Sitemap</p>
                   <ul className="space-y-1.5 sm:space-y-2 font-display text-sm sm:text-base font-medium">{[["Features", "#features"], ["Capabilities", "#capabilities"], ["Platform", "#platform"], ["Top", "#top"]].map(([label, href]) => <li key={label}><a href={href} className="hover:underline underline-offset-2">{label}</a></li>)}</ul>
@@ -291,7 +291,7 @@ export default function Index() {
 
               {/* Socials — lime block */}
               <div className="flux-float col-span-1 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-lime p-5 sm:p-6 text-primary-foreground lg:col-span-3 lg:min-h-[200px]" style={{ animationDelay: '-1.5s' }}>
-                <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-semibold leading-none">Social</span>
+                <span className="font-display text-4xl sm:text-7xl lg:text-8xl font-semibold leading-none">Social</span>
                 <div>
                   <p className="font-display mb-2 sm:mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Socials</p>
                   <ul className="space-y-1.5 sm:space-y-2 font-display text-sm sm:text-base font-medium">{["Instagram", "Twitter", "LinkedIn"].map((label) => <li key={label}><a href="#top" className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2">{label}<ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" /></a></li>)}</ul>
@@ -300,7 +300,7 @@ export default function Index() {
 
               {/* Support — violet block */}
               <div className="flux-float col-span-1 sm:col-span-2 lg:col-span-5 min-h-[160px] flex flex-col justify-between rounded-[1rem] bg-flux-violet p-5 sm:p-6 text-primary-foreground lg:min-h-[200px]" style={{ animationDelay: '-2.5s' }}>
-                <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-semibold leading-none">Help</span>
+                <span className="font-display text-4xl sm:text-7xl lg:text-8xl font-semibold leading-none">Help</span>
                 <div>
                   <p className="font-display mb-2 sm:mb-3 text-xs uppercase tracking-[0.2em] opacity-60">Support</p>
                   <div className="flex flex-col gap-1.5 sm:gap-2 font-display text-sm sm:text-base font-semibold opacity-90"><a href="#" className="hover:underline">Help Center</a><a href="#" className="hover:underline">Contact Us</a><a href="#" className="hover:underline">Privacy Policy</a></div>

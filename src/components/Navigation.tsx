@@ -189,7 +189,7 @@ export function Navigation() {
                     <a 
                       href={href} 
                       onClick={() => setMenuOpen(false)}
-                      className="group flex items-center text-[clamp(4rem,10vw,10rem)] font-display font-medium leading-[0.85] tracking-tight hover:text-flux-orange transition-colors"
+                      className="group flex items-center text-[clamp(2.5rem,10vw,10rem)] font-display font-medium leading-[0.85] tracking-tight hover:text-flux-orange transition-colors"
                     >
                       {label}
                       <ArrowUpRight className="ml-4 size-[0.6em] opacity-0 -translate-x-10 translate-y-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" />
@@ -199,7 +199,7 @@ export function Navigation() {
               ))}
             </motion.div>
             
-            <div className="mt-auto flex flex-wrap justify-between text-sm uppercase tracking-[0.2em] opacity-50 relative z-10">
+            <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between text-xs sm:text-sm uppercase tracking-[0.2em] opacity-50 relative z-10">
               <p>Personal Financial Management</p>
               <p>Est. 2026</p>
             </div>
