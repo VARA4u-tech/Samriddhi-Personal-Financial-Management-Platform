@@ -26,7 +26,7 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
   return (
     <motion.a
       href="#contact"
-      className={`group block ${project.className}`}
+      className={`group block shrink-0 w-[85vw] sm:w-[45vw] md:w-auto snap-center ${project.className}`}
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
@@ -230,7 +230,7 @@ export default function Index() {
         <section className="px-4 pb-24 sm:px-6" aria-label="Platform capabilities">
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2 rounded-[1.5rem] border border-foreground/10 bg-card p-2 sm:grid-cols-4 sm:gap-3 sm:p-3">
             <div className="relative col-span-2 row-span-2 min-h-[320px] overflow-hidden rounded-[1rem] bg-flux-orange p-5 text-primary-foreground sm:min-h-[480px]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,var(--color-flux-sand)_0_7%,transparent_7.5%),linear-gradient(140deg,transparent_0_58%,var(--color-flux-violet)_58%_72%,transparent_72%)] opacity-70" /><div className="relative flex h-full flex-col justify-between"><span className="font-display text-4xl font-semibold leading-none sm:text-7xl">Grow<br />your<br /><em className="font-normal">wealth.</em></span><span className="text-xs uppercase tracking-[0.2em]">Complete financial platform</span></div></div>
-            {[['Secure', 'Authentication', 'bg-flux-pink text-primary-foreground'], ['Automated', 'Recurring Expenses', 'bg-flux-lime text-primary-foreground'], ['Categorized', 'Smart labeling', 'bg-flux-violet text-primary-foreground'], ['Analytics', 'Financial Reports', 'bg-flux-green text-primary-foreground']].map(([title, caption, classes], index) => <div key={title} className={`flux-float flex min-h-[190px] flex-col justify-between rounded-[1rem] p-5 ${classes}`} style={{ animationDelay: `${index * -1.2}s` }}><span className="font-display text-3xl font-semibold leading-none">{title}</span><span className="text-xs uppercase tracking-[0.16em] opacity-75">{caption}</span></div>)}
+            {[['Secure', 'Authentication', 'bg-flux-pink text-primary-foreground'], ['Automated', 'Recurring Expenses', 'bg-flux-lime text-primary-foreground'], ['Categorized', 'Smart labeling', 'bg-flux-violet text-primary-foreground'], ['Analytics', 'Financial Reports', 'bg-flux-green text-primary-foreground']].map(([title, caption, classes], index) => <div key={title} className={`flux-float flex min-h-[190px] flex-col justify-between rounded-[1rem] p-5 ${classes}`} style={{ animationDelay: `${index * -1.2}s` }}><span className="font-display text-2xl sm:text-3xl font-semibold leading-none">{title}</span><span className="text-xs uppercase tracking-[0.16em] opacity-75">{caption}</span></div>)}
           </div>
         </section>
 
@@ -251,7 +251,7 @@ export default function Index() {
 
         <section id="features" className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32" data-gsap-reveal>
           <div className="mb-10 flex items-end justify-between"><h2 className="font-display text-3xl font-medium tracking-tight sm:text-5xl">Platform Modules</h2><span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">All-in-one Dashboard</span></div>
-          <div className="grid gap-x-5 gap-y-12 md:grid-cols-12">{projects.map((project, index) => <ProjectTile key={project.name} project={project} index={index} />)}</div>
+          <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x md:snap-none snap-mandatory gap-5 pb-8 md:pb-0 -mx-5 px-5 sm:-mx-8 sm:px-8 md:mx-0 md:px-0 md:grid-cols-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{projects.map((project, index) => <ProjectTile key={project.name} project={project} index={index} />)}</div>
         </section>
 
         <section id="platform" className="border-t border-foreground/10 py-24 sm:py-32" data-gsap-reveal>
@@ -333,10 +333,10 @@ export default function Index() {
               </div>
 
               {/* Bottom bar — green block spanning full width */}
-              <div className="col-span-1 sm:col-span-2 lg:col-span-12 rounded-[1rem] bg-flux-green p-5 sm:p-6 text-primary-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-5">
-                <span className="flex items-center gap-3"><BrandMark src="/logo-footer.png" /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
-                <div className="flex flex-wrap gap-4 sm:gap-8 font-display text-sm font-semibold opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
-                <div className="flex items-center gap-4">
+              <div className="col-span-1 sm:col-span-2 lg:col-span-12 rounded-[1rem] bg-flux-green p-6 text-primary-foreground flex flex-col md:flex-row items-center md:items-center justify-between gap-6 md:gap-5 text-center md:text-left">
+                <span className="flex items-center justify-center md:justify-start gap-3"><BrandMark src="/logo-footer.png" /><span className="font-display text-xl font-semibold tracking-tight">Samriddhi</span></span>
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-display text-sm font-semibold opacity-80"><a href="#features" className="hover:opacity-100 hover:underline underline-offset-2">Features</a><a href="#capabilities" className="hover:opacity-100 hover:underline underline-offset-2">Capabilities</a><a href="mailto:hello@samriddhi.app" className="hover:opacity-100 hover:underline underline-offset-2">Email</a></div>
+                <div className="flex items-center justify-center gap-4">
                   <span className="font-display text-sm font-medium opacity-70">© 2026</span>
                   <a href="#top" aria-label="Back to top" className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"><ArrowUp className="size-4" /></a>
                 </div>
