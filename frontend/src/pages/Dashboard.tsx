@@ -17,7 +17,8 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground flex overflow-hidden relative">
+      <div className="absolute inset-0 flux-grid-bg opacity-[0.03] pointer-events-none" />
       
       {/* Mobile Sidebar Overlay */}
       <div 
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
       {/* Sidebar */}
       <aside 
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-zinc-950 border-r border-white/10 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-black/40 backdrop-blur-2xl border-r border-white/10 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex items-center justify-between p-6">
           <Link to="/" className="flex items-center gap-2">
@@ -57,7 +58,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
         {/* Top Header */}
-        <header className="h-20 flex items-center justify-between px-6 lg:px-10 border-b border-white/5 bg-background z-10">
+        <header className="h-20 flex items-center justify-between px-6 lg:px-10 border-b border-white/5 bg-black/20 backdrop-blur-xl z-10 relative">
           <div className="flex items-center gap-4">
             <button className="lg:hidden text-white/70 hover:text-white" onClick={() => setSidebarOpen(true)}>
               <Menu size={24} />
@@ -96,7 +97,7 @@ const Dashboard = () => {
             {/* Charts & Transactions Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main Chart Placeholder */}
-              <div className="lg:col-span-2 rounded-[2rem] bg-zinc-900 border border-white/10 p-6 min-h-[400px] flex flex-col relative overflow-hidden">
+              <div className="lg:col-span-2 rounded-[2rem] bg-white/[0.02] backdrop-blur-xl border border-white/10 p-6 min-h-[400px] flex flex-col relative overflow-hidden">
                 <h3 className="font-display text-lg font-medium opacity-80 mb-6">Cash Flow Analysis</h3>
                 <div className="flex-1 rounded-xl">
                   <ResponsiveContainer width="100%" height="100%">
@@ -159,7 +160,7 @@ const Dashboard = () => {
               </div>
 
               {/* Recent Transactions Placeholder */}
-              <div className="rounded-[2rem] bg-zinc-900 border border-white/10 p-6 min-h-[400px] flex flex-col">
+              <div className="rounded-[2rem] bg-white/[0.02] backdrop-blur-xl border border-white/10 p-6 min-h-[400px] flex flex-col">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="font-display text-lg font-medium opacity-80">Recent Transactions</h3>
                   <button className="text-sm text-flux-lime hover:underline">View All</button>
@@ -209,7 +210,7 @@ const SidebarItem = ({ icon, label, active = false }: { icon: React.ReactNode; l
 const MetricCard = ({ title, amount, trend, color }: { title: string; amount: string; trend: string; color: string }) => {
   const isPositive = trend.startsWith('+');
   return (
-    <div className="relative rounded-[2rem] bg-zinc-900 border border-white/10 p-6 overflow-hidden group hover:border-white/20 transition-all duration-300">
+    <div className="relative rounded-[2rem] bg-white/[0.02] backdrop-blur-xl border border-white/10 p-6 overflow-hidden group hover:bg-white/[0.04] transition-all duration-300">
       <p className="font-display text-sm uppercase tracking-wider opacity-60 mb-2">{title}</p>
       <h2 className="font-display text-3xl font-semibold mb-4">{amount}</h2>
       <div className="flex items-center gap-2">
