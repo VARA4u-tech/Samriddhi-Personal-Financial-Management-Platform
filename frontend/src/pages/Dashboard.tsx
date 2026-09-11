@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, PieChart, ArrowLeftRight, Settings, Menu, X, Bell, Search, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+const cashFlowData = [
+  { month: 'Jan', income: 4200, expenses: 3100 },
+  { month: 'Feb', income: 4500, expenses: 2900 },
+  { month: 'Mar', income: 5100, expenses: 3400 },
+  { month: 'Apr', income: 4800, expenses: 3200 },
+  { month: 'May', income: 5400, expenses: 3600 },
+  { month: 'Jun', income: 6200, expenses: 3800 },
+];
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -89,8 +99,63 @@ const Dashboard = () => {
               <div className="lg:col-span-2 rounded-[2rem] bg-zinc-900 border border-white/10 p-6 min-h-[400px] flex flex-col relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-flux-violet/20 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none" />
                 <h3 className="font-display text-lg font-medium opacity-80 mb-6">Cash Flow Analysis</h3>
-                <div className="flex-1 border-2 border-dashed border-white/10 rounded-xl flex items-center justify-center text-white/30">
-                  Interactive Chart Area
+                <div className="flex-1 rounded-xl">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={cashFlowData}
+                      margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="var(--color-flux-lime)" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="var(--color-flux-lime)" stopOpacity={0}/>
+                        </linearGradient>
+                        <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="var(--color-flux-pink)" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="var(--color-flux-pink)" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <XAxis 
+                        dataKey="month" 
+                        stroke="#ffffff40" 
+                        fontSize={12} 
+                        tickLine={false} 
+                        axisLine={false} 
+                      />
+                      <YAxis 
+                        stroke="#ffffff40" 
+                        fontSize={12} 
+                        tickLine={false} 
+                        axisLine={false} 
+                        tickFormatter={(value) => `$${value}`}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#111', 
+                          border: '1px solid rgba(255,255,255,0.1)',
+                          borderRadius: '16px',
+                          color: '#fff'
+                        }}
+                        itemStyle={{ color: '#fff' }}
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="income" 
+                        stroke="var(--color-flux-lime)" 
+                        fillOpacity={1} 
+                        fill="url(#colorIncome)" 
+                        strokeWidth={2}
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="expenses" 
+                        stroke="var(--color-flux-pink)" 
+                        fillOpacity={1} 
+                        fill="url(#colorExpenses)" 
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
 
