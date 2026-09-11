@@ -1,9 +1,24 @@
-import { motion, AnimatePresence, useScroll, useMotionValue, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValue,
+  useReducedMotion,
+  type HTMLMotionProps,
+} from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
-export function BrandMark({ src = "/logo.png", className = "" }: { src?: string; className?: string }) {
-  return <img src={src} alt="Samriddhi Logo" className={`size-8 object-contain shrink-0 ${className}`} />;
+export function BrandMark({
+  src = "/logo.png",
+  className = "",
+}: {
+  src?: string;
+  className?: string;
+}) {
+  return (
+    <img src={src} alt="Samriddhi Logo" className={`size-8 object-contain shrink-0 ${className}`} />
+  );
 }
 
 export function MagneticLink({ children, className, ...props }: HTMLMotionProps<"a">) {
@@ -58,7 +73,7 @@ export function Navigation() {
       (entries) => {
         if (entries[0]) setIsAtBottom(entries[0].isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     const footer = document.getElementById("contact");
     if (footer) observer.observe(footer);
@@ -83,7 +98,11 @@ export function Navigation() {
     },
     exit: {
       clipPath: "circle(0% at top right)",
-      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 0.4 },
+      transition: {
+        duration: 0.8,
+        ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+        delay: 0.4,
+      },
     },
   };
 
@@ -93,15 +112,25 @@ export function Navigation() {
   };
 
   const linkVars = {
-    initial: { y: "30vh", rotate: 5, opacity: 0, transition: { duration: 0.5, ease: [0.37, 0, 0.63, 1] as [number, number, number, number] } },
-    open: { y: 0, rotate: 0, opacity: 1, transition: { ease: [0, 0.55, 0.45, 1] as [number, number, number, number], duration: 0.7 } },
+    initial: {
+      y: "30vh",
+      rotate: 5,
+      opacity: 0,
+      transition: { duration: 0.5, ease: [0.37, 0, 0.63, 1] as [number, number, number, number] },
+    },
+    open: {
+      y: 0,
+      rotate: 0,
+      opacity: 1,
+      transition: { ease: [0, 0.55, 0.45, 1] as [number, number, number, number], duration: 0.7 },
+    },
   };
 
   return (
     <>
       {/* Dynamic Island Navbar */}
       <header className="fixed bottom-6 left-0 right-0 z-[100] px-4 pointer-events-none flex justify-center">
-        <motion.nav 
+        <motion.nav
           layout
           animate={{ y: isAtBottom || menuOpen ? 100 : 0, opacity: isAtBottom || menuOpen ? 0 : 1 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -131,7 +160,7 @@ export function Navigation() {
 
           {/* Action buttons */}
           <motion.div layout className="flex items-center gap-2 ml-4">
-             <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait">
               {(!isScrolled || isHovered) && (
                 <motion.div
                   layout
@@ -141,16 +170,19 @@ export function Navigation() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden hidden sm:block"
                 >
-                  <MagneticLink href="#contact" className="whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange block">
+                  <MagneticLink
+                    href="#contact"
+                    className="whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange block"
+                  >
                     Get Started
                   </MagneticLink>
                 </motion.div>
               )}
             </AnimatePresence>
-            
-            <button 
-              type="button" 
-              onClick={() => setMenuOpen(!menuOpen)} 
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
               className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105 active:scale-95"
             >
               <Menu className="size-4" />
@@ -169,28 +201,44 @@ export function Navigation() {
             exit="exit"
             className="fixed right-4 top-4 bottom-4 w-[calc(100%-2rem)] sm:w-[420px] z-[150] rounded-[2rem] shadow-2xl flex flex-col p-6 sm:p-10 overflow-hidden text-black"
             style={{
-              background: 'linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)'
+              background:
+                "linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)",
             }}
           >
             {/* Background noise/texture for premium feel */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')" }} />
+            <div
+              className="absolute inset-0 opacity-[0.03] pointer-events-none"
+              style={{
+                backgroundImage:
+                  "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')",
+              }}
+            />
 
             <div className="flex w-full justify-between items-center mb-10 relative z-10">
-               <div className="flex items-center gap-2">
-                 <BrandMark />
-                 <span className="font-display text-lg font-bold tracking-tight">Samriddhi</span>
-               </div>
-               <button onClick={() => setMenuOpen(false)} className="text-black/50 hover:text-black transition-colors p-4 group">
-                  <X className="size-8 transition-transform group-hover:rotate-90" />
-               </button>
+              <div className="flex items-center gap-2">
+                <BrandMark />
+                <span className="font-display text-lg font-bold tracking-tight">Samriddhi</span>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-black/50 hover:text-black transition-colors p-4 group"
+              >
+                <X className="size-8 transition-transform group-hover:rotate-90" />
+              </button>
             </div>
 
-            <motion.div variants={containerVars} initial="initial" animate="open" exit="initial" className="flex flex-col h-full justify-center gap-2 sm:gap-4 relative z-10">
+            <motion.div
+              variants={containerVars}
+              initial="initial"
+              animate="open"
+              exit="initial"
+              className="flex flex-col h-full justify-center gap-2 sm:gap-4 relative z-10"
+            >
               {menuLinks.map(([label, href], i) => (
                 <div key={i} className="overflow-hidden py-2">
                   <motion.div variants={linkVars}>
-                    <a 
-                      href={href} 
+                    <a
+                      href={href}
                       onClick={() => setMenuOpen(false)}
                       className="group flex items-center text-4xl sm:text-5xl font-display font-medium leading-[0.85] tracking-tight hover:opacity-70 transition-opacity"
                     >
@@ -201,7 +249,7 @@ export function Navigation() {
                 </div>
               ))}
             </motion.div>
-            
+
             <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between text-xs sm:text-sm uppercase tracking-[0.2em] opacity-50 relative z-10">
               <p>Personal Financial Management</p>
               <p>Est. 2026</p>

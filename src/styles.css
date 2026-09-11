@@ -161,25 +161,86 @@
     overflow-x: hidden;
   }
 
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-body { font-family: var(--font-body); }
-  .text-balance { text-wrap: balance; }
-  .flux-grid-bg { background-image: linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px); background-size: 100% 25%, 25% 100%; }
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .flux-grid-bg {
+    background-image:
+      linear-gradient(var(--color-foreground) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px);
+    background-size:
+      100% 25%,
+      25% 100%;
+  }
 }
 
-@keyframes flux-float { 0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); } 50% { transform: translate3d(0, -12px, 0) rotate(2deg); } }
-@keyframes flux-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.flux-float { animation: flux-float 7s ease-in-out infinite; }
-.flux-marquee { animation: flux-marquee 24s linear infinite; }
-.flux-tilt { transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transform-style: preserve-3d; will-change: transform; }
-.flux-cursor { opacity: 0; transition: opacity 180ms ease, width 220ms ease, height 220ms ease; will-change: transform; }
-[data-tilt] { touch-action: pan-y; }
-@media (pointer: fine) {
-  [data-tilt]:hover { --tilt-x: 0deg; --tilt-y: 0deg; }
-  .flux-cursor { display: block; }
+@keyframes flux-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotate(2deg);
+  }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.001ms !important; } }
+@keyframes flux-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.flux-float {
+  animation: flux-float 7s ease-in-out infinite;
+}
+.flux-marquee {
+  animation: flux-marquee 24s linear infinite;
+}
+.flux-tilt {
+  transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.flux-cursor {
+  opacity: 0;
+  transition:
+    opacity 180ms ease,
+    width 220ms ease,
+    height 220ms ease;
+  will-change: transform;
+}
+[data-tilt] {
+  touch-action: pan-y;
+}
+@media (pointer: fine) {
+  [data-tilt]:hover {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+  }
+  .flux-cursor {
+    display: block;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
