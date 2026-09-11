@@ -144,7 +144,7 @@ export default function Index() {
       <Navigation />
 
       <main id="top">
-        <section className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-32 overflow-hidden bg-background">
+        <section className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-32 lg:pt-16 overflow-hidden bg-background">
           <motion.div style={{ y: heroY }} className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             
             {/* Left side text content */}

@@ -192,7 +192,7 @@ export function Navigation() {
                     <a 
                       href={href} 
                       onClick={() => setMenuOpen(false)}
-                      className="group flex items-center text-[clamp(2.5rem,10vw,10rem)] font-display font-medium leading-[0.85] tracking-tight hover:opacity-70 transition-opacity"
+                      className="group flex items-center text-4xl sm:text-5xl font-display font-medium leading-[0.85] tracking-tight hover:opacity-70 transition-opacity"
                     >
                       {label}
                       <ArrowUpRight className="ml-4 size-[0.6em] opacity-0 -translate-x-10 translate-y-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" />
