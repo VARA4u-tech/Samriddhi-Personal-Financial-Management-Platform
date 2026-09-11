@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type HTMLMotionProps } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate, useReducedMotion, useScroll, useSpring, useTransform, type HTMLMotionProps } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -23,6 +23,15 @@ const projects = [
 ];
 
 function ProjectTile({ project, index }: { project: (typeof projects)[number]; index: number }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
   return (
     <motion.a
       href="#contact"
@@ -31,8 +40,21 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      onMouseMove={handleMouseMove}
     >
       <div data-tilt className="flux-tilt relative aspect-[1.45] overflow-hidden rounded-[1.5rem] border border-foreground/10 bg-card transition-transform duration-700 group-hover:-translate-y-2">
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-[1.5rem] opacity-0 transition duration-300 group-hover:opacity-100 z-10"
+          style={{
+            background: useMotionTemplate`
+              radial-gradient(
+                650px circle at ${mouseX}px ${mouseY}px,
+                rgba(255,255,255,0.1),
+                transparent 80%
+              )
+            `,
+          }}
+        />
         <div className={`size-full ${project.color} flux-grid-bg relative overflow-hidden`}>
           <div className="absolute inset-[13%] rounded-full border-[clamp(18px,4vw,64px)] border-primary-foreground/80" />
           <div className="absolute bottom-[13%] right-[14%] size-[30%] rounded-[1.5rem] bg-primary-foreground/80" />
