@@ -1,5 +1,20 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789181695401,
+      "tag": "0000_create_finance_workspace_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789181744660,
+      "tag": "0001_create_profile_signup_trigger",
+      "breakpoints": true
+    }
+  ]
 }
