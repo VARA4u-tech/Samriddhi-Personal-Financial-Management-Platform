@@ -217,7 +217,7 @@ export function Navigation() {
 
             <div className="flex w-full justify-between items-center mb-10 relative z-10">
               <div className="flex items-center gap-2">
-                <BrandMark />
+                <BrandMark src="/menu-logo.png" />
                 <span className="font-display text-lg font-bold tracking-tight">Samriddhi</span>
               </div>
               <button
