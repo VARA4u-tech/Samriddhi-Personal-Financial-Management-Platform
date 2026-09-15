@@ -3,8 +3,8 @@
  * triggers re-renders whenever store.notify() is called.
  * No Supabase, no network calls.
  */
-import { useSyncExternalStore } from 'react';
-import { store } from '@/lib/store';
+import { useSyncExternalStore } from "react";
+import { store } from "@/lib/store";
 
 function subscribe(cb: () => void) {
   return store.subscribe(cb);
