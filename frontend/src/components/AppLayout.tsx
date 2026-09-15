@@ -15,7 +15,7 @@ import {
   ChevronRight,
   Search,
   MoreHorizontal,
-  Plus
+  Plus,
 } from "lucide-react";
 import { useProfile } from "@/hooks/useFinanceData";
 
@@ -30,7 +30,7 @@ const navItems = [
 ];
 
 const bottomNavLabels = ["Transactions", "Budgets", "Dashboard", "Reports"];
-const bottomNavItems = bottomNavLabels.map(label => navItems.find(n => n.label === label)!);
+const bottomNavItems = bottomNavLabels.map((label) => navItems.find((n) => n.label === label)!);
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -228,7 +228,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
               </motion.div>
             </AnimatePresence>
           </div>
-          
+
           {/* Floating Action Button (FAB) */}
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -267,7 +267,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     size={22}
                     strokeWidth={active ? 2.5 : 2}
                     className={`transition-colors duration-300 ${
-                      active ? "text-flux-orange drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]" : "text-white/40 hover:text-white/80"
+                      active
+                        ? "text-flux-orange drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]"
+                        : "text-white/40 hover:text-white/80"
                     }`}
                   />
                   {active && (
@@ -278,13 +280,15 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     />
                   )}
                   {!active && (
-                    <span className="text-[9px] font-medium tracking-tight text-white/40">{label}</span>
+                    <span className="text-[9px] font-medium tracking-tight text-white/40">
+                      {label}
+                    </span>
                   )}
                 </motion.div>
               </Link>
             );
           })}
-          
+
           {/* More Menu Trigger */}
           <button
             onClick={() => setSidebarOpen(true)}
