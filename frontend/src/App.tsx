@@ -23,18 +23,25 @@ export default function App() {
         position="top-right"
         toastOptions={{
           style: {
-            background: '#111',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#fff',
-            borderRadius: '1rem',
-            fontFamily: 'DM Sans, sans-serif',
+            background: "#111",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: "#fff",
+            borderRadius: "1rem",
+            fontFamily: "DM Sans, sans-serif",
           },
         }}
       />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           {/* Landing */}
-          <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+          <Route
+            path="/"
+            element={
+              <PageTransition>
+                <Index />
+              </PageTransition>
+            }
+          />
 
           {/* App — no auth required */}
           <Route path="/dashboard" element={<DashboardPage />} />
@@ -46,7 +53,14 @@ export default function App() {
           <Route path="/dashboard/reports" element={<ReportsPage />} />
 
           {/* 404 */}
-          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+          <Route
+            path="*"
+            element={
+              <PageTransition>
+                <NotFound />
+              </PageTransition>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </>
