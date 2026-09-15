@@ -28,8 +28,8 @@ const navItems = [
   { to: "/dashboard/reports", icon: BarChart3, label: "Reports" },
 ];
 
-const bottomNavLabels = ["Dashboard", "Transactions", "Budgets", "Reports"];
-const bottomNavItems = navItems.filter((n) => bottomNavLabels.includes(n.label));
+const bottomNavLabels = ["Transactions", "Budgets", "Dashboard", "Reports"];
+const bottomNavItems = bottomNavLabels.map(label => navItems.find(n => n.label === label)!);
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -219,41 +219,49 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       </main>
 
       {/* Mobile Bottom Navbar */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050505]/80 backdrop-blur-xl border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)] pt-2 px-2 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
-        <div className="flex items-center justify-around pb-2">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050505]/60 backdrop-blur-2xl border-t border-white/[0.05] pb-[env(safe-area-inset-bottom)] pt-2 px-2">
+        <div className="flex items-center justify-around pb-2 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
             return (
               <Link
                 key={to}
                 to={to}
-                className={`flex flex-col items-center justify-center gap-1 w-16 h-12 relative ${
+                className={`flex flex-col items-center justify-center gap-1 w-[4.5rem] py-2 relative z-10 transition-colors ${
                   active ? "text-flux-orange" : "text-white/40 hover:text-white/80"
                 }`}
               >
-                <Icon
-                  size={20}
-                  className={`transition-transform duration-300 ${active ? "-translate-y-0.5" : ""}`}
-                />
-                <span className="text-[10px] font-medium tracking-tight">{label}</span>
                 {active && (
                   <motion.div
                     layoutId="bottom-nav-active"
-                    className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 rounded-b-full bg-gradient-to-r from-flux-orange to-flux-pink shadow-[0_2px_10px_rgba(255,123,0,0.5)]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    className="absolute inset-0 rounded-xl bg-flux-orange/10 border border-flux-orange/20"
+                    transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                   />
                 )}
+                <motion.div
+                  whileTap={{ scale: 0.85 }}
+                  className="relative z-10"
+                >
+                  <Icon
+                    size={22}
+                    strokeWidth={active ? 2.5 : 2}
+                    className={`transition-all duration-300 ${active ? "-translate-y-0.5 drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]" : ""}`}
+                  />
+                </motion.div>
+                <span className={`text-[10px] font-medium tracking-tight relative z-10 transition-all duration-300 ${active ? "opacity-100 translate-y-0" : "opacity-70"}`}>{label}</span>
               </Link>
             );
           })}
-
+          
           {/* More Menu Trigger */}
           <button
             onClick={() => setSidebarOpen(true)}
-            className={`flex flex-col items-center justify-center gap-1 w-16 h-12 relative text-white/40 hover:text-white/80`}
+            className={`flex flex-col items-center justify-center gap-1 w-[4.5rem] py-2 relative text-white/40 hover:text-white/80 transition-colors z-10`}
           >
-            <MoreHorizontal size={20} />
-            <span className="text-[10px] font-medium tracking-tight">More</span>
+            <motion.div whileTap={{ scale: 0.85 }} className="relative z-10">
+              <MoreHorizontal size={22} strokeWidth={2} />
+            </motion.div>
+            <span className="text-[10px] font-medium tracking-tight relative z-10 opacity-70">More</span>
           </button>
         </div>
       </nav>
