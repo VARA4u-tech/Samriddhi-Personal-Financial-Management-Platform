@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   ArrowLeftRight,
@@ -14,17 +14,17 @@ import {
   Bell,
   ChevronRight,
   Settings,
-} from 'lucide-react';
-import { useProfile } from '@/hooks/useFinanceData';
+} from "lucide-react";
+import { useProfile } from "@/hooks/useFinanceData";
 
 const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/dashboard/transactions', icon: ArrowLeftRight, label: 'Transactions' },
-  { to: '/dashboard/budgets', icon: PieChart, label: 'Budgets' },
-  { to: '/dashboard/categories', icon: Tag, label: 'Categories' },
-  { to: '/dashboard/recurring', icon: RefreshCw, label: 'Recurring' },
-  { to: '/dashboard/savings', icon: Target, label: 'Savings Goals' },
-  { to: '/dashboard/reports', icon: BarChart3, label: 'Reports' },
+  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/dashboard/transactions", icon: ArrowLeftRight, label: "Transactions" },
+  { to: "/dashboard/budgets", icon: PieChart, label: "Budgets" },
+  { to: "/dashboard/categories", icon: Tag, label: "Categories" },
+  { to: "/dashboard/recurring", icon: RefreshCw, label: "Recurring" },
+  { to: "/dashboard/savings", icon: Target, label: "Savings Goals" },
+  { to: "/dashboard/reports", icon: BarChart3, label: "Reports" },
 ];
 
 interface AppLayoutProps {
@@ -37,11 +37,15 @@ export function AppLayout({ children, title }: AppLayoutProps) {
   const location = useLocation();
   const profile = useProfile();
 
-  const displayName = profile.display_name || 'User';
-  const initials = displayName.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2);
+  const displayName = profile.display_name || "User";
+  const initials = displayName
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 
-  const pageTitle =
-    title ?? navItems.find((n) => n.to === location.pathname)?.label ?? 'Dashboard';
+  const pageTitle = title ?? navItems.find((n) => n.to === location.pathname)?.label ?? "Dashboard";
 
   return (
     <div className="min-h-screen bg-background text-foreground flex overflow-hidden relative">
@@ -50,8 +54,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{
           backgroundImage:
-            'linear-gradient(var(--color-foreground) 1px,transparent 1px),linear-gradient(90deg,var(--color-foreground) 1px,transparent 1px)',
-          backgroundSize: '40px 40px',
+            "linear-gradient(var(--color-foreground) 1px,transparent 1px),linear-gradient(90deg,var(--color-foreground) 1px,transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -71,7 +75,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-black/60 backdrop-blur-2xl border-r border-white/[0.07] transform transition-transform duration-300 ease-out lg:relative lg:translate-x-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Logo */}
@@ -99,22 +103,20 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 onClick={() => setSidebarOpen(false)}
                 className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 relative ${
                   active
-                    ? 'bg-flux-orange/15 text-flux-orange'
-                    : 'text-white/50 hover:text-white hover:bg-white/[0.06]'
+                    ? "bg-flux-orange/15 text-flux-orange"
+                    : "text-white/50 hover:text-white hover:bg-white/[0.06]"
                 }`}
               >
                 {active && (
                   <motion.div
                     layoutId="sidebar-active"
                     className="absolute inset-0 rounded-xl bg-flux-orange/10 border border-flux-orange/20"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                   />
                 )}
                 <Icon size={18} className="relative z-10 flex-shrink-0" />
                 <span className="relative z-10 font-medium text-sm">{label}</span>
-                {active && (
-                  <ChevronRight size={14} className="relative z-10 ml-auto opacity-60" />
-                )}
+                {active && <ChevronRight size={14} className="relative z-10 ml-auto opacity-60" />}
               </Link>
             );
           })}
@@ -128,7 +130,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium truncate">{displayName}</p>
-              <p className="text-xs text-white/40 truncate">{profile.currency} · {profile.monthly_income.toLocaleString('en-IN')}/mo</p>
+              <p className="text-xs text-white/40 truncate">
+                {profile.currency} · {profile.monthly_income.toLocaleString("en-IN")}/mo
+              </p>
             </div>
           </div>
           <Link
@@ -166,9 +170,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         </header>
 
         {/* Scrollable page content */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
-          {children}
-        </div>
+        <div className="flex-1 overflow-y-auto scrollbar-hide">{children}</div>
       </main>
     </div>
   );
