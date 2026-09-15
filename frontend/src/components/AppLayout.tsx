@@ -245,8 +245,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         </div>
       </main>
 
-      {/* Mobile Bottom Navbar (Floating Dock Style) */}
-      <nav className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-[#050505]/70 backdrop-blur-3xl border border-white/[0.08] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+      {/* Mobile Bottom Navbar (Floating Dock Style) Optimized for Performance */}
+      <nav className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-[#050505]/80 backdrop-blur-lg border border-white/[0.08] rounded-[2rem] shadow-xl overflow-hidden will-change-transform transform-gpu">
         <div className="flex items-center justify-around px-1 py-1.5 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
@@ -259,14 +259,14 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 {active && (
                   <motion.div
                     layoutId="bottom-nav-active-pill"
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-10 bg-gradient-to-tr from-flux-orange via-flux-pink to-flux-violet rounded-xl shadow-[0_4px_15px_rgba(255,123,0,0.3)]"
-                    transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-10 bg-gradient-to-tr from-flux-orange via-flux-pink to-flux-violet rounded-xl shadow-md will-change-transform"
+                    transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
                   />
                 )}
                 <motion.div
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center will-change-transform"
                 >
                   <Icon
                     size={22}
@@ -291,9 +291,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80"
           >
             <motion.div
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center will-change-transform"
             >
               <MoreHorizontal size={22} strokeWidth={2} />
               <span className="text-[9px] font-medium tracking-tight">More</span>
