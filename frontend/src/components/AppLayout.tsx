@@ -14,6 +14,7 @@ import {
   Bell,
   ChevronRight,
   Search,
+  MoreHorizontal
 } from "lucide-react";
 import { useProfile } from "@/hooks/useFinanceData";
 
@@ -26,6 +27,9 @@ const navItems = [
   { to: "/dashboard/savings", icon: Target, label: "Savings Goals" },
   { to: "/dashboard/reports", icon: BarChart3, label: "Reports" },
 ];
+
+const bottomNavLabels = ["Dashboard", "Transactions", "Budgets", "Reports"];
+const bottomNavItems = navItems.filter((n) => bottomNavLabels.includes(n.label));
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -143,7 +147,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           </nav>
 
           {/* User section */}
-          <div className="p-4 mt-auto">
+          <div className="p-4 mt-auto hidden lg:block">
             <div className="rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 flex items-center gap-3 hover:bg-white/[0.05] transition-colors cursor-pointer group">
               <div className="size-10 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner flex-shrink-0">
                 {initials}
@@ -162,15 +166,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       {/* Main content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden min-w-0 relative z-10">
         {/* Top header */}
-        <header className="h-20 flex-shrink-0 flex items-center justify-between px-5 lg:px-10 z-10 relative">
+        <header className="h-16 lg:h-20 flex-shrink-0 flex items-center justify-between px-5 lg:px-10 z-10 relative">
           <div className="flex items-center gap-4">
-            <button
-              className="lg:hidden size-10 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/[0.05] text-white/60 hover:text-white transition-colors"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu size={20} />
-            </button>
-            <h1 className="hidden sm:block font-display text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50">{pageTitle}</h1>
+            <h1 className="font-display text-xl lg:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50">{pageTitle}</h1>
           </div>
           
           <div className="flex items-center gap-3 lg:gap-5">
@@ -182,24 +180,66 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <span>⌘</span><span>K</span>
               </div>
             </button>
-            <button className="sm:hidden size-10 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
-              <Search size={18} />
+            <button className="sm:hidden size-9 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
+              <Search size={16} />
             </button>
 
-            <button className="relative size-10 lg:size-11 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white hover:bg-white/[0.08] transition-all backdrop-blur-md">
-              <Bell size={18} />
-              <span className="absolute top-2.5 right-2.5 size-2 rounded-full bg-flux-orange animate-pulse shadow-[0_0_8px_rgba(255,123,0,0.8)]" />
+            <button className="relative size-9 lg:size-11 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white hover:bg-white/[0.08] transition-all backdrop-blur-md">
+              <Bell size={16} className="lg:scale-110" />
+              <span className="absolute top-2 right-2 lg:top-2.5 lg:right-2.5 size-1.5 lg:size-2 rounded-full bg-flux-orange animate-pulse shadow-[0_0_8px_rgba(255,123,0,0.8)]" />
             </button>
+
+            {/* Mobile User Profile */}
+            <div className="lg:hidden size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0">
+              {initials}
+            </div>
           </div>
         </header>
 
         {/* Scrollable page content */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide pb-10">
+        <div className="flex-1 overflow-y-auto scrollbar-hide pb-24 lg:pb-10">
           <div className="lg:pr-8">
             {children}
           </div>
         </div>
       </main>
+
+      {/* Mobile Bottom Navbar */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050505]/80 backdrop-blur-xl border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)] pt-2 px-2 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+        <div className="flex items-center justify-around pb-2">
+          {bottomNavItems.map(({ to, icon: Icon, label }) => {
+            const active = location.pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex flex-col items-center justify-center gap-1 w-16 h-12 relative ${
+                  active ? "text-flux-orange" : "text-white/40 hover:text-white/80"
+                }`}
+              >
+                <Icon size={20} className={`transition-transform duration-300 ${active ? "-translate-y-0.5" : ""}`} />
+                <span className="text-[10px] font-medium tracking-tight">{label}</span>
+                {active && (
+                  <motion.div
+                    layoutId="bottom-nav-active"
+                    className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 rounded-b-full bg-gradient-to-r from-flux-orange to-flux-pink shadow-[0_2px_10px_rgba(255,123,0,0.5)]"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+          
+          {/* More Menu Trigger */}
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className={`flex flex-col items-center justify-center gap-1 w-16 h-12 relative text-white/40 hover:text-white/80`}
+          >
+            <MoreHorizontal size={20} />
+            <span className="text-[10px] font-medium tracking-tight">More</span>
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }
