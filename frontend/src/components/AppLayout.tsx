@@ -240,37 +240,47 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         </div>
       </main>
 
-      {/* Mobile Bottom Navbar */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050505]/60 backdrop-blur-2xl border-t border-white/[0.05] pb-[env(safe-area-inset-bottom)] pt-2 px-2">
-        <div className="flex items-center justify-around pb-2 relative">
+      {/* Mobile Bottom Navbar (Floating Dock Style) */}
+      <nav className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-[#050505]/70 backdrop-blur-3xl border border-white/[0.08] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+        <div className="flex items-center justify-around px-1 py-1.5 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
             return (
               <Link
                 key={to}
                 to={to}
-                className={`flex flex-col items-center justify-center gap-1 w-[4.5rem] py-2 relative z-10 transition-colors ${
-                  active ? "text-flux-orange" : "text-white/40 hover:text-white/80"
-                }`}
+                className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14"
               >
                 {active && (
                   <motion.div
-                    layoutId="bottom-nav-active"
-                    className="absolute inset-0 rounded-xl bg-flux-orange/10 border border-flux-orange/20"
-                    transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
+                    layoutId="bottom-nav-active-pill"
+                    className="absolute inset-0 bg-white/[0.08] rounded-2xl"
+                    transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
                   />
                 )}
                 <motion.div
-                  whileTap={{ scale: 0.85 }}
-                  className="relative z-10"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center"
                 >
                   <Icon
                     size={22}
                     strokeWidth={active ? 2.5 : 2}
-                    className={`transition-all duration-300 ${active ? "-translate-y-0.5 drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]" : ""}`}
+                    className={`transition-colors duration-300 ${
+                      active ? "text-flux-orange drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]" : "text-white/40 hover:text-white/80"
+                    }`}
                   />
+                  {active && (
+                    <motion.div
+                      layoutId="bottom-nav-active-dot"
+                      className="absolute -bottom-1 size-1 rounded-full bg-flux-orange shadow-[0_0_8px_rgba(255,123,0,0.8)]"
+                      transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
+                    />
+                  )}
+                  {!active && (
+                    <span className="text-[9px] font-medium tracking-tight text-white/40">{label}</span>
+                  )}
                 </motion.div>
-                <span className={`text-[10px] font-medium tracking-tight relative z-10 transition-all duration-300 ${active ? "opacity-100 translate-y-0" : "opacity-70"}`}>{label}</span>
               </Link>
             );
           })}
@@ -278,12 +288,16 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           {/* More Menu Trigger */}
           <button
             onClick={() => setSidebarOpen(true)}
-            className={`flex flex-col items-center justify-center gap-1 w-[4.5rem] py-2 relative text-white/40 hover:text-white/80 transition-colors z-10`}
+            className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80"
           >
-            <motion.div whileTap={{ scale: 0.85 }} className="relative z-10">
+            <motion.div
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center"
+            >
               <MoreHorizontal size={22} strokeWidth={2} />
+              <span className="text-[9px] font-medium tracking-tight">More</span>
             </motion.div>
-            <span className="text-[10px] font-medium tracking-tight relative z-10 opacity-70">More</span>
           </button>
         </div>
       </nav>
