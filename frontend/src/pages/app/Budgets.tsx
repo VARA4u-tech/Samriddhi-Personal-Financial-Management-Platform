@@ -110,11 +110,7 @@ export default function BudgetsPage() {
                   transition={{ delay: i * 0.07 }}
                   className={`rounded-2xl border p-5 relative group ${over ? "bg-flux-pink/[0.06] border-flux-pink/20" : "bg-white/[0.03] border-white/[0.08]"}`}
                 >
-                  {over && (
-                    <div className="absolute top-3 right-10 text-flux-pink">
-                      <AlertTriangle size={14} />
-                    </div>
-                  )}
+
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative size-20 flex-shrink-0">
                       <svg className="size-20 -rotate-90" viewBox="0 0 88 88">
@@ -148,8 +144,11 @@ export default function BudgetsPage() {
                         </span>
                       </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-display font-semibold truncate">{b.name}</p>
+                    <div className="min-w-0 pr-12">
+                      <p className="font-display font-semibold truncate flex items-center gap-2">
+                        {b.name}
+                        {over && <AlertTriangle size={14} className="text-flux-pink flex-shrink-0" />}
+                      </p>
                       <p className="text-xs text-white/40 mt-0.5 capitalize">{b.period}</p>
                     </div>
                   </div>
@@ -159,7 +158,7 @@ export default function BudgetsPage() {
                     </span>
                     <span className="text-white/40">of {fmt(b.amount)}</span>
                   </div>
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
+                  <div className="absolute top-3 right-3 opacity-100 sm:opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
                     <button
                       onClick={() => openEdit(b)}
                       className="size-7 rounded-lg bg-white/[0.08] hover:bg-white/[0.14] flex items-center justify-center text-white/50 hover:text-white transition-all"
