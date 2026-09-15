@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Search,
   MoreHorizontal,
+  Plus
 } from "lucide-react";
 import { useProfile } from "@/hooks/useFinanceData";
 
@@ -213,8 +214,29 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         </header>
 
         {/* Scrollable page content */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide pb-24 lg:pb-10">
-          <div className="lg:pr-8">{children}</div>
+        <div className="flex-1 overflow-y-auto scrollbar-hide pb-24 lg:pb-10 relative">
+          <div className="lg:pr-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
+          {/* Floating Action Button (FAB) */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="fixed z-50 bottom-[5.5rem] lg:bottom-10 right-4 lg:right-10 flex items-center justify-center size-14 rounded-full bg-gradient-to-r from-flux-orange to-flux-pink text-white shadow-[0_4px_20px_rgba(255,123,0,0.4)] hover:shadow-[0_4px_30px_rgba(255,123,0,0.6)] transition-shadow"
+          >
+            <Plus size={24} strokeWidth={2.5} />
+          </motion.button>
         </div>
       </main>
 
