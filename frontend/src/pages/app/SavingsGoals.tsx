@@ -230,7 +230,7 @@ export default function SavingsGoalsPage() {
                   >
                     <PlusCircle size={13} /> Contribute
                   </button>
-                  <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-3 right-3 flex gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => openEdit(g)}
                       className="size-6 rounded-md bg-white/[0.08] hover:bg-white/[0.15] flex items-center justify-center text-white/40 hover:text-white transition-all"

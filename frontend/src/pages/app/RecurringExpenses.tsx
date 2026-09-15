@@ -145,33 +145,35 @@ export default function RecurringPage() {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04 }}
-                  className={`flex items-center gap-4 px-4 py-4 group hover:bg-white/[0.03] transition-colors ${paused ? "opacity-50" : ""}`}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 px-4 py-4 group hover:bg-white/[0.03] transition-colors ${paused ? "opacity-50" : ""}`}
                 >
-                  <div
-                    className="size-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${freqColor}18` }}
-                  >
-                    <RefreshCw size={18} style={{ color: freqColor }} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm">{e.name}</p>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <span
-                        className="text-xs px-1.5 py-0.5 rounded-md capitalize"
-                        style={{ background: `${freqColor}18`, color: freqColor }}
-                      >
-                        {e.frequency}
-                      </span>
-                      <span className="text-xs text-white/40">
-                        Next: {format(parseISO(e.next_date), "MMM d, yyyy")}
-                      </span>
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1">
+                    <div
+                      className="size-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${freqColor}18` }}
+                    >
+                      <RefreshCw size={18} style={{ color: freqColor }} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">{e.name}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span
+                          className="text-xs px-1.5 py-0.5 rounded-md capitalize"
+                          style={{ background: `${freqColor}18`, color: freqColor }}
+                        >
+                          {e.frequency}
+                        </span>
+                        <span className="text-xs text-white/40 truncate">
+                          Next: {format(parseISO(e.next_date), "MMM d, yyyy")}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="font-semibold text-sm">{fmt(e.amount)}</p>
+                      <p className="text-xs text-white/40">/{e.frequency}</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">{fmt(e.amount)}</p>
-                    <p className="text-xs text-white/40">/{e.frequency}</p>
-                  </div>
-                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity mt-2 sm:mt-0 pt-3 sm:pt-0 border-t border-white/[0.05] sm:border-0">
                     <button
                       onClick={() => toggleStatus(e)}
                       className="size-7 rounded-lg bg-white/[0.07] hover:bg-white/[0.14] flex items-center justify-center text-white/50 hover:text-white transition-all"
