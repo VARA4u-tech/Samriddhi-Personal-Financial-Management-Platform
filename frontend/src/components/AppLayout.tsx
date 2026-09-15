@@ -89,14 +89,15 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       >
         {/* Mobile Sidebar Background */}
         <div className="absolute inset-0 bg-[#050505] lg:hidden border-r border-white/[0.04]" />
-        
+
         <div className="relative h-full flex flex-col lg:gap-4 z-10">
-          
           {/* Logo Island */}
           <div className="flex items-center justify-between px-6 lg:px-6 pt-8 pb-6 lg:py-6 lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] shrink-0">
             <Link to="/" className="flex items-center gap-3">
               <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)] shrink-0">
-                <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">S</span>
+                <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">
+                  S
+                </span>
               </div>
               <span className="font-display text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
                 Samriddhi
@@ -147,9 +148,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     size={18}
                     className={`relative z-10 flex-shrink-0 transition-colors duration-300 ${active ? "text-flux-orange" : "group-hover:text-white/70"}`}
                   />
-                  <span className="relative z-10 font-medium text-[15px]">
-                    {label}
-                  </span>
+                  <span className="relative z-10 font-medium text-[15px]">{label}</span>
                   {active && (
                     <ChevronRight
                       size={14}
@@ -175,7 +174,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   {profile.currency} · {profile.monthly_income.toLocaleString("en-IN")}/mo
                 </p>
               </div>
-              
+
               {/* Subtle hover gradient behind user profile */}
               <div className="absolute inset-0 bg-gradient-to-r from-flux-violet/0 via-flux-violet/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
             </div>
