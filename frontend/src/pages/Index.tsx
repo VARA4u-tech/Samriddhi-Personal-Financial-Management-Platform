@@ -13,6 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navigation, BrandMark, MagneticLink } from "@/components/Navigation";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -116,6 +117,7 @@ export default function Index() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
+  const navigate = useNavigate();
   const smoothY = useSpring(scrollY, { stiffness: 80, damping: 22, mass: 0.4 });
   const heroY = useTransform(smoothY, [0, 900], [0, 170]);
 
@@ -195,6 +197,10 @@ export default function Index() {
     });
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [prefersReducedMotion]);
+
+  function setAuthOpen(arg0: boolean): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
@@ -506,12 +512,12 @@ export default function Index() {
                       <ArrowUpRight className="ml-2 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" />
                     </a>
                     <div className="mt-6 flex flex-wrap items-center gap-3">
-                      <MagneticLink
-                        href="mailto:hello@samriddhi.app"
+                      <button
+                        onClick={() => setAuthOpen(true)}
                         className="font-display rounded-full bg-primary-foreground px-5 sm:px-7 py-3 sm:py-3.5 text-sm font-semibold text-flux-orange transition-opacity hover:opacity-80"
                       >
                         Get Started
-                      </MagneticLink>
+                      </button>
                       <MagneticLink
                         href="mailto:hello@samriddhi.app"
                         className="font-display rounded-full border border-primary-foreground/40 px-5 sm:px-7 py-3 sm:py-3.5 text-sm font-medium transition-colors hover:bg-primary-foreground/10"
@@ -697,3 +703,4 @@ export default function Index() {
     </div>
   );
 }
+
