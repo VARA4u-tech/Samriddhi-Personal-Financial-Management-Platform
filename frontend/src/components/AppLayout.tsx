@@ -254,7 +254,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 {active && (
                   <motion.div
                     layoutId="bottom-nav-active-pill"
-                    className="absolute inset-0 bg-white/[0.08] rounded-2xl"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-10 bg-gradient-to-tr from-flux-orange via-flux-pink to-flux-violet rounded-xl shadow-[0_4px_15px_rgba(255,123,0,0.3)]"
                     transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
                   />
                 )}
@@ -267,18 +267,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     size={22}
                     strokeWidth={active ? 2.5 : 2}
                     className={`transition-colors duration-300 ${
-                      active
-                        ? "text-flux-orange drop-shadow-[0_0_8px_rgba(255,123,0,0.5)]"
-                        : "text-white/40 hover:text-white/80"
+                      active ? "text-white" : "text-white/40 hover:text-white/80"
                     }`}
                   />
-                  {active && (
-                    <motion.div
-                      layoutId="bottom-nav-active-dot"
-                      className="absolute -bottom-1 size-1 rounded-full bg-flux-orange shadow-[0_0_8px_rgba(255,123,0,0.8)]"
-                      transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-                    />
-                  )}
                   {!active && (
                     <span className="text-[9px] font-medium tracking-tight text-white/40">
                       {label}
