@@ -81,42 +81,43 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         )}
       </AnimatePresence>
 
-      {/* Sidebar Container */}
+      {/* Desktop Segmented Island Sidebar & Mobile Slide-out */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 flex flex-col transition-transform duration-400 ease-out lg:translate-x-0 lg:static lg:p-5 lg:w-[320px] lg:bg-transparent lg:border-none ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 flex flex-col transition-transform duration-400 ease-out lg:translate-x-0 lg:static lg:w-[320px] lg:p-6 lg:bg-transparent lg:border-none ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Sidebar Inner (Floating Dock on Desktop) */}
-        <div className="flex flex-col h-full bg-[#050505] border-r border-white/[0.04] lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] overflow-hidden lg:shadow-2xl relative">
-          {/* Logo */}
-          <div className="flex items-center justify-between px-6 pt-8 pb-6">
+        {/* Mobile Sidebar Background */}
+        <div className="absolute inset-0 bg-[#050505] lg:hidden border-r border-white/[0.04]" />
+        
+        <div className="relative h-full flex flex-col lg:gap-4 z-10">
+          
+          {/* Logo Island */}
+          <div className="flex items-center justify-between px-6 lg:px-6 pt-8 pb-6 lg:py-6 lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] shrink-0">
             <Link to="/" className="flex items-center gap-3">
-              <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)]">
-                <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">
-                  S
-                </span>
+              <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)] shrink-0">
+                <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">S</span>
               </div>
               <span className="font-display text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
                 Samriddhi
               </span>
             </Link>
             <button
-              className="lg:hidden size-8 rounded-full bg-white/[0.05] flex items-center justify-center text-white/50 hover:text-white transition-colors"
+              className="lg:hidden size-8 rounded-full bg-white/[0.05] flex items-center justify-center text-white/50 hover:text-white transition-colors shrink-0"
               onClick={() => setSidebarOpen(false)}
             >
               <X size={16} />
             </button>
           </div>
 
-          <div className="px-6 pb-2">
+          <div className="px-6 pb-2 lg:hidden">
             <p className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.2em] ml-1">
               Menu
             </p>
           </div>
 
-          {/* Nav */}
-          <nav className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto scrollbar-hide">
+          {/* Navigation Island */}
+          <nav className="flex-1 flex flex-col px-4 lg:px-4 py-2 lg:py-4 space-y-1.5 overflow-y-auto scrollbar-hide lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)]">
             {navItems.map(({ to, icon: Icon, label }) => {
               const active = location.pathname === to;
               return (
@@ -124,7 +125,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   key={to}
                   to={to}
                   onClick={() => setSidebarOpen(false)}
-                  className={`group flex items-center gap-3.5 px-4 py-3 rounded-2xl transition-all duration-300 relative ${
+                  className={`group flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 relative ${
                     active ? "text-white" : "text-white/40 hover:text-white/80"
                   }`}
                 >
@@ -146,7 +147,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     size={18}
                     className={`relative z-10 flex-shrink-0 transition-colors duration-300 ${active ? "text-flux-orange" : "group-hover:text-white/70"}`}
                   />
-                  <span className="relative z-10 font-medium text-[15px]">{label}</span>
+                  <span className="relative z-10 font-medium text-[15px]">
+                    {label}
+                  </span>
                   {active && (
                     <ChevronRight
                       size={14}
@@ -158,13 +161,13 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             })}
           </nav>
 
-          {/* User section */}
-          <div className="p-4 mt-auto hidden lg:block">
-            <div className="rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 flex items-center gap-3 hover:bg-white/[0.05] transition-colors cursor-pointer group">
-              <div className="size-10 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner flex-shrink-0">
+          {/* User Profile Island */}
+          <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0">
+            <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-colors cursor-pointer group overflow-hidden relative">
+              <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10">
                 {initials}
               </div>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1 relative z-10">
                 <p className="text-sm font-semibold truncate group-hover:text-white text-white/90 transition-colors">
                   {displayName}
                 </p>
@@ -172,6 +175,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   {profile.currency} · {profile.monthly_income.toLocaleString("en-IN")}/mo
                 </p>
               </div>
+              
+              {/* Subtle hover gradient behind user profile */}
+              <div className="absolute inset-0 bg-gradient-to-r from-flux-violet/0 via-flux-violet/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
             </div>
           </div>
         </div>
