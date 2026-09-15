@@ -175,12 +175,15 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           
           <div className="flex items-center gap-3 lg:gap-5">
             {/* Command Search Mockup */}
-            <button className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md">
+            <button className="hidden sm:flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md">
               <Search size={16} className="group-hover:text-flux-orange transition-colors" />
               <span className="text-[13px] font-medium hidden sm:block">Search anything...</span>
               <div className="hidden lg:flex items-center gap-0.5 ml-6 text-[10px] font-bold text-white/30 bg-white/5 px-2 py-0.5 rounded-md shadow-inner border border-white/5">
                 <span>⌘</span><span>K</span>
               </div>
+            </button>
+            <button className="sm:hidden size-10 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
+              <Search size={18} />
             </button>
 
             <button className="relative size-10 lg:size-11 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white hover:bg-white/[0.08] transition-all backdrop-blur-md">
