@@ -92,7 +92,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
         <div className="relative h-full flex flex-col lg:gap-4 z-10">
           {/* Logo Island */}
-          <div className="flex items-center justify-between px-6 lg:px-6 pt-8 pb-6 lg:py-6 lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] shrink-0">
+          <div className="flex items-center justify-between px-6 lg:px-6 pt-8 pb-6 lg:py-6 lg:bg-gradient-to-br lg:from-[#111111]/80 lg:to-[#1a1118]/80 lg:backdrop-blur-3xl lg:border lg:border-flux-orange/20 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(255,123,0,0.05)] shrink-0 relative overflow-hidden group">
+            {/* Subtle glow effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-flux-orange/0 via-flux-orange/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             <Link to="/" className="flex items-center gap-3">
               <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)] shrink-0">
                 <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">
@@ -118,7 +120,11 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           </div>
 
           {/* Navigation Island */}
-          <nav className="flex-1 flex flex-col px-4 lg:px-4 py-2 lg:py-4 space-y-1.5 overflow-y-auto scrollbar-hide lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)]">
+          <nav className="flex-1 flex flex-col px-4 lg:px-4 py-2 lg:py-4 space-y-1.5 overflow-y-auto scrollbar-hide lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] relative group/navcontainer">
+            {/* Subtle Grid Texture Background */}
+            <div className="absolute inset-0 flux-grid-bg opacity-[0.03] pointer-events-none rounded-[2rem]" />
+            {/* Ambient hover glow that follows the mouse (CSS approximation via group hover) */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-flux-violet/10 to-transparent opacity-0 group-hover/navcontainer:opacity-100 transition-opacity duration-1000 pointer-events-none rounded-b-[2rem]" />
             {navItems.map(({ to, icon: Icon, label }) => {
               const active = location.pathname === to;
               return (
@@ -133,7 +139,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   {active && (
                     <motion.div
                       layoutId="sidebar-active"
-                      className="absolute inset-0 rounded-2xl bg-white/[0.06] border border-white/[0.05] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+                      className="absolute inset-0 rounded-2xl bg-gradient-to-r from-flux-orange/10 via-flux-pink/5 to-transparent border border-white/[0.05] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                     />
                   )}
@@ -161,8 +167,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           </nav>
 
           {/* User Profile Island */}
-          <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0">
-            <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-colors cursor-pointer group overflow-hidden relative">
+          <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0 relative">
+            <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative">
               <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10">
                 {initials}
               </div>
