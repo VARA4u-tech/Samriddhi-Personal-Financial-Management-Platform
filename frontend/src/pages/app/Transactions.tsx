@@ -168,7 +168,9 @@ export default function TransactionsPage() {
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium truncate">{t.merchant}</p>
                     <p className="text-xs text-white/40 truncate">
-                      <span className="sm:hidden">{format(new Date(t.transaction_date), "MMM d")}</span>
+                      <span className="sm:hidden">
+                        {format(new Date(t.transaction_date), "MMM d")}
+                      </span>
                       {t.notes && <span className="sm:hidden"> • </span>}
                       {t.notes && <span>{t.notes}</span>}
                     </p>

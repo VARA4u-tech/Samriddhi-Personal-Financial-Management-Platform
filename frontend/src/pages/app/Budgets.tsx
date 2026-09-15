@@ -110,7 +110,6 @@ export default function BudgetsPage() {
                   transition={{ delay: i * 0.07 }}
                   className={`rounded-2xl border p-5 relative group ${over ? "bg-flux-pink/[0.06] border-flux-pink/20" : "bg-white/[0.03] border-white/[0.08]"}`}
                 >
-
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative size-20 flex-shrink-0">
                       <svg className="size-20 -rotate-90" viewBox="0 0 88 88">
@@ -147,7 +146,9 @@ export default function BudgetsPage() {
                     <div className="min-w-0 pr-12">
                       <p className="font-display font-semibold truncate flex items-center gap-2">
                         {b.name}
-                        {over && <AlertTriangle size={14} className="text-flux-pink flex-shrink-0" />}
+                        {over && (
+                          <AlertTriangle size={14} className="text-flux-pink flex-shrink-0" />
+                        )}
                       </p>
                       <p className="text-xs text-white/40 mt-0.5 capitalize">{b.period}</p>
                     </div>
