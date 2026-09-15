@@ -126,7 +126,7 @@ export default function CategoriesPage() {
                 />
                 <button
                   onClick={() => handleDelete(c.id)}
-                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 size-6 rounded-lg bg-flux-pink/20 flex items-center justify-center text-flux-pink transition-all hover:bg-flux-pink/30"
+                  className="absolute top-2 right-2 opacity-100 sm:opacity-0 group-hover:opacity-100 size-6 rounded-lg bg-flux-pink/20 flex items-center justify-center text-flux-pink transition-all hover:bg-flux-pink/30"
                 >
                   <Trash2 size={11} />
                 </button>

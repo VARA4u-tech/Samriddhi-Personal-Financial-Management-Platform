@@ -90,12 +90,12 @@ export default function TransactionsPage() {
               className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-flux-orange/40 transition-all placeholder:text-white/30"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             {(["all", "income", "expense"] as const).map((f) => (
               <button
                 key={f}
                 onClick={() => setTypeFilter(f)}
-                className={`px-3 py-2 rounded-xl text-sm font-medium transition-all capitalize ${
+                className={`flex-1 sm:flex-none px-3 py-2 rounded-xl text-sm font-medium transition-all capitalize whitespace-nowrap ${
                   typeFilter === f
                     ? f === "income"
                       ? "bg-flux-green/20 text-flux-green border border-flux-green/30"
@@ -126,7 +126,7 @@ export default function TransactionsPage() {
 
         {/* Table */}
         <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] overflow-hidden">
-          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 px-4 py-3 border-b border-white/[0.06] text-xs text-white/40 uppercase tracking-wider">
+          <div className="hidden sm:grid grid-cols-[1fr_auto_auto_auto] gap-4 px-4 py-3 border-b border-white/[0.06] text-xs text-white/40 uppercase tracking-wider">
             <span>Merchant</span>
             <span>Date</span>
             <span>Amount</span>
@@ -153,9 +153,9 @@ export default function TransactionsPage() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.02 }}
-                className="grid grid-cols-[1fr_auto_auto_auto] gap-4 items-center px-4 py-3.5 border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors group last:border-0"
+                className="flex items-center sm:grid sm:grid-cols-[1fr_auto_auto_auto] gap-3 sm:gap-4 px-4 py-3.5 border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors group last:border-0"
               >
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex flex-1 items-center gap-3 min-w-0">
                   <div
                     className={`size-8 rounded-full flex items-center justify-center flex-shrink-0 ${t.transaction_type === "income" ? "bg-flux-green/15" : "bg-flux-pink/15"}`}
                   >
@@ -165,23 +165,27 @@ export default function TransactionsPage() {
                       <ArrowUpRight size={14} className="text-flux-pink" />
                     )}
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium truncate">{t.merchant}</p>
-                    {t.notes && <p className="text-xs text-white/40 truncate">{t.notes}</p>}
+                    <p className="text-xs text-white/40 truncate">
+                      <span className="sm:hidden">{format(new Date(t.transaction_date), "MMM d")}</span>
+                      {t.notes && <span className="sm:hidden"> • </span>}
+                      {t.notes && <span>{t.notes}</span>}
+                    </p>
                   </div>
                 </div>
-                <span className="text-xs text-white/40 whitespace-nowrap">
+                <span className="hidden sm:inline text-xs text-white/40 whitespace-nowrap">
                   {format(new Date(t.transaction_date), "MMM d, yyyy")}
                 </span>
                 <span
-                  className={`text-sm font-semibold whitespace-nowrap ${t.transaction_type === "income" ? "text-flux-green" : "text-flux-pink"}`}
+                  className={`text-sm font-semibold whitespace-nowrap flex-shrink-0 ${t.transaction_type === "income" ? "text-flux-green" : "text-flux-pink"}`}
                 >
                   {t.transaction_type === "income" ? "+" : "-"}
                   {fmt(t.amount)}
                 </span>
                 <button
                   onClick={() => handleDelete(t.id)}
-                  className="opacity-0 group-hover:opacity-100 size-7 rounded-lg hover:bg-flux-pink/20 flex items-center justify-center text-white/30 hover:text-flux-pink transition-all"
+                  className="opacity-100 sm:opacity-0 group-hover:opacity-100 size-7 rounded-lg hover:bg-flux-pink/20 flex flex-shrink-0 items-center justify-center text-white/30 hover:text-flux-pink transition-all"
                 >
                   <Trash2 size={14} />
                 </button>
