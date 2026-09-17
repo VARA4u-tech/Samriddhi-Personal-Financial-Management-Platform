@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useProfile } from "@/hooks/useFinanceData";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export function BrandMark({
@@ -62,6 +63,9 @@ export function Navigation() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  
+  const profile = useProfile();
+  const getStartedLink = profile.is_onboarded ? "/dashboard" : "/onboarding";
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
@@ -172,7 +176,7 @@ export function Navigation() {
                   className="overflow-hidden hidden sm:block pointer-events-none sm:pointer-events-auto"
                 >
                   <Link
-                    to="/dashboard"
+                    to={getStartedLink}
                     className="whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange block"
                   >
                     Get Started
@@ -254,7 +258,7 @@ export function Navigation() {
               <div className="overflow-hidden py-2 mt-4 sm:hidden">
                 <motion.div variants={linkVars}>
                   <Link
-                    to="/dashboard"
+                    to={getStartedLink}
                     onClick={() => setMenuOpen(false)}
                     className="group flex items-center text-4xl font-display font-medium leading-[0.85] tracking-tight text-white hover:opacity-70 transition-opacity"
                   >
