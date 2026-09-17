@@ -1,12 +1,25 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Search, Trash2, X, ArrowUpRight, ArrowDownRight, Filter } from "lucide-react";
+import {
+  Plus,
+  Search,
+  Trash2,
+  X,
+  ArrowUpRight,
+  ArrowDownRight,
+  Filter,
+  CalendarDays,
+  ChevronDown,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { AppLayout } from "@/components/AppLayout";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useTransactions, useCategories, useProfile, store } from "@/hooks/useFinanceData";
 
 const txSchema = z.object({
@@ -24,6 +37,8 @@ export default function TransactionsPage() {
   const categories = useCategories();
   const profile = useProfile();
   const currency = profile.currency;
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
@@ -48,6 +63,8 @@ export default function TransactionsPage() {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<TxForm>({
     resolver: zodResolver(txSchema),
@@ -56,6 +73,15 @@ export default function TransactionsPage() {
       transaction_date: format(new Date(), "yyyy-MM-dd"),
     },
   });
+  const selectedType = watch("transaction_type");
+  const selectedDate = watch("transaction_date");
+
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get("add") === "1") {
+      setShowModal(true);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location.pathname, location.search, navigate]);
 
   const onSubmit = (data: TxForm) => {
     store.addTransaction({
@@ -209,24 +235,21 @@ export default function TransactionsPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex gap-2">
                 {(["expense", "income"] as const).map((t) => (
-                  <label key={t} className="flex-1 cursor-pointer">
-                    <input
-                      type="radio"
-                      value={t}
-                      {...register("transaction_type")}
-                      className="sr-only"
-                    />
-                    <span
-                      className={`block text-center py-2 rounded-xl text-sm font-medium transition-all border capitalize
-                      ${
-                        t === "expense"
-                          ? "has-[:checked]:bg-flux-pink/20 has-[:checked]:text-flux-pink has-[:checked]:border-flux-pink/30 border-white/10 text-white/40 hover:text-white"
-                          : "has-[:checked]:bg-flux-green/20 has-[:checked]:text-flux-green has-[:checked]:border-flux-green/30 border-white/10 text-white/40 hover:text-white"
-                      }`}
-                    >
-                      {t}
-                    </span>
-                  </label>
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setValue("transaction_type", t, { shouldDirty: true })}
+                    aria-pressed={selectedType === t}
+                    className={`flex-1 rounded-xl border py-2.5 text-sm font-medium capitalize transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flux-orange/60 ${
+                      selectedType === t
+                        ? t === "expense"
+                          ? "border-flux-pink/40 bg-flux-pink/15 text-flux-pink shadow-[inset_0_0_0_1px_rgba(255,51,161,0.12)]"
+                          : "border-flux-green/40 bg-flux-green/15 text-flux-green shadow-[inset_0_0_0_1px_rgba(0,200,120,0.12)]"
+                        : "border-white/10 text-white/45 hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
+                    }`}
+                  >
+                    {t}
+                  </button>
                 ))}
               </div>
               <Field label="Merchant / Description" error={errors.merchant?.message}>
@@ -247,14 +270,45 @@ export default function TransactionsPage() {
               </Field>
               <div className="grid grid-cols-2 gap-3">
                 <Field label="Date" error={errors.transaction_date?.message}>
-                  <input {...register("transaction_date")} type="date" className="form-input" />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button
+                        type="button"
+                        className="form-input flex items-center justify-between text-left"
+                      >
+                        <span className="flex items-center gap-2">
+                          <CalendarDays size={15} className="text-flux-orange" />
+                          {selectedDate
+                            ? format(new Date(`${selectedDate}T00:00:00`), "MMM d, yyyy")
+                            : "Choose date"}
+                        </span>
+                        <ChevronDown size={15} className="text-white/40" />
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-auto border-white/10 bg-[#151515] p-2 text-white"
+                      align="start"
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate ? new Date(`${selectedDate}T00:00:00`) : undefined}
+                        onSelect={(date) =>
+                          date &&
+                          setValue("transaction_date", format(date, "yyyy-MM-dd"), {
+                            shouldDirty: true,
+                          })
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </Field>
                 <Field label="Category">
-                  <select {...register("category_id")} className="form-input">
+                  <select {...register("category_id")} className="form-input appearance-none">
                     <option value="">None</option>
                     {categories.map((c) => (
                       <option key={c.id} value={c.id}>
-                        {c.icon} {c.name}
+                        {c.name}
                       </option>
                     ))}
                   </select>

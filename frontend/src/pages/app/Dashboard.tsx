@@ -84,7 +84,8 @@ export default function DashboardPage() {
         {/* Welcome Greeting */}
         <div className="mb-2">
           <h1 className="font-display text-3xl font-bold tracking-tight text-white">
-            {greeting}{profile.display_name ? `, ${profile.display_name}` : ""} 👋
+            {greeting}
+            {profile.display_name ? `, ${profile.display_name}` : ""} 👋
           </h1>
           <p className="text-white/50 text-sm mt-1">Here's your financial overview.</p>
         </div>
