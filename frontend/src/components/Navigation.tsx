@@ -183,7 +183,7 @@ export function Navigation() {
                     to={getStartedLink}
                     className="whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-flux-orange block"
                   >
-                    Get Started
+                    {profile.is_onboarded ? "Dashboard" : "Get Started"}
                   </Link>
                 </motion.div>
               )}
@@ -266,7 +266,7 @@ export function Navigation() {
                     onClick={() => setMenuOpen(false)}
                     className="group flex items-center text-4xl font-display font-medium leading-[0.85] tracking-tight text-white hover:opacity-70 transition-opacity"
                   >
-                    Get Started
+                    {profile.is_onboarded ? "Dashboard" : "Get Started"}
                     <ArrowUpRight className="ml-4 size-[0.6em] opacity-0 -translate-x-10 translate-y-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" />
                   </Link>
                 </motion.div>

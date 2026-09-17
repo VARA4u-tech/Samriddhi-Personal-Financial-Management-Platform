@@ -15,6 +15,7 @@ import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navigation, BrandMark, MagneticLink } from "@/components/Navigation";
+import { useProfile } from "@/hooks/useFinanceData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,6 +119,8 @@ export default function Index() {
   const prefersReducedMotion = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
   const navigate = useNavigate();
+  const profile = useProfile();
+  const getStartedLink = profile.is_onboarded ? "/dashboard" : "/onboarding";
   const smoothY = useSpring(scrollY, { stiffness: 80, damping: 22, mass: 0.4 });
   const heroY = useTransform(smoothY, [0, 900], [0, 170]);
 
@@ -213,9 +216,7 @@ export default function Index() {
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [prefersReducedMotion]);
 
-  function setAuthOpen(arg0: boolean): void {
-    throw new Error("Function not implemented.");
-  }
+
 
   return (
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
@@ -563,10 +564,10 @@ export default function Index() {
                     </a>
                     <div className="mt-6 flex flex-wrap items-center gap-3">
                       <button
-                        onClick={() => setAuthOpen(true)}
+                        onClick={() => navigate(getStartedLink)}
                         className="font-display rounded-full bg-primary-foreground px-5 sm:px-7 py-3 sm:py-3.5 text-sm font-semibold text-flux-orange transition-opacity hover:opacity-80"
                       >
-                        Get Started
+                        {profile.is_onboarded ? "Dashboard" : "Get Started"}
                       </button>
                       <MagneticLink
                         href="mailto:hello@samriddhi.app"
@@ -735,15 +736,20 @@ export default function Index() {
                     Email
                   </a>
                 </div>
-                <div className="flex items-center justify-center gap-4">
-                  <span className="font-display text-sm font-medium opacity-70">© 2026</span>
-                  <a
-                    href="#top"
-                    aria-label="Back to top"
-                    className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"
-                  >
-                    <ArrowUp className="size-4" />
-                  </a>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+                  <span className="font-display text-xs font-medium opacity-60">
+                    Crafted & Served by Vara
+                  </span>
+                  <div className="flex items-center justify-center gap-4">
+                    <span className="font-display text-sm font-medium opacity-70">© 2026</span>
+                    <a
+                      href="#top"
+                      aria-label="Back to top"
+                      className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"
+                    >
+                      <ArrowUp className="size-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

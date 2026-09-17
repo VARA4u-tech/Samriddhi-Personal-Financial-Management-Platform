@@ -596,6 +596,37 @@ class LocalStore {
     this.notify();
   }
 
+  // Reset financial data (keeps profile)
+  resetFinancialData(): void {
+    localStorage.removeItem("samriddhi_transactions");
+    localStorage.removeItem("samriddhi_budgets");
+    localStorage.removeItem("samriddhi_categories");
+    localStorage.removeItem("samriddhi_recurring");
+    localStorage.removeItem("samriddhi_goals");
+
+    this.transactions = SEED_TRANSACTIONS;
+    this.budgets = SEED_BUDGETS;
+    this.categories = SEED_CATEGORIES;
+    this.recurring = SEED_RECURRING;
+    this.goals = SEED_GOALS;
+
+    save("samriddhi_transactions", this.transactions);
+    save("samriddhi_budgets", this.budgets);
+    save("samriddhi_categories", this.categories);
+    save("samriddhi_recurring", this.recurring);
+    save("samriddhi_goals", this.goals);
+
+    this.notify();
+  }
+
+  // Reset profile (keeps financial data)
+  resetProfile(): void {
+    localStorage.removeItem("samriddhi_profile");
+    this.profile = DEFAULT_PROFILE;
+    save("samriddhi_profile", this.profile);
+    this.notify();
+  }
+
   // Reset entirely
   resetAll(): void {
     localStorage.removeItem("samriddhi_profile");

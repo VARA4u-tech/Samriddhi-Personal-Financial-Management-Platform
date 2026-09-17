@@ -15,6 +15,7 @@ import CategoriesPage from "./pages/app/Categories";
 import RecurringPage from "./pages/app/RecurringExpenses";
 import SavingsGoalsPage from "./pages/app/SavingsGoals";
 import ReportsPage from "./pages/app/Reports";
+import ProfilePage from "./pages/app/Profile";
 
 export default function App() {
   const location = useLocation();
@@ -60,6 +61,7 @@ export default function App() {
           <Route path="/dashboard/recurring" element={<RecurringPage />} />
           <Route path="/dashboard/savings" element={<SavingsGoalsPage />} />
           <Route path="/dashboard/reports" element={<ReportsPage />} />
+          <Route path="/dashboard/profile" element={<ProfilePage />} />
 
           {/* 404 */}
           <Route

@@ -30,3 +30,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exported Financial Data
+*.xlsx
+*.csv

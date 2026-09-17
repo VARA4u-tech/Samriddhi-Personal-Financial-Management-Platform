@@ -175,16 +175,10 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem
-                  onClick={() => navigate("/onboarding")}
+                  onClick={() => navigate("/dashboard/profile")}
                   className="cursor-pointer focus:bg-white/10 focus:text-white"
                 >
-                  Edit Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={handleReset}
-                  className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400"
-                >
-                  Reset Local Data
+                  Profile Settings
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -241,16 +235,10 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   <DropdownMenuLabel>{displayName}</DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-white/10" />
                   <DropdownMenuItem
-                    onClick={() => navigate("/onboarding")}
+                    onClick={() => navigate("/dashboard/profile")}
                     className="cursor-pointer focus:bg-white/10 focus:text-white"
                   >
-                    Edit Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={handleReset}
-                    className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400"
-                  >
-                    Reset Local Data
+                    Profile Settings
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
