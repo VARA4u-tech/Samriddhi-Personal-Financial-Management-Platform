@@ -158,7 +158,22 @@ export default function Index() {
       return;
 
     const handlePointerMove = (event: PointerEvent) => {
-      cursor.style.opacity = "1";
+      const target = event.target as Element | null;
+      let isInteractive = false;
+      
+      if (target) {
+        // Quick tag check first
+        if (target.tagName === "A" || target.tagName === "BUTTON") {
+          isInteractive = true;
+        } else if (target.closest('a, button, [role="button"]')) {
+          isInteractive = true;
+        } else {
+          // Fallback to computed style to catch anything with cursor-pointer
+          isInteractive = window.getComputedStyle(target).cursor === "pointer";
+        }
+      }
+
+      cursor.style.opacity = isInteractive ? "0" : "1";
       cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
     };
     const handlePointerLeave = () => {
