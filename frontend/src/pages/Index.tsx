@@ -160,7 +160,7 @@ export default function Index() {
     const handlePointerMove = (event: PointerEvent) => {
       const target = event.target as Element | null;
       let isInteractive = false;
-      
+
       if (target) {
         // Quick tag check first
         if (target.tagName === "A" || target.tagName === "BUTTON") {
