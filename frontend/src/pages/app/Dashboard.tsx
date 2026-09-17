@@ -28,6 +28,10 @@ export default function DashboardPage() {
   const currency = profile.currency;
 
   const now = new Date();
+  const currentHour = now.getHours();
+  let greeting = "Good evening";
+  if (currentHour < 12) greeting = "Good morning";
+  else if (currentHour < 18) greeting = "Good afternoon";
   const monthStart = startOfMonth(now);
   const monthEnd = endOfMonth(now);
 
@@ -77,6 +81,14 @@ export default function DashboardPage() {
   return (
     <AppLayout title="Overview">
       <div className="p-5 lg:p-8 max-w-7xl mx-auto space-y-6 pb-16">
+        {/* Welcome Greeting */}
+        <div className="mb-2">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-white">
+            {greeting}{profile.display_name ? `, ${profile.display_name}` : ""} 👋
+          </h1>
+          <p className="text-white/50 text-sm mt-1">Here's your financial overview.</p>
+        </div>
+
         {/* Metric cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
