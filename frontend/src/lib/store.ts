@@ -67,36 +67,42 @@ const SEED_CATEGORIES: Category[] = [
   {
     id: "cat-1",
     name: "Food & Dining",
-    icon: "🍔",
+    icon: "utensils",
     color: "#ff7b00",
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-2",
     name: "Transport",
-    icon: "🚗",
+    icon: "transport",
     color: "#38bdf8",
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-3",
     name: "Shopping",
-    icon: "🛒",
+    icon: "shopping",
     color: "#d1ff26",
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-4",
     name: "Entertainment",
-    icon: "🎬",
+    icon: "entertainment",
     color: "#9b5de5",
     created_at: "2026-01-01T00:00:00Z",
   },
-  { id: "cat-5", name: "Health", icon: "💊", color: "#00c878", created_at: "2026-01-01T00:00:00Z" },
+  {
+    id: "cat-5",
+    name: "Health",
+    icon: "health",
+    color: "#00c878",
+    created_at: "2026-01-01T00:00:00Z",
+  },
   {
     id: "cat-6",
     name: "Utilities",
-    icon: "💡",
+    icon: "utilities",
     color: "#f59e0b",
     created_at: "2026-01-01T00:00:00Z",
   },
@@ -598,7 +604,7 @@ class LocalStore {
     localStorage.removeItem("samriddhi_categories");
     localStorage.removeItem("samriddhi_recurring");
     localStorage.removeItem("samriddhi_goals");
-    
+
     // Reset in-memory state
     this.profile = DEFAULT_PROFILE;
     this.transactions = SEED_TRANSACTIONS;
@@ -606,7 +612,7 @@ class LocalStore {
     this.categories = SEED_CATEGORIES;
     this.recurring = SEED_RECURRING;
     this.goals = SEED_GOALS;
-    
+
     // Re-initialize local storage with defaults/seeds
     save("samriddhi_profile", this.profile);
     save("samriddhi_transactions", this.transactions);
@@ -614,7 +620,7 @@ class LocalStore {
     save("samriddhi_categories", this.categories);
     save("samriddhi_recurring", this.recurring);
     save("samriddhi_goals", this.goals);
-    
+
     this.notify();
   }
 }
