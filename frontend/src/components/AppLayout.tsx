@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -9,7 +9,6 @@ import {
   RefreshCw,
   Target,
   BarChart3,
-  Menu,
   X,
   Bell,
   ChevronRight,
@@ -47,7 +46,6 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children, title }: AppLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const profile = useProfile();
@@ -85,28 +83,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-flux-violet/10 blur-[150px] pointer-events-none mix-blend-screen" />
       </div>
 
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-md"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Desktop Segmented Island Sidebar & Mobile Slide-out */}
-      <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 flex flex-col transition-transform duration-400 ease-out lg:translate-x-0 lg:static lg:w-[320px] lg:p-6 lg:bg-transparent lg:border-none ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        {/* Mobile Sidebar Background */}
-        <div className="absolute inset-0 bg-[#050505] lg:hidden border-r border-white/[0.04]" />
-
+      {/* Desktop segmented sidebar */}
+      <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 flex-col lg:static lg:flex lg:w-[320px] lg:bg-transparent lg:p-6 lg:border-none">
         <div className="relative h-full flex flex-col lg:gap-4 z-10">
           {/* Logo Island */}
           <div className="flex items-center justify-between px-6 lg:px-6 pt-8 pb-6 lg:py-6 lg:bg-gradient-to-br lg:from-[#111111]/80 lg:to-[#1a1118]/80 lg:backdrop-blur-3xl lg:border lg:border-flux-orange/20 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(255,123,0,0.05)] shrink-0 relative overflow-hidden group">
@@ -120,18 +98,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 Samriddhi
               </span>
             </Link>
-            <button
-              className="lg:hidden size-8 rounded-full bg-white/[0.05] flex items-center justify-center text-white/50 hover:text-white transition-colors shrink-0"
-              onClick={() => setSidebarOpen(false)}
-            >
+            <button className="lg:hidden size-8 rounded-full bg-white/[0.05] flex items-center justify-center text-white/50 hover:text-white transition-colors shrink-0">
               <X size={16} />
             </button>
-          </div>
-
-          <div className="px-6 pb-2 lg:hidden">
-            <p className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.2em] ml-1">
-              Menu
-            </p>
           </div>
 
           {/* Navigation Island */}
@@ -146,7 +115,6 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <Link
                   key={to}
                   to={to}
-                  onClick={() => setSidebarOpen(false)}
                   className={`group flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 relative ${
                     active ? "text-white" : "text-white/40 hover:text-white/80"
                   }`}
@@ -200,13 +168,22 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                   <div className="absolute inset-0 bg-gradient-to-r from-flux-violet/0 via-flux-violet/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-[#111] border-white/10 text-white rounded-xl">
+              <DropdownMenuContent
+                align="end"
+                className="w-56 bg-[#111] border-white/10 text-white rounded-xl"
+              >
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-white/10" />
-                <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer focus:bg-white/10 focus:text-white">
+                <DropdownMenuItem
+                  onClick={() => navigate("/onboarding")}
+                  className="cursor-pointer focus:bg-white/10 focus:text-white"
+                >
                   Edit Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleReset} className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400">
+                <DropdownMenuItem
+                  onClick={handleReset}
+                  className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400"
+                >
                   Reset Local Data
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -220,9 +197,6 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         {/* Top header */}
         <header className="h-16 lg:h-20 flex-shrink-0 flex items-center justify-between px-5 lg:px-10 z-10 relative">
           <div className="flex items-center gap-4">
-            <button className="lg:hidden text-white/60 hover:text-white transition-colors" onClick={() => setSidebarOpen(true)}>
-              <Menu size={24} />
-            </button>
             <Link to="/" className="lg:hidden flex items-center justify-center mr-2">
               <div className="relative size-10 flex items-center justify-center shrink-0">
                 <img src="/logo.png" alt="Samriddhi" className="w-full h-full object-contain" />
@@ -260,13 +234,22 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                     {initials}
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-[#111] border-white/10 text-white rounded-xl mt-2 z-[100]">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 bg-[#111] border-white/10 text-white rounded-xl mt-2 z-[100]"
+                >
                   <DropdownMenuLabel>{displayName}</DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-white/10" />
-                  <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer focus:bg-white/10 focus:text-white">
+                  <DropdownMenuItem
+                    onClick={() => navigate("/onboarding")}
+                    className="cursor-pointer focus:bg-white/10 focus:text-white"
+                  >
                     Edit Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleReset} className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400">
+                  <DropdownMenuItem
+                    onClick={handleReset}
+                    className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400"
+                  >
                     Reset Local Data
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -293,9 +276,11 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
           {/* Floating Action Button (FAB) */}
           <motion.button
+            onClick={() => navigate("/dashboard/transactions?add=1")}
+            aria-label="Add transaction"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="fixed z-50 bottom-[5.5rem] lg:bottom-10 right-4 lg:right-10 flex items-center justify-center size-14 rounded-full bg-gradient-to-r from-flux-orange to-flux-pink text-white shadow-[0_4px_20px_rgba(255,123,0,0.4)] hover:shadow-[0_4px_30px_rgba(255,123,0,0.6)] transition-shadow"
+            className="fixed z-50 bottom-[6.75rem] right-4 flex size-14 items-center justify-center rounded-full bg-gradient-to-r from-flux-orange to-flux-pink text-white shadow-[0_4px_20px_rgba(255,123,0,0.4)] transition-shadow hover:shadow-[0_4px_30px_rgba(255,123,0,0.6)] lg:bottom-10 lg:right-10"
           >
             <Plus size={24} strokeWidth={2.5} />
           </motion.button>
@@ -303,7 +288,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       </main>
 
       {/* Mobile Bottom Navbar (Floating Dock Style) Optimized for Performance */}
-      <nav className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-[#050505]/80 backdrop-blur-lg border border-white/[0.08] rounded-[2rem] shadow-xl overflow-hidden will-change-transform transform-gpu">
+      <nav className="fixed bottom-3 left-3 right-3 z-40 overflow-hidden rounded-[1.5rem] border border-white/[0.08] bg-[#050505]/90 pb-[env(safe-area-inset-bottom)] shadow-xl backdrop-blur-lg will-change-transform transform-gpu lg:hidden">
         <div className="flex items-center justify-around px-1 py-1.5 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
@@ -344,7 +329,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
           {/* More Menu Trigger */}
           <button
-            onClick={() => setSidebarOpen(true)}
+            onClick={() => navigate("/onboarding")}
             className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80"
           >
             <motion.div
