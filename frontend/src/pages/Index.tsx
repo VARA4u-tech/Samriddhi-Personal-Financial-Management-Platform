@@ -716,7 +716,7 @@ export default function Index() {
                     Samriddhi
                   </span>
                 </span>
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-display text-sm font-semibold opacity-80">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-display text-base font-semibold opacity-80">
                   <a
                     href="#features"
                     className="hover:opacity-100 hover:underline underline-offset-2"
@@ -737,11 +737,11 @@ export default function Index() {
                   </a>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
-                  <span className="font-display text-xs font-medium opacity-60">
-                    Crafted & Served by Vara
+                  <span className="font-display text-base font-semibold tracking-wide flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-colors hover:bg-primary-foreground/20 text-white/80">
+                    Crafted & Served by <span className="text-white font-bold">Vara</span>
                   </span>
                   <div className="flex items-center justify-center gap-4">
-                    <span className="font-display text-sm font-medium opacity-70">© 2026</span>
+                    <span className="font-display text-base font-medium opacity-70">© 2026</span>
                     <a
                       href="#top"
                       aria-label="Back to top"
