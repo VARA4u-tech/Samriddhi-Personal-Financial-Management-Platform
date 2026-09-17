@@ -84,7 +84,7 @@ export default function Onboarding() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your name"
-                        className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 text-black font-medium text-xl placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/20 focus:bg-black/10 transition-all"
+                        className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 text-black font-medium text-xl placeholder:text-black/60 focus:outline-none focus:ring-2 focus:ring-black/20 focus:bg-black/10 transition-all"
                         autoFocus
                         required
                       />
