@@ -13,14 +13,14 @@ export default function Onboarding() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Slight artificial delay for UX feel
     setTimeout(() => {
-      store.updateProfile({ 
+      store.updateProfile({
         display_name: name.trim(),
-        is_onboarded: true 
+        is_onboarded: true,
       });
       navigate("/dashboard");
     }, 600);
@@ -43,18 +43,17 @@ export default function Onboarding() {
 
         {/* Content (Bento Box Grid) */}
         <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 py-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="w-full max-w-7xl"
           >
             <div className="mx-auto grid grid-cols-2 gap-2 rounded-[1.5rem] border border-foreground/10 bg-card p-2 sm:grid-cols-4 sm:gap-3 sm:p-3">
-              
               {/* Main Orange Card (Form) */}
               <div className="relative col-span-2 row-span-2 min-h-[400px] overflow-hidden rounded-[1rem] bg-flux-orange p-6 sm:p-10 text-primary-foreground sm:min-h-[480px] flex flex-col justify-between">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,var(--color-flux-sand)_0_7%,transparent_7.5%),linear-gradient(140deg,transparent_0_58%,var(--color-flux-violet)_58%_72%,transparent_72%)] opacity-70" />
-                
+
                 <div className="relative z-10">
                   <motion.div
                     initial={{ scale: 0 }}
@@ -75,7 +74,10 @@ export default function Onboarding() {
                 <div className="relative z-10 mt-8 max-w-sm w-full">
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="block text-sm font-bold text-black uppercase tracking-wider ml-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-bold text-black uppercase tracking-wider ml-1"
+                      >
                         What should we call you?
                       </label>
                       <input
@@ -124,11 +126,26 @@ export default function Onboarding() {
                 className="flex min-h-[190px] flex-col justify-between rounded-[3rem] p-6 bg-flux-pink overflow-hidden relative"
               >
                 <div className="absolute top-[-20%] right-[-10%] w-28 h-28 rounded-full bg-white/10 blur-sm" />
-                <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">Secure</span>
+                <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">
+                  Secure
+                </span>
                 <div className="flex items-end justify-between">
-                  <span className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium">Authentication</span>
+                  <span className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium">
+                    Authentication
+                  </span>
                   <div className="size-9 rounded-full bg-black/10 flex items-center justify-center">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                   </div>
                 </div>
               </motion.div>
@@ -141,13 +158,21 @@ export default function Onboarding() {
               >
                 <div className="absolute bottom-[-15%] left-[-5%] w-32 h-20 rounded-full bg-black/5 blur-md" />
                 <div className="flex items-end gap-1 h-12 mt-2">
-                  {[40,70,55,90,65,80].map((h,i) => (
-                    <div key={i} className="flex-1 rounded-sm bg-black/20" style={{height:`${h}%`}} />
+                  {[40, 70, 55, 90, 65, 80].map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 rounded-sm bg-black/20"
+                      style={{ height: `${h}%` }}
+                    />
                   ))}
                 </div>
                 <div>
-                  <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">Automated</span>
-                  <p className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium mt-1">Recurring Expenses</p>
+                  <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">
+                    Automated
+                  </span>
+                  <p className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium mt-1">
+                    Recurring Expenses
+                  </p>
                 </div>
               </motion.div>
 
@@ -159,11 +184,27 @@ export default function Onboarding() {
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.2),transparent_60%)]" />
                 <div className="size-10 rounded-full bg-black/15 flex items-center justify-center">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="black"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                  </svg>
                 </div>
                 <div>
-                  <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">Categorized</span>
-                  <p className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium mt-1">Smart Labeling</p>
+                  <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">
+                    Categorized
+                  </span>
+                  <p className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium mt-1">
+                    Smart Labeling
+                  </p>
                 </div>
               </motion.div>
 
@@ -175,17 +216,33 @@ export default function Onboarding() {
               >
                 <div className="absolute top-[15%] right-[10%] size-14 rounded-full bg-white/20" />
                 <div className="absolute bottom-[20%] left-[5%] w-20 h-4 rounded-full bg-black/10" />
-                <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">Analytics</span>
+                <span className="font-display text-2xl sm:text-3xl font-semibold leading-none text-black">
+                  Analytics
+                </span>
                 <div className="flex items-end justify-between">
-                  <span className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium">Financial Reports</span>
+                  <span className="text-xs uppercase tracking-[0.16em] opacity-60 text-black font-medium">
+                    Financial Reports
+                  </span>
                   <div className="size-9 rounded-full bg-black/10 flex items-center justify-center">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="18" y1="20" x2="18" y2="10" />
+                      <line x1="12" y1="20" x2="12" y2="4" />
+                      <line x1="6" y1="20" x2="6" y2="14" />
+                    </svg>
                   </div>
                 </div>
               </motion.div>
-              
             </div>
-            
+
             <div className="flex items-center justify-center gap-2 text-white/40 text-sm font-medium mt-6 text-center">
               <Check size={16} className="text-flux-lime shrink-0" />
               No account required. All data stays securely on your device.
