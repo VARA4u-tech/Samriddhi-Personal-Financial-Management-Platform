@@ -32,8 +32,8 @@ export default function Onboarding() {
         {/* Top Navbar with Brand */}
         <nav className="relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
           <div className="flex items-center gap-3">
-            <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)]">
-              <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">S</span>
+            <div className="relative size-12 flex items-center justify-center shrink-0">
+              <img src="/logo.png" alt="Samriddhi" className="w-full h-full object-contain" />
             </div>
             <span className="font-display text-xl font-bold tracking-tight text-white">
               Samriddhi

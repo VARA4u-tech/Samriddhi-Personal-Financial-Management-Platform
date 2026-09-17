@@ -19,7 +19,11 @@ export function BrandMark({
   className?: string;
 }) {
   return (
-    <img src={src} alt="Samriddhi Logo" className={`size-8 object-contain shrink-0 ${className}`} />
+    <img
+      src={src}
+      alt="Samriddhi Logo"
+      className={`w-10 h-10 object-contain drop-shadow-lg ${className}`}
+    />
   );
 }
 

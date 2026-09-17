@@ -113,10 +113,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             {/* Subtle glow effect on hover */}
             <div className="absolute inset-0 bg-gradient-to-tr from-flux-orange/0 via-flux-orange/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             <Link to="/" className="flex items-center gap-3">
-              <div className="relative size-10 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-[0_0_30px_rgba(255,123,0,0.3)] shrink-0">
-                <span className="text-black font-display font-bold text-xl leading-none -ml-0.5">
-                  S
-                </span>
+              <div className="relative size-12 flex items-center justify-center shrink-0">
+                <img src="/logo.png" alt="Samriddhi" className="w-full h-full object-contain" />
               </div>
               <span className="font-display text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
                 Samriddhi
@@ -225,11 +223,9 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <button className="lg:hidden text-white/60 hover:text-white transition-colors" onClick={() => setSidebarOpen(true)}>
               <Menu size={24} />
             </button>
-            <Link to="/" className="lg:hidden flex items-center gap-2 mr-2">
-              <div className="relative size-8 flex items-center justify-center rounded-xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-md shrink-0">
-                <span className="text-black font-display font-bold text-base leading-none -ml-0.5">
-                  S
-                </span>
+            <Link to="/" className="lg:hidden flex items-center justify-center mr-2">
+              <div className="relative size-10 flex items-center justify-center shrink-0">
+                <img src="/logo.png" alt="Samriddhi" className="w-full h-full object-contain" />
               </div>
             </Link>
             <h1 className="font-display text-xl lg:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50 hidden sm:block">
