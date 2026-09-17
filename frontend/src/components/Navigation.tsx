@@ -169,7 +169,7 @@ export function Navigation() {
                   animate={{ opacity: 1, width: "auto", scale: 1 }}
                   exit={{ opacity: 0, width: 0, scale: 0.8 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden hidden sm:block"
+                  className="overflow-hidden hidden sm:block pointer-events-none sm:pointer-events-auto"
                 >
                   <Link
                     to="/dashboard"
@@ -206,9 +206,9 @@ export function Navigation() {
                 "linear-gradient(135deg, var(--color-flux-orange) 0%, var(--color-flux-pink) 25%, var(--color-flux-violet) 50%, var(--color-flux-lime) 75%, var(--color-flux-green) 100%)",
             }}
           >
-            {/* Background noise/texture for premium feel */}
+            {/* Background noise/texture for premium feel (desktop only for performance) */}
             <div
-              className="absolute inset-0 opacity-[0.03] pointer-events-none"
+              className="absolute inset-0 opacity-[0.03] pointer-events-none hidden sm:block"
               style={{
                 backgroundImage:
                   "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')",
@@ -233,7 +233,7 @@ export function Navigation() {
               initial="initial"
               animate="open"
               exit="initial"
-              className="flex flex-col h-full justify-center gap-2 sm:gap-4 relative z-10"
+              className="flex flex-col h-full justify-center gap-2 sm:gap-4 relative z-10 overflow-y-auto scrollbar-hide py-10"
             >
               {menuLinks.map(([label, href], i) => (
                 <div key={i} className="overflow-hidden py-2">
@@ -249,6 +249,20 @@ export function Navigation() {
                   </motion.div>
                 </div>
               ))}
+              
+              {/* Get Started Button for Mobile */}
+              <div className="overflow-hidden py-2 mt-4 sm:hidden">
+                <motion.div variants={linkVars}>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    className="group flex items-center text-4xl font-display font-medium leading-[0.85] tracking-tight text-white hover:opacity-70 transition-opacity"
+                  >
+                    Get Started
+                    <ArrowUpRight className="ml-4 size-[0.6em] opacity-0 -translate-x-10 translate-y-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" />
+                  </Link>
+                </motion.div>
+              </div>
             </motion.div>
 
             <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between text-xs sm:text-sm uppercase tracking-[0.2em] opacity-50 relative z-10">
