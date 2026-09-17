@@ -7,25 +7,8 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { AppLayout } from "@/components/AppLayout";
 import { useCategories, store } from "@/hooks/useFinanceData";
+import { CATEGORY_ICON_OPTIONS, CategoryIcon } from "@/components/CategoryIcon";
 
-const PRESET_ICONS = [
-  "🍔",
-  "🏠",
-  "🚗",
-  "💊",
-  "✈️",
-  "📱",
-  "🎬",
-  "📚",
-  "💼",
-  "🛒",
-  "💰",
-  "🎮",
-  "🏋️",
-  "☕",
-  "🎵",
-  "👗",
-];
 const PRESET_COLORS = [
   "#ff7b00",
   "#ff33a1",
@@ -59,7 +42,7 @@ export default function CategoriesPage() {
     formState: { errors },
   } = useForm<CatForm>({
     resolver: zodResolver(catSchema),
-    defaultValues: { icon: "🏠", color: "#ff7b00" },
+    defaultValues: { icon: "home", color: "#ff7b00" },
   });
   const selectedIcon = watch("icon");
   const selectedColor = watch("color");
@@ -67,7 +50,7 @@ export default function CategoriesPage() {
   const onSubmit = (data: CatForm) => {
     store.addCategory(data);
     toast.success("Category created!");
-    reset({ icon: "🏠", color: "#ff7b00" });
+    reset({ icon: "home", color: "#ff7b00" });
     setShowModal(false);
   };
 
@@ -114,10 +97,10 @@ export default function CategoriesPage() {
                 style={{ borderColor: `${c.color}22` }}
               >
                 <div
-                  className="size-11 rounded-xl flex items-center justify-center text-2xl mb-3"
+                  className="size-11 rounded-xl flex items-center justify-center mb-3"
                   style={{ background: `${c.color}22` }}
                 >
-                  {c.icon}
+                  <CategoryIcon icon={c.icon} name={c.name} size={21} className="text-white/80" />
                 </div>
                 <p className="font-medium text-sm truncate">{c.name}</p>
                 <div
@@ -141,7 +124,7 @@ export default function CategoriesPage() {
           <Modal
             onClose={() => {
               setShowModal(false);
-              reset({ icon: "🏠", color: "#ff7b00" });
+              reset({ icon: "home", color: "#ff7b00" });
             }}
             title="New Category"
           >
@@ -160,14 +143,15 @@ export default function CategoriesPage() {
               <div>
                 <label className="block text-xs text-white/50 mb-2">Icon</label>
                 <div className="grid grid-cols-8 gap-2">
-                  {PRESET_ICONS.map((icon) => (
+                  {CATEGORY_ICON_OPTIONS.map((icon) => (
                     <button
                       key={icon}
                       type="button"
                       onClick={() => setValue("icon", icon)}
-                      className={`size-9 rounded-xl text-lg flex items-center justify-center transition-all ${selectedIcon === icon ? "bg-flux-orange/20 ring-2 ring-flux-orange/40" : "bg-white/[0.05] hover:bg-white/[0.1]"}`}
+                      aria-label={`Use ${icon} icon`}
+                      className={`size-9 rounded-xl flex items-center justify-center transition-all ${selectedIcon === icon ? "bg-flux-orange/20 text-flux-orange ring-2 ring-flux-orange/40" : "bg-white/[0.05] text-white/60 hover:bg-white/[0.1] hover:text-white"}`}
                     >
-                      {icon}
+                      <CategoryIcon icon={icon} size={17} />
                     </button>
                   ))}
                 </div>
@@ -189,10 +173,10 @@ export default function CategoriesPage() {
               {/* Preview */}
               <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-3 flex items-center gap-3">
                 <div
-                  className="size-9 rounded-xl flex items-center justify-center text-xl"
+                  className="size-9 rounded-xl flex items-center justify-center"
                   style={{ background: `${selectedColor}22` }}
                 >
-                  {selectedIcon}
+                  <CategoryIcon icon={selectedIcon} size={18} />
                 </div>
                 <span className="text-sm font-medium text-white/70">
                   {watch("name") || "Category Name"}
@@ -205,7 +189,7 @@ export default function CategoriesPage() {
               <ModalActions
                 onCancel={() => {
                   setShowModal(false);
-                  reset({ icon: "🏠", color: "#ff7b00" });
+                  reset({ icon: "home", color: "#ff7b00" });
                 }}
                 label="Create"
               />
