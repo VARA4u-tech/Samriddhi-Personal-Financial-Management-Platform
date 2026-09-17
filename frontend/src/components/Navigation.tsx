@@ -249,7 +249,7 @@ export function Navigation() {
                   </motion.div>
                 </div>
               ))}
-              
+
               {/* Get Started Button for Mobile */}
               <div className="overflow-hidden py-2 mt-4 sm:hidden">
                 <motion.div variants={linkVars}>
