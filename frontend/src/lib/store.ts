@@ -59,6 +59,7 @@ export interface Profile {
   display_name: string;
   currency: string;
   monthly_income: number;
+  is_onboarded: boolean;
 }
 
 // ─── Seed data ───────────────────────────────────────────────────────────────
@@ -423,9 +424,10 @@ const SEED_GOALS: SavingsGoal[] = [
 ];
 
 const DEFAULT_PROFILE: Profile = {
-  display_name: "Arjun Kumar",
+  display_name: "",
   currency: "₹",
   monthly_income: 90000,
+  is_onboarded: false,
 };
 
 // ─── Storage helpers ─────────────────────────────────────────────────────────
@@ -585,6 +587,34 @@ class LocalStore {
   deleteSavingsGoal(id: string): void {
     this.goals = this.goals.filter((g) => g.id !== id);
     save("samriddhi_goals", this.goals);
+    this.notify();
+  }
+
+  // Reset entirely
+  resetAll(): void {
+    localStorage.removeItem("samriddhi_profile");
+    localStorage.removeItem("samriddhi_transactions");
+    localStorage.removeItem("samriddhi_budgets");
+    localStorage.removeItem("samriddhi_categories");
+    localStorage.removeItem("samriddhi_recurring");
+    localStorage.removeItem("samriddhi_goals");
+    
+    // Reset in-memory state
+    this.profile = DEFAULT_PROFILE;
+    this.transactions = SEED_TRANSACTIONS;
+    this.budgets = SEED_BUDGETS;
+    this.categories = SEED_CATEGORIES;
+    this.recurring = SEED_RECURRING;
+    this.goals = SEED_GOALS;
+    
+    // Re-initialize local storage with defaults/seeds
+    save("samriddhi_profile", this.profile);
+    save("samriddhi_transactions", this.transactions);
+    save("samriddhi_budgets", this.budgets);
+    save("samriddhi_categories", this.categories);
+    save("samriddhi_recurring", this.recurring);
+    save("samriddhi_goals", this.goals);
+    
     this.notify();
   }
 }
