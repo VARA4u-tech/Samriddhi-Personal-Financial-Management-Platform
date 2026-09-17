@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -18,6 +18,15 @@ import {
   Plus,
 } from "lucide-react";
 import { useProfile } from "@/hooks/useFinanceData";
+import { store } from "@/lib/store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -40,6 +49,7 @@ interface AppLayoutProps {
 export function AppLayout({ children, title }: AppLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const profile = useProfile();
 
   const displayName = profile.display_name || "User";
@@ -51,6 +61,13 @@ export function AppLayout({ children, title }: AppLayoutProps) {
     .slice(0, 2);
 
   const pageTitle = title ?? navItems.find((n) => n.to === location.pathname)?.label ?? "Dashboard";
+
+  const handleReset = () => {
+    if (confirm("Are you sure you want to reset all data? This cannot be undone.")) {
+      store.resetAll();
+      navigate("/");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex overflow-hidden relative selection:bg-flux-orange/30">
@@ -168,22 +185,34 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
           {/* User Profile Island */}
           <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0 relative">
-            <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative">
-              <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10">
-                {initials}
-              </div>
-              <div className="min-w-0 flex-1 relative z-10">
-                <p className="text-sm font-semibold truncate group-hover:text-white text-white/90 transition-colors">
-                  {displayName}
-                </p>
-                <p className="text-xs text-white/40 truncate mt-0.5">
-                  {profile.currency} · {profile.monthly_income.toLocaleString("en-IN")}/mo
-                </p>
-              </div>
-
-              {/* Subtle hover gradient behind user profile */}
-              <div className="absolute inset-0 bg-gradient-to-r from-flux-violet/0 via-flux-violet/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
+                  <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10">
+                    {initials}
+                  </div>
+                  <div className="min-w-0 flex-1 relative z-10">
+                    <p className="text-sm font-semibold truncate group-hover:text-white text-white/90 transition-colors">
+                      {displayName}
+                    </p>
+                    <p className="text-xs text-white/40 truncate mt-0.5">
+                      {profile.currency} · {profile.monthly_income.toLocaleString("en-IN")}/mo
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-flux-violet/0 via-flux-violet/5 to-flux-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 bg-[#111] border-white/10 text-white rounded-xl">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer focus:bg-white/10 focus:text-white">
+                  Edit Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleReset} className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400">
+                  Reset Local Data
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </aside>
@@ -193,7 +222,17 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         {/* Top header */}
         <header className="h-16 lg:h-20 flex-shrink-0 flex items-center justify-between px-5 lg:px-10 z-10 relative">
           <div className="flex items-center gap-4">
-            <h1 className="font-display text-xl lg:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50">
+            <button className="lg:hidden text-white/60 hover:text-white transition-colors" onClick={() => setSidebarOpen(true)}>
+              <Menu size={24} />
+            </button>
+            <Link to="/" className="lg:hidden flex items-center gap-2 mr-2">
+              <div className="relative size-8 flex items-center justify-center rounded-xl bg-gradient-to-tr from-flux-orange to-flux-pink shadow-md shrink-0">
+                <span className="text-black font-display font-bold text-base leading-none -ml-0.5">
+                  S
+                </span>
+              </div>
+            </Link>
+            <h1 className="font-display text-xl lg:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50 hidden sm:block">
               {pageTitle}
             </h1>
           </div>
@@ -218,8 +257,24 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             </button>
 
             {/* Mobile User Profile */}
-            <div className="lg:hidden size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0">
-              {initials}
+            <div className="lg:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none">
+                    {initials}
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-[#111] border-white/10 text-white rounded-xl mt-2 z-[100]">
+                  <DropdownMenuLabel>{displayName}</DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer focus:bg-white/10 focus:text-white">
+                    Edit Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleReset} className="cursor-pointer text-red-400 focus:bg-red-400/10 focus:text-red-400">
+                    Reset Local Data
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
