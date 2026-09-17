@@ -276,7 +276,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
       </main>
 
       {/* Mobile Bottom Navbar (Floating Dock Style) Optimized for Performance */}
-      <nav className="fixed bottom-3 left-3 right-3 z-40 overflow-hidden rounded-[1.5rem] border border-white/[0.08] bg-[#050505]/90 pb-[env(safe-area-inset-bottom)] shadow-xl backdrop-blur-lg will-change-transform transform-gpu lg:hidden">
+      <nav className="fixed bottom-3 left-3 right-3 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-[400px] z-40 overflow-hidden rounded-[1.5rem] border border-white/[0.08] bg-[#050505]/90 pb-[env(safe-area-inset-bottom)] shadow-xl backdrop-blur-lg will-change-transform transform-gpu lg:hidden">
         <div className="flex items-center justify-around px-1 py-1.5 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
@@ -316,19 +316,55 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           })}
 
           {/* More Menu Trigger */}
-          <button
-            onClick={() => navigate("/onboarding")}
-            className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center will-change-transform"
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80 outline-none"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative z-10 flex flex-col items-center gap-1 w-full h-full justify-center will-change-transform"
+                >
+                  <MoreHorizontal size={22} strokeWidth={2} />
+                  <span className="text-[9px] font-medium tracking-tight">More</span>
+                </motion.div>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={15}
+              className="w-56 bg-[#111] border-white/10 text-white rounded-xl mb-2 z-[100]"
             >
-              <MoreHorizontal size={22} strokeWidth={2} />
-              <span className="text-[9px] font-medium tracking-tight">More</span>
-            </motion.div>
-          </button>
+              <DropdownMenuLabel>More Options</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-white/10" />
+              <DropdownMenuItem
+                onClick={() => navigate("/dashboard/categories")}
+                className="cursor-pointer focus:bg-white/10 focus:text-white gap-2"
+              >
+                <Tag size={16} /> Categories
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/dashboard/recurring")}
+                className="cursor-pointer focus:bg-white/10 focus:text-white gap-2"
+              >
+                <RefreshCw size={16} /> Recurring
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/dashboard/savings")}
+                className="cursor-pointer focus:bg-white/10 focus:text-white gap-2"
+              >
+                <Target size={16} /> Savings Goals
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-white/10" />
+              <DropdownMenuItem
+                onClick={() => navigate("/dashboard/profile")}
+                className="cursor-pointer focus:bg-white/10 focus:text-white gap-2"
+              >
+                Profile Settings
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
     </div>
