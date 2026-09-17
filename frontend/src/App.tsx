@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PageTransition from "./components/PageTransition";
+import Onboarding from "./pages/Onboarding";
 
 // App pages — no auth guard, direct access
 import DashboardPage from "./pages/app/Dashboard";
@@ -39,6 +40,14 @@ export default function App() {
             element={
               <PageTransition>
                 <Index />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/onboarding"
+            element={
+              <PageTransition>
+                <Onboarding />
               </PageTransition>
             }
           />
