@@ -67,7 +67,7 @@ export function Navigation() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
-  
+
   const profile = useProfile();
   const getStartedLink = profile.is_onboarded ? "/dashboard" : "/onboarding";
 
