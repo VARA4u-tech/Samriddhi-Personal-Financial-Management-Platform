@@ -207,13 +207,48 @@ export default function Index() {
       <div
         ref={cursorRef}
         aria-hidden="true"
-        className="flux-cursor pointer-events-none fixed left-0 top-0 z-50 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-flux-orange"
-      />
-      <motion.div
-        aria-hidden="true"
-        className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-flux-orange"
-        style={{ scaleX: scrollYProgress }}
-      />
+        className="flux-cursor pointer-events-none fixed left-0 top-0 z-50 flex size-12 items-center justify-center -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0"
+      >
+        <svg className="absolute inset-0 size-full" viewBox="0 0 50 50">
+          <defs>
+            <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="var(--color-flux-orange)" />
+              <stop offset="33%" stopColor="var(--color-flux-pink)" />
+              <stop offset="66%" stopColor="var(--color-flux-violet)" />
+              <stop offset="100%" stopColor="var(--color-flux-lime)" />
+            </linearGradient>
+          </defs>
+          <motion.circle
+            cx="25"
+            cy="25"
+            r="22"
+            fill="none"
+            stroke="url(#cursor-gradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            style={{
+              pathLength: scrollYProgress,
+              rotate: -90,
+              transformOrigin: "50% 50%",
+              filter: "blur(2px)",
+            }}
+          />
+          <motion.circle
+            cx="25"
+            cy="25"
+            r="22"
+            fill="none"
+            stroke="url(#cursor-gradient)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            style={{
+              pathLength: scrollYProgress,
+              rotate: -90,
+              transformOrigin: "50% 50%",
+            }}
+          />
+        </svg>
+      </div>
       <Navigation />
 
       <main id="top">
