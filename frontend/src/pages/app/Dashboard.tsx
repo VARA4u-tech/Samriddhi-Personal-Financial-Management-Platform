@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Wallet, ArrowUpRight, ArrowDownRight, Plus } from "lucide-react";
+import { TrendingUp, TrendingDown, Wallet, ArrowUpRight, ArrowDownRight, Plus, BarChart3 } from "lucide-react";
 import {
   AreaChart,
   Area,
@@ -151,63 +151,72 @@ export default function DashboardPage() {
                 </span>
               </div>
             </div>
-            <div className="h-52">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={cashFlowData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="gIncome" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#d1ff26" stopOpacity={0.5} />
-                      <stop offset="95%" stopColor="#d1ff26" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="gExpenses" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#ff33a1" stopOpacity={0.5} />
-                      <stop offset="95%" stopColor="#ff33a1" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid stroke="#ffffff08" strokeDasharray="3 3" />
-                  <XAxis
-                    dataKey="month"
-                    stroke="#ffffff30"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                  />
-                  <YAxis
-                    stroke="#ffffff30"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v) =>
-                      `${currency}${v >= 1000 ? (v / 1000).toFixed(0) + "k" : v}`
-                    }
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#111",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                      borderRadius: "12px",
-                      color: "#fff",
-                      fontSize: "12px",
-                    }}
-                    formatter={(v: number) => [fmt(v), ""]}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="income"
-                    stroke="#d1ff26"
-                    strokeWidth={2}
-                    fill="url(#gIncome)"
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="expenses"
-                    stroke="#ff33a1"
-                    strokeWidth={2}
-                    fill="url(#gExpenses)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
+            {transactions.length === 0 ? (
+              <div className="h-52 flex items-center justify-center border border-white/5 bg-white/[0.01] rounded-xl flex-col gap-2">
+                <BarChart3 className="size-8 text-white/20" />
+                <p className="text-sm font-medium text-white/50 text-center px-4 max-w-sm">
+                  Your financial insights will appear here once you start adding transactions.
+                </p>
+              </div>
+            ) : (
+              <div className="h-52">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={cashFlowData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="gIncome" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#d1ff26" stopOpacity={0.5} />
+                        <stop offset="95%" stopColor="#d1ff26" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="gExpenses" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#ff33a1" stopOpacity={0.5} />
+                        <stop offset="95%" stopColor="#ff33a1" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid stroke="#ffffff08" strokeDasharray="3 3" />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#ffffff30"
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <YAxis
+                      stroke="#ffffff30"
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                      tickFormatter={(v) =>
+                        `${currency}${v >= 1000 ? (v / 1000).toFixed(0) + "k" : v}`
+                      }
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        background: "#111",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        borderRadius: "12px",
+                        color: "#fff",
+                        fontSize: "12px",
+                      }}
+                      formatter={(v: number) => [fmt(v), ""]}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="income"
+                      stroke="#d1ff26"
+                      strokeWidth={2}
+                      fill="url(#gIncome)"
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="expenses"
+                      stroke="#ff33a1"
+                      strokeWidth={2}
+                      fill="url(#gExpenses)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            )}
           </div>
 
           {/* Budget pie */}
