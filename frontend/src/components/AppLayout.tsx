@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -16,8 +16,11 @@ import {
   MoreHorizontal,
   Plus,
 } from "lucide-react";
-import { useProfile } from "@/hooks/useFinanceData";
+import { useProfile, useFinanceData } from "@/hooks/useFinanceData";
 import { store } from "@/lib/store";
+import { GlobalSearch } from "./GlobalSearch";
+import { NotificationBell } from "./NotificationBell";
+import { OnboardingTour } from "./OnboardingTour";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,12 +51,13 @@ interface AppLayoutProps {
 export function AppLayout({ children, title }: AppLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const profile = useProfile();
+  const profile = useFinanceData().profile;
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const displayName = profile.display_name || "User";
   const initials = displayName
     .split(" ")
-    .map((n) => n[0])
+    .map((n: string) => n[0])
     .join("")
     .toUpperCase()
     .slice(0, 2);
@@ -69,6 +73,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex overflow-hidden relative selection:bg-flux-orange/30">
+      <GlobalSearch open={searchOpen} setOpen={setSearchOpen} />
+      <OnboardingTour />
       {/* Ambient background glow & grid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -111,10 +117,13 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-flux-violet/10 to-transparent opacity-0 group-hover/navcontainer:opacity-100 transition-opacity duration-1000 pointer-events-none rounded-b-[2rem]" />
             {navItems.map(({ to, icon: Icon, label }) => {
               const active = location.pathname === to;
+              // Extract the base path name for the tour ID (e.g., /dashboard/transactions -> transactions, /dashboard -> dashboard)
+              const tourId = to === "/dashboard" ? "tour-dashboard" : `tour-${to.split("/").pop()}`;
               return (
                 <Link
                   key={to}
                   to={to}
+                  id={tourId}
                   className={`group flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 relative ${
                     active ? "text-white" : "text-white/40 hover:text-white/80"
                   }`}
@@ -153,7 +162,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0 relative">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
+                <div id="tour-profile" className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
                   <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10 overflow-hidden">
                     {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
                   </div>
@@ -203,7 +212,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
           <div className="flex items-center gap-3 lg:gap-5">
             {/* Command Search Mockup */}
-            <button className="hidden sm:flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md">
+            <button onClick={() => setSearchOpen(true)} className="hidden sm:flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md">
               <Search size={16} className="group-hover:text-flux-orange transition-colors" />
               <span className="text-[13px] font-medium hidden sm:block">Search anything...</span>
               <div className="hidden lg:flex items-center gap-0.5 ml-6 text-[10px] font-bold text-white/30 bg-white/5 px-2 py-0.5 rounded-md shadow-inner border border-white/5">
@@ -211,14 +220,11 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <span>K</span>
               </div>
             </button>
-            <button className="sm:hidden size-9 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
+            <button onClick={() => setSearchOpen(true)} className="sm:hidden size-9 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
               <Search size={16} />
             </button>
 
-            <button className="relative size-9 lg:size-11 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white hover:bg-white/[0.08] transition-all backdrop-blur-md">
-              <Bell size={16} className="lg:scale-110" />
-              <span className="absolute top-2 right-2 lg:top-2.5 lg:right-2.5 size-1.5 lg:size-2 rounded-full bg-flux-orange animate-pulse shadow-[0_0_8px_rgba(255,123,0,0.8)]" />
-            </button>
+            <NotificationBell />
 
             {/* Mobile User Profile */}
             <div className="lg:hidden">
