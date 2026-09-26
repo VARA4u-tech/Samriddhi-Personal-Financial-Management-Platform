@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Pencil, Trash2, X, AlertTriangle } from "lucide-react";
+import { Plus, Pencil, Trash2, X, AlertTriangle, Target } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -82,16 +82,21 @@ export default function BudgetsPage() {
         </div>
 
         {budgets.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 gap-4">
-            <div className="size-14 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-2xl">
-              📊
+          <div className="flex flex-col items-center justify-center py-20 px-4 text-center gap-4">
+            <div className="size-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+              <Target className="size-8 text-white/20" />
             </div>
-            <p className="text-white/30 text-sm">No budgets yet</p>
+            <div>
+              <p className="text-white font-medium text-lg">No budgets set</p>
+              <p className="text-white/40 text-sm mt-1 max-w-sm">
+                Set your first budget to take control of your spending.
+              </p>
+            </div>
             <button
               onClick={openAdd}
-              className="text-sm text-flux-orange hover:underline flex items-center gap-1"
+              className="mt-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-flux-orange to-flux-pink text-white text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
             >
-              <Plus size={14} /> Create your first budget
+              <Plus size={16} /> Create Budget
             </button>
           </div>
         ) : (
