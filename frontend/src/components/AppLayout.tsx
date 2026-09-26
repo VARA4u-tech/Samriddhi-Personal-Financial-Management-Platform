@@ -154,8 +154,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
-                  <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10">
-                    {initials}
+                  <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10 overflow-hidden">
+                    {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
                   </div>
                   <div className="min-w-0 flex-1 relative z-10">
                     <p className="text-sm font-semibold truncate group-hover:text-white text-white/90 transition-colors">
@@ -224,8 +224,8 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <div className="lg:hidden">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none">
-                    {initials}
+                  <button className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none overflow-hidden">
+                    {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent

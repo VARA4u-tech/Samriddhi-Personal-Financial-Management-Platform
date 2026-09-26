@@ -5,7 +5,8 @@ import { useProfile } from "@/hooks/useFinanceData";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Save, Download, AlertTriangle, UserX } from "lucide-react";
+import { Save, Download, AlertTriangle, UserX, Check } from "lucide-react";
+import { AVATAR_OPTIONS } from "@/lib/avatars";
 import * as XLSX from "xlsx";
 import { format } from "date-fns";
 
@@ -14,12 +15,13 @@ export default function Profile() {
   const profile = useProfile();
   
   const [name, setName] = useState(profile.display_name);
+  const [selectedAvatar, setSelectedAvatar] = useState(profile.avatar || "");
 
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    store.updateProfile({ display_name: name.trim() });
+    store.updateProfile({ display_name: name.trim(), avatar: selectedAvatar });
     toast.success("Profile updated successfully!");
     navigate("/dashboard");
   };
@@ -126,12 +128,39 @@ export default function Profile() {
                 required
               />
             </div>
+            <div className="space-y-3 pt-4">
+              <label className="text-sm font-medium text-muted-foreground ml-1">
+                Avatar
+              </label>
+              <div className="grid grid-cols-4 gap-3">
+                {AVATAR_OPTIONS.map((avatar, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setSelectedAvatar(avatar)}
+                    className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-300 bg-white ${
+                      selectedAvatar === avatar
+                        ? "border-flux-orange scale-105 shadow-xl"
+                        : "border-transparent hover:border-foreground/20 hover:scale-105"
+                    }`}
+                  >
+                    <img src={avatar} alt={`Avatar ${idx}`} className="w-full h-full object-cover" />
+                    {selectedAvatar === avatar && (
+                      <div className="absolute bottom-1 right-1 bg-flux-orange text-white rounded-full p-0.5">
+                        <Check size={12} />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              disabled={!name.trim() || name === profile.display_name}
+              disabled={(!name.trim() || name === profile.display_name) && selectedAvatar === profile.avatar}
               type="submit"
-              className="w-full rounded-2xl bg-foreground text-background font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-foreground/90"
+              className="w-full rounded-2xl bg-foreground text-background font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-foreground/90 mt-4"
             >
               <Save size={20} /> Save Changes
             </motion.button>

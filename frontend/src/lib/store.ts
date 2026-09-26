@@ -60,6 +60,7 @@ export interface Profile {
   currency: string;
   monthly_income: number;
   is_onboarded: boolean;
+  avatar?: string;
 }
 
 // ─── Seed data ───────────────────────────────────────────────────────────────

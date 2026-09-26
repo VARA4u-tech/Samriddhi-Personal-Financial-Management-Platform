@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { store } from "@/lib/store";
+import { AVATAR_OPTIONS } from "@/lib/avatars";
 import { ArrowRight, Check, RefreshCw } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
 
 export default function Onboarding() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [step, setStep] = useState<"name" | "avatar">("name");
+  const [selectedAvatar, setSelectedAvatar] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
+    setStep("avatar");
+  };
 
+  const handleAvatarSubmit = () => {
+    if (!selectedAvatar) return;
     setIsSubmitting(true);
 
-    // Slight artificial delay for UX feel
     setTimeout(() => {
       store.updateProfile({
         display_name: name.trim(),
+        avatar: selectedAvatar,
         is_onboarded: true,
       });
       navigate("/dashboard");
@@ -72,50 +79,107 @@ export default function Onboarding() {
                 </div>
 
                 <div className="relative z-10 mt-8 max-w-sm w-full">
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-bold text-black uppercase tracking-wider ml-1"
+                  <AnimatePresence mode="wait">
+                    {step === "name" && (
+                      <motion.form
+                        key="name-form"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        onSubmit={handleNameSubmit}
+                        className="space-y-4"
                       >
-                        What should we call you?
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Enter your name"
-                        className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 text-black font-medium text-xl placeholder:text-black/60 focus:outline-none focus:ring-2 focus:ring-black/20 focus:bg-black/10 transition-all"
-                        autoFocus
-                        required
-                      />
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={!name.trim() || isSubmitting}
-                      type="submit"
-                      className="w-full rounded-xl bg-black text-white font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="name"
+                            className="block text-sm font-bold text-black uppercase tracking-wider ml-1"
                           >
-                            <RefreshCw size={20} />
-                          </motion.div>
-                          Setting up...
-                        </>
-                      ) : (
-                        <>
-                          Get Started <ArrowRight size={20} />
-                        </>
-                      )}
-                    </motion.button>
-                  </form>
+                            What should we call you?
+                          </label>
+                          <input
+                            id="name"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Enter your name"
+                            className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 text-black font-medium text-xl placeholder:text-black/60 focus:outline-none focus:ring-2 focus:ring-black/20 focus:bg-black/10 transition-all"
+                            autoFocus
+                            required
+                          />
+                        </div>
+
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          disabled={!name.trim()}
+                          type="submit"
+                          className="w-full rounded-xl bg-black text-white font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl"
+                        >
+                          Choose Avatar <ArrowRight size={20} />
+                        </motion.button>
+                      </motion.form>
+                    )}
+
+                    {step === "avatar" && (
+                      <motion.div
+                        key="avatar-form"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                      >
+                        <div className="space-y-3">
+                          <label className="block text-sm font-bold text-black uppercase tracking-wider ml-1">
+                            Choose your avatar
+                          </label>
+                          <div className="grid grid-cols-4 gap-3">
+                            {AVATAR_OPTIONS.map((avatar, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => setSelectedAvatar(avatar)}
+                                className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-300 bg-white ${
+                                  selectedAvatar === avatar
+                                    ? "border-black scale-105 shadow-xl"
+                                    : "border-transparent hover:border-black/20 hover:scale-105"
+                                }`}
+                              >
+                                <img src={avatar} alt={`Avatar ${idx}`} className="w-full h-full object-cover" />
+                                {selectedAvatar === avatar && (
+                                  <div className="absolute bottom-1 right-1 bg-black text-white rounded-full p-0.5">
+                                    <Check size={12} />
+                                  </div>
+                                )}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          disabled={!selectedAvatar || isSubmitting}
+                          onClick={handleAvatarSubmit}
+                          className="w-full rounded-xl bg-black text-white font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                              >
+                                <RefreshCw size={20} />
+                              </motion.div>
+                              Setting up...
+                            </>
+                          ) : (
+                            <>
+                              Continue to Dashboard <ArrowRight size={20} />
+                            </>
+                          )}
+                        </motion.button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 
