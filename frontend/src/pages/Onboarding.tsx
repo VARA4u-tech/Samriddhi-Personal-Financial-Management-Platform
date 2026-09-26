@@ -143,7 +143,11 @@ export default function Onboarding() {
                                     : "border-transparent hover:border-black/20 hover:scale-105"
                                 }`}
                               >
-                                <img src={avatar} alt={`Avatar ${idx}`} className="w-full h-full object-cover" />
+                                <img
+                                  src={avatar}
+                                  alt={`Avatar ${idx}`}
+                                  className="w-full h-full object-cover"
+                                />
                                 {selectedAvatar === avatar && (
                                   <div className="absolute bottom-1 right-1 bg-black text-white rounded-full p-0.5">
                                     <Check size={12} />

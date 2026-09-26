@@ -153,8 +153,6 @@ export default function Index() {
     };
   }, [prefersReducedMotion]);
 
-
-
   useEffect(() => {
     const root = heroRef.current;
     if (!root || prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
@@ -180,8 +178,6 @@ export default function Index() {
     });
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [prefersReducedMotion]);
-
-
 
   return (
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">

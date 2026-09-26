@@ -8,19 +8,22 @@ const TOUR_STEPS = [
   {
     targetId: null,
     title: "Welcome to Samriddhi!",
-    content: "Welcome to your personal financial workspace! Let's take a quick tour so you know exactly where everything lives.",
+    content:
+      "Welcome to your personal financial workspace! Let's take a quick tour so you know exactly where everything lives.",
     align: "center" as const,
   },
   {
     targetId: "tour-dashboard",
     title: "Dashboard",
-    content: "This is your financial overview. You'll get a quick snapshot of your income, expenses, balance, and recent activity here.",
+    content:
+      "This is your financial overview. You'll get a quick snapshot of your income, expenses, balance, and recent activity here.",
     align: "right" as const,
   },
   {
     targetId: "tour-transactions",
     title: "Transactions",
-    content: "Transactions is where you manage every income and expense. Add, review, filter, and organize your financial activity here.",
+    content:
+      "Transactions is where you manage every income and expense. Add, review, filter, and organize your financial activity here.",
     align: "right" as const,
   },
   {
@@ -38,15 +41,17 @@ const TOUR_STEPS = [
   {
     targetId: "tour-profile",
     title: "Your Profile",
-    content: "Update your name, change your avatar, manage local data, and export your personal backups here.",
+    content:
+      "Update your name, change your avatar, manage local data, and export your personal backups here.",
     align: "right" as const,
   },
   {
     targetId: null,
     title: "You're all set!",
-    content: "Start by adding your first transaction and watch your financial dashboard come to life.",
+    content:
+      "Start by adding your first transaction and watch your financial dashboard come to life.",
     align: "center" as const,
-  }
+  },
 ];
 
 export const OnboardingTour = () => {
@@ -90,7 +95,7 @@ export const OnboardingTour = () => {
     if (isLast) {
       handleComplete();
     } else {
-      setCurrentStep(s => s + 1);
+      setCurrentStep((s) => s + 1);
     }
   };
 
@@ -124,12 +129,12 @@ export const OnboardingTour = () => {
         </defs>
       </svg>
 
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-opacity duration-500 pointer-events-none" 
-        style={{ 
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-opacity duration-500 pointer-events-none"
+        style={{
           opacity: 1,
           maskImage: "url(#spotlight-mask)",
-          WebkitMaskImage: "url(#spotlight-mask)"
+          WebkitMaskImage: "url(#spotlight-mask)",
         }}
       />
 
@@ -166,7 +171,7 @@ export const OnboardingTour = () => {
         >
           <div className="w-[320px] lg:w-[360px] bg-[#1a1118] border border-flux-orange/20 rounded-[2rem] p-6 shadow-[0_20px_50px_rgba(255,123,0,0.15)] relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-flux-orange/5 to-transparent pointer-events-none" />
-            
+
             <button
               onClick={handleComplete}
               className="absolute top-4 right-4 size-8 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:text-white transition-colors"
@@ -179,7 +184,7 @@ export const OnboardingTour = () => {
                 Step {currentStep + 1} of {TOUR_STEPS.length}
               </span>
             </div>
-            
+
             <h3 className="text-xl font-display font-semibold text-white mb-2">{step.title}</h3>
             <p className="text-sm text-white/70 leading-relaxed mb-8">{step.content}</p>
 
@@ -196,9 +201,13 @@ export const OnboardingTour = () => {
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-flux-orange to-flux-pink text-white text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
               >
                 {isLast ? (
-                  <>Start Tracking <Check size={16} /></>
+                  <>
+                    Start Tracking <Check size={16} />
+                  </>
                 ) : (
-                  <>Next <ChevronRight size={16} /></>
+                  <>
+                    Next <ChevronRight size={16} />
+                  </>
                 )}
               </button>
             </div>

@@ -197,7 +197,7 @@ class LocalStore {
       b.transaction_date.localeCompare(a.transaction_date),
     );
     save("samriddhi_transactions", this.transactions);
-    
+
     this.addNotification({
       title: tx.transaction_type === "expense" ? "New Expense Added" : "Income Received",
       description: `Recorded ${this.profile.currency}${tx.amount.toLocaleString("en-IN")} for ${tx.merchant}.`,

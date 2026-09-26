@@ -1,7 +1,15 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Wallet, ArrowUpRight, ArrowDownRight, Plus, BarChart3 } from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  Wallet,
+  ArrowUpRight,
+  ArrowDownRight,
+  Plus,
+  BarChart3,
+} from "lucide-react";
 import {
   AreaChart,
   Area,
@@ -161,7 +169,10 @@ export default function DashboardPage() {
             ) : (
               <div className="h-52">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={cashFlowData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                  <AreaChart
+                    data={cashFlowData}
+                    margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
+                  >
                     <defs>
                       <linearGradient id="gIncome" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#d1ff26" stopOpacity={0.5} />

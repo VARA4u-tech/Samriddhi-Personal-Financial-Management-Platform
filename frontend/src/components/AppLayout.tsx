@@ -162,9 +162,20 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0 relative">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div data-tour="tour-profile" className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
+                <div
+                  data-tour="tour-profile"
+                  className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none"
+                >
                   <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10 overflow-hidden">
-                    {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
+                    {profile.avatar ? (
+                      <img
+                        src={profile.avatar}
+                        alt="Avatar"
+                        className="w-full h-full object-cover bg-white"
+                      />
+                    ) : (
+                      initials
+                    )}
                   </div>
                   <div className="min-w-0 flex-1 relative z-10">
                     <p className="text-sm font-semibold truncate group-hover:text-white text-white/90 transition-colors">
@@ -212,7 +223,10 @@ export function AppLayout({ children, title }: AppLayoutProps) {
 
           <div className="flex items-center gap-3 lg:gap-5">
             {/* Command Search Mockup */}
-            <button onClick={() => setSearchOpen(true)} className="hidden sm:flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="hidden sm:flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-white/40 hover:bg-white/[0.08] hover:text-white transition-all group backdrop-blur-md"
+            >
               <Search size={16} className="group-hover:text-flux-orange transition-colors" />
               <span className="text-[13px] font-medium hidden sm:block">Search anything...</span>
               <div className="hidden lg:flex items-center gap-0.5 ml-6 text-[10px] font-bold text-white/30 bg-white/5 px-2 py-0.5 rounded-md shadow-inner border border-white/5">
@@ -220,7 +234,10 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <span>K</span>
               </div>
             </button>
-            <button onClick={() => setSearchOpen(true)} className="sm:hidden size-9 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="sm:hidden size-9 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 hover:text-white transition-colors backdrop-blur-md"
+            >
               <Search size={16} />
             </button>
 
@@ -230,8 +247,19 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <div className="lg:hidden">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button data-tour="tour-profile" className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none overflow-hidden">
-                    {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
+                  <button
+                    data-tour="tour-profile"
+                    className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none overflow-hidden"
+                  >
+                    {profile.avatar ? (
+                      <img
+                        src={profile.avatar}
+                        alt="Avatar"
+                        className="w-full h-full object-cover bg-white"
+                      />
+                    ) : (
+                      initials
+                    )}
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -326,9 +354,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           {/* More Menu Trigger */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button
-                className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80 outline-none"
-              >
+              <button className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14 text-white/40 hover:text-white/80 outline-none">
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}

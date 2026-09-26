@@ -13,7 +13,7 @@ import { format } from "date-fns";
 export default function Profile() {
   const navigate = useNavigate();
   const profile = useProfile();
-  
+
   const [name, setName] = useState(profile.display_name);
   const [selectedAvatar, setSelectedAvatar] = useState(profile.avatar || "");
 
@@ -35,7 +35,8 @@ export default function Profile() {
         Date: format(new Date(t.transaction_date), "yyyy-MM-dd"),
         Type: t.transaction_type,
         Merchant: t.merchant,
-        Category: store.getCategories().find(c => c.id === t.category_id)?.name || "Uncategorized",
+        Category:
+          store.getCategories().find((c) => c.id === t.category_id)?.name || "Uncategorized",
         Amount: t.amount,
         Notes: t.notes || "",
       }));
@@ -48,7 +49,7 @@ export default function Profile() {
         Amount: b.amount,
         Spent: b.spent,
         Period: b.period,
-        Category: store.getCategories().find(c => c.id === b.category_id)?.name || "None",
+        Category: store.getCategories().find((c) => c.id === b.category_id)?.name || "None",
       }));
       const wsBudgets = XLSX.utils.json_to_sheet(budgets);
       XLSX.utils.book_append_sheet(wb, wsBudgets, "Budgets");
@@ -91,7 +92,11 @@ export default function Profile() {
   };
 
   const handleResetFinancialData = () => {
-    if (confirm("Reset financial data?\n\nThis will permanently remove your locally stored expense and income records. Your profile name will remain unchanged.")) {
+    if (
+      confirm(
+        "Reset financial data?\n\nThis will permanently remove your locally stored expense and income records. Your profile name will remain unchanged.",
+      )
+    ) {
       store.resetFinancialData();
       toast.success("Financial data reset successfully.");
       navigate("/dashboard");
@@ -99,7 +104,11 @@ export default function Profile() {
   };
 
   const handleResetProfile = () => {
-    if (confirm("Reset profile?\n\nThis will remove your locally stored profile information and you will be logged out.")) {
+    if (
+      confirm(
+        "Reset profile?\n\nThis will remove your locally stored profile information and you will be logged out.",
+      )
+    ) {
       store.resetProfile();
       toast.success("Profile reset successfully.");
       navigate("/");
@@ -109,7 +118,6 @@ export default function Profile() {
   return (
     <AppLayout title="Profile Settings">
       <div className="p-5 lg:p-10 max-w-4xl mx-auto space-y-8">
-        
         {/* Edit Profile Section */}
         <section className="bg-card border border-foreground/10 rounded-3xl p-6 sm:p-8">
           <h2 className="text-2xl font-display font-semibold mb-6">Edit My Profile</h2>
@@ -129,9 +137,7 @@ export default function Profile() {
               />
             </div>
             <div className="space-y-3 pt-4">
-              <label className="text-sm font-medium text-muted-foreground ml-1">
-                Avatar
-              </label>
+              <label className="text-sm font-medium text-muted-foreground ml-1">Avatar</label>
               <div className="grid grid-cols-4 gap-3">
                 {AVATAR_OPTIONS.map((avatar, idx) => (
                   <button
@@ -144,7 +150,11 @@ export default function Profile() {
                         : "border-transparent hover:border-foreground/20 hover:scale-105"
                     }`}
                   >
-                    <img src={avatar} alt={`Avatar ${idx}`} className="w-full h-full object-cover" />
+                    <img
+                      src={avatar}
+                      alt={`Avatar ${idx}`}
+                      className="w-full h-full object-cover"
+                    />
                     {selectedAvatar === avatar && (
                       <div className="absolute bottom-1 right-1 bg-flux-orange text-white rounded-full p-0.5">
                         <Check size={12} />
@@ -158,7 +168,9 @@ export default function Profile() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              disabled={(!name.trim() || name === profile.display_name) && selectedAvatar === profile.avatar}
+              disabled={
+                (!name.trim() || name === profile.display_name) && selectedAvatar === profile.avatar
+              }
               type="submit"
               className="w-full rounded-2xl bg-foreground text-background font-semibold text-lg py-4 px-6 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-foreground/90 mt-4"
             >
@@ -171,7 +183,9 @@ export default function Profile() {
         <section className="bg-card border border-foreground/10 rounded-3xl p-6 sm:p-8">
           <h2 className="text-2xl font-display font-semibold mb-2">Export Data</h2>
           <p className="text-muted-foreground mb-6 max-w-xl">
-            Your data stays on your device. Export a personal backup whenever you need it. The export contains all your transactions, budgets, categories, and savings goals in an Excel spreadsheet.
+            Your data stays on your device. Export a personal backup whenever you need it. The
+            export contains all your transactions, budgets, categories, and savings goals in an
+            Excel spreadsheet.
           </p>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -189,7 +203,7 @@ export default function Profile() {
           <p className="text-muted-foreground mb-6 max-w-xl">
             These actions are irreversible. Please proceed with caution.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -210,7 +224,6 @@ export default function Profile() {
             </motion.button>
           </div>
         </section>
-
       </div>
     </AppLayout>
   );

@@ -38,7 +38,11 @@ export function useProfile() {
 }
 
 export function useNotifications() {
-  return useSyncExternalStore(subscribe, () => store.getNotifications(), () => store.getNotifications());
+  return useSyncExternalStore(
+    subscribe,
+    () => store.getNotifications(),
+    () => store.getNotifications(),
+  );
 }
 
 export function useFinanceData() {

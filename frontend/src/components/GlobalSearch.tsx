@@ -5,7 +5,13 @@ import { Search, TrendingUp, TrendingDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useFinanceData } from "@/hooks/useFinanceData";
 
-export const GlobalSearch = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
+export const GlobalSearch = ({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}) => {
   const { transactions, profile } = useFinanceData();
   const navigate = useNavigate();
 
@@ -69,12 +75,17 @@ export const GlobalSearch = ({ open, setOpen }: { open: boolean; setOpen: (open:
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate text-white">{tx.merchant}</p>
                       <p className="text-xs text-white/50 truncate">
-                        {tx.notes ? `${tx.notes} • ` : ""}{new Date(tx.transaction_date).toLocaleDateString()}
+                        {tx.notes ? `${tx.notes} • ` : ""}
+                        {new Date(tx.transaction_date).toLocaleDateString()}
                       </p>
                     </div>
                     <div className="text-right ml-4">
-                      <p className={`font-semibold ${tx.transaction_type === "income" ? "text-flux-lime" : "text-white"}`}>
-                        {tx.transaction_type === "income" ? "+" : "-"}{profile.currency}{tx.amount.toLocaleString("en-IN")}
+                      <p
+                        className={`font-semibold ${tx.transaction_type === "income" ? "text-flux-lime" : "text-white"}`}
+                      >
+                        {tx.transaction_type === "income" ? "+" : "-"}
+                        {profile.currency}
+                        {tx.amount.toLocaleString("en-IN")}
                       </p>
                     </div>
                   </Command.Item>
