@@ -115,7 +115,6 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
 
 export default function Index() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
   const navigate = useNavigate();
@@ -154,41 +153,7 @@ export default function Index() {
     };
   }, [prefersReducedMotion]);
 
-  useEffect(() => {
-    const root = heroRef.current;
-    const cursor = cursorRef.current;
-    if (!root || !cursor || prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches)
-      return;
 
-    const handlePointerMove = (event: PointerEvent) => {
-      const target = event.target as Element | null;
-      let isInteractive = false;
-
-      if (target) {
-        // Quick tag check first
-        if (target.tagName === "A" || target.tagName === "BUTTON") {
-          isInteractive = true;
-        } else if (target.closest('a, button, [role="button"]')) {
-          isInteractive = true;
-        } else {
-          // Fallback to computed style to catch anything with cursor-pointer
-          isInteractive = window.getComputedStyle(target).cursor === "pointer";
-        }
-      }
-
-      cursor.style.opacity = isInteractive ? "0" : "1";
-      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
-    };
-    const handlePointerLeave = () => {
-      cursor.style.opacity = "0";
-    };
-    root.addEventListener("pointermove", handlePointerMove);
-    root.addEventListener("pointerleave", handlePointerLeave);
-    return () => {
-      root.removeEventListener("pointermove", handlePointerMove);
-      root.removeEventListener("pointerleave", handlePointerLeave);
-    };
-  }, [prefersReducedMotion]);
 
   useEffect(() => {
     const root = heroRef.current;
@@ -220,51 +185,10 @@ export default function Index() {
 
   return (
     <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
-      <div
-        ref={cursorRef}
-        aria-hidden="true"
-        className="flux-cursor pointer-events-none fixed left-0 top-0 z-50 flex size-12 items-center justify-center -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0"
-      >
-        <svg className="absolute inset-0 size-full" viewBox="0 0 50 50">
-          <defs>
-            <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="var(--color-flux-orange)" />
-              <stop offset="33%" stopColor="var(--color-flux-pink)" />
-              <stop offset="66%" stopColor="var(--color-flux-violet)" />
-              <stop offset="100%" stopColor="var(--color-flux-lime)" />
-            </linearGradient>
-          </defs>
-          <motion.circle
-            cx="25"
-            cy="25"
-            r="22"
-            fill="none"
-            stroke="url(#cursor-gradient)"
-            strokeWidth="4"
-            strokeLinecap="round"
-            style={{
-              pathLength: scrollYProgress,
-              rotate: -90,
-              transformOrigin: "50% 50%",
-              filter: "blur(2px)",
-            }}
-          />
-          <motion.circle
-            cx="25"
-            cy="25"
-            r="22"
-            fill="none"
-            stroke="url(#cursor-gradient)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            style={{
-              pathLength: scrollYProgress,
-              rotate: -90,
-              transformOrigin: "50% 50%",
-            }}
-          />
-        </svg>
-      </div>
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-flux-orange via-flux-pink to-flux-violet z-50 origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
       <Navigation />
 
       <main id="top">
