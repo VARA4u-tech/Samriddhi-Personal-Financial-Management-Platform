@@ -123,7 +123,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
                 <Link
                   key={to}
                   to={to}
-                  id={tourId}
+                  data-tour={tourId}
                   className={`group flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 relative ${
                     active ? "text-white" : "text-white/40 hover:text-white/80"
                   }`}
@@ -162,7 +162,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
           <div className="p-4 lg:p-0 mt-auto hidden lg:block shrink-0 relative">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div id="tour-profile" className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
+                <div data-tour="tour-profile" className="lg:bg-[#111111]/70 lg:backdrop-blur-3xl lg:border lg:border-white/[0.08] hover:lg:border-flux-violet/30 lg:rounded-[2rem] lg:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl bg-white/[0.03] border border-white/[0.05] p-3 lg:p-4 flex items-center gap-4 hover:bg-white/[0.05] transition-all duration-500 cursor-pointer group overflow-hidden relative outline-none">
                   <div className="size-11 shrink-0 rounded-xl bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-sm font-bold text-white shadow-inner relative z-10 overflow-hidden">
                     {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
                   </div>
@@ -230,7 +230,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             <div className="lg:hidden">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none overflow-hidden">
+                  <button data-tour="tour-profile" className="size-9 rounded-full bg-gradient-to-tr from-flux-violet to-flux-pink flex items-center justify-center text-xs font-bold text-white shadow-inner flex-shrink-0 outline-none overflow-hidden">
                     {profile.avatar ? <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover bg-white" /> : initials}
                   </button>
                 </DropdownMenuTrigger>
@@ -286,10 +286,12 @@ export function AppLayout({ children, title }: AppLayoutProps) {
         <div className="flex items-center justify-around px-1 py-1.5 relative">
           {bottomNavItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
+            const tourId = to === "/dashboard" ? "tour-dashboard" : `tour-${to.split("/").pop()}`;
             return (
               <Link
                 key={to}
                 to={to}
+                data-tour={tourId}
                 className="relative z-10 flex-1 flex flex-col items-center justify-center gap-1 h-14"
               >
                 {active && (

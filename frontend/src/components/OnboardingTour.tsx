@@ -60,12 +60,16 @@ export const OnboardingTour = () => {
     if (!isActive) return;
     const step = TOUR_STEPS[currentStep];
     if (step.targetId) {
-      const el = document.getElementById(step.targetId);
-      if (el) {
-        setTargetRect(el.getBoundingClientRect());
-      } else {
-        setTargetRect(null);
+      const elements = document.querySelectorAll(`[data-tour="${step.targetId}"]`);
+      let foundRect: DOMRect | null = null;
+      for (const el of Array.from(elements)) {
+        const rect = el.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          foundRect = rect;
+          break;
+        }
       }
+      setTargetRect(foundRect);
     } else {
       setTargetRect(null);
     }
@@ -97,27 +101,37 @@ export const OnboardingTour = () => {
   return (
     <div className="fixed inset-0 z-[200] pointer-events-auto">
       {/* Dark Overlay */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-opacity duration-500" 
-        style={{ opacity: targetRect ? 0 : 1 }}
-      />
+      {/* Dark Overlay with Spotlight Mask */}
+      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <mask id="spotlight-mask" x="0" y="0" width="100%" height="100%">
+            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+            {targetRect && (
+              <motion.rect
+                initial={false}
+                animate={{
+                  x: targetRect.left - 8,
+                  y: targetRect.top - 8,
+                  width: targetRect.width + 16,
+                  height: targetRect.height + 16,
+                }}
+                rx={16}
+                fill="black"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
+            )}
+          </mask>
+        </defs>
+      </svg>
 
-      {/* Spotlight Cutout */}
-      {targetRect && (
-        <motion.div
-          layout
-          className="absolute rounded-2xl bg-transparent ring-[10000px] ring-black/0 pointer-events-none"
-          initial={false}
-          animate={{
-            top: targetRect.top - 8,
-            left: targetRect.left - 8,
-            width: targetRect.width + 16,
-            height: targetRect.height + 16,
-            boxShadow: "0 0 0 10000px rgba(0,0,0,0.6)",
-          }}
-          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-        />
-      )}
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-opacity duration-500 pointer-events-none" 
+        style={{ 
+          opacity: 1,
+          maskImage: "url(#spotlight-mask)",
+          WebkitMaskImage: "url(#spotlight-mask)"
+        }}
+      />
 
       {/* Tour Card */}
       <AnimatePresence mode="wait">
@@ -130,15 +144,23 @@ export const OnboardingTour = () => {
           className="absolute z-[210]"
           style={
             targetRect && step.align === "right"
-              ? {
-                  top: Math.max(20, targetRect.top),
-                  left: targetRect.right + 24, // Place to the right of the nav items
-                }
+              ? window.innerWidth < 1024
+                ? targetRect.top > window.innerHeight / 2
+                  ? {
+                      bottom: window.innerHeight - targetRect.top + 20,
+                      left: "calc(50% - 160px)",
+                    }
+                  : {
+                      top: targetRect.bottom + 20,
+                      left: "calc(50% - 160px)",
+                    }
+                : {
+                    top: Math.max(20, targetRect.top),
+                    left: targetRect.right + 24,
+                  }
               : {
-                  top: "50%",
-                  left: "50%",
-                  x: "-50%",
-                  y: "-50%",
+                  top: "calc(50% - 150px)",
+                  left: window.innerWidth < 1024 ? "calc(50% - 160px)" : "calc(50% - 180px)",
                 }
           }
         >
