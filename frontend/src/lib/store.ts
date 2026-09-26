@@ -61,6 +61,16 @@ export interface Profile {
   monthly_income: number;
   is_onboarded: boolean;
   avatar?: string;
+  tour_completed?: boolean;
+}
+
+export interface Notification {
+  id: string;
+  title: string;
+  description: string;
+  is_read: boolean;
+  created_at: string;
+  link?: string;
 }
 
 // ─── Seed data ───────────────────────────────────────────────────────────────
@@ -109,332 +119,20 @@ const SEED_CATEGORIES: Category[] = [
   },
 ];
 
-const SEED_TRANSACTIONS: Transaction[] = [
-  {
-    id: "tx-1",
-    merchant: "Salary",
-    amount: 75000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-09-01",
-    notes: "Monthly salary",
-    created_at: "2026-09-01T00:00:00Z",
-  },
-  {
-    id: "tx-2",
-    merchant: "Swiggy",
-    amount: 450,
-    transaction_type: "expense",
-    category_id: "cat-1",
-    transaction_date: "2026-09-03",
-    notes: null,
-    created_at: "2026-09-03T00:00:00Z",
-  },
-  {
-    id: "tx-3",
-    merchant: "Ola Cabs",
-    amount: 280,
-    transaction_type: "expense",
-    category_id: "cat-2",
-    transaction_date: "2026-09-04",
-    notes: null,
-    created_at: "2026-09-04T00:00:00Z",
-  },
-  {
-    id: "tx-4",
-    merchant: "Amazon",
-    amount: 2200,
-    transaction_type: "expense",
-    category_id: "cat-3",
-    transaction_date: "2026-09-05",
-    notes: "Electronics",
-    created_at: "2026-09-05T00:00:00Z",
-  },
-  {
-    id: "tx-5",
-    merchant: "Netflix",
-    amount: 649,
-    transaction_type: "expense",
-    category_id: "cat-4",
-    transaction_date: "2026-09-06",
-    notes: null,
-    created_at: "2026-09-06T00:00:00Z",
-  },
-  {
-    id: "tx-6",
-    merchant: "Apollo Pharmacy",
-    amount: 890,
-    transaction_type: "expense",
-    category_id: "cat-5",
-    transaction_date: "2026-09-07",
-    notes: null,
-    created_at: "2026-09-07T00:00:00Z",
-  },
-  {
-    id: "tx-7",
-    merchant: "Freelance Project",
-    amount: 15000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-09-10",
-    notes: "Web design project",
-    created_at: "2026-09-10T00:00:00Z",
-  },
-  {
-    id: "tx-8",
-    merchant: "Zomato",
-    amount: 380,
-    transaction_type: "expense",
-    category_id: "cat-1",
-    transaction_date: "2026-09-11",
-    notes: null,
-    created_at: "2026-09-11T00:00:00Z",
-  },
-  {
-    id: "tx-9",
-    merchant: "BSNL Broadband",
-    amount: 999,
-    transaction_type: "expense",
-    category_id: "cat-6",
-    transaction_date: "2026-09-12",
-    notes: null,
-    created_at: "2026-09-12T00:00:00Z",
-  },
-  {
-    id: "tx-10",
-    merchant: "Reliance Smart",
-    amount: 3200,
-    transaction_type: "expense",
-    category_id: "cat-3",
-    transaction_date: "2026-09-14",
-    notes: "Grocery shopping",
-    created_at: "2026-09-14T00:00:00Z",
-  },
-  // Previous months for charts
-  {
-    id: "tx-11",
-    merchant: "Salary",
-    amount: 75000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-08-01",
-    notes: null,
-    created_at: "2026-08-01T00:00:00Z",
-  },
-  {
-    id: "tx-12",
-    merchant: "Monthly Expenses",
-    amount: 22000,
-    transaction_type: "expense",
-    category_id: "cat-1",
-    transaction_date: "2026-08-15",
-    notes: null,
-    created_at: "2026-08-15T00:00:00Z",
-  },
-  {
-    id: "tx-13",
-    merchant: "Salary",
-    amount: 75000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-07-01",
-    notes: null,
-    created_at: "2026-07-01T00:00:00Z",
-  },
-  {
-    id: "tx-14",
-    merchant: "Monthly Expenses",
-    amount: 19500,
-    transaction_type: "expense",
-    category_id: "cat-2",
-    transaction_date: "2026-07-15",
-    notes: null,
-    created_at: "2026-07-15T00:00:00Z",
-  },
-  {
-    id: "tx-15",
-    merchant: "Salary",
-    amount: 75000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-06-01",
-    notes: null,
-    created_at: "2026-06-01T00:00:00Z",
-  },
-  {
-    id: "tx-16",
-    merchant: "Monthly Expenses",
-    amount: 25000,
-    transaction_type: "expense",
-    category_id: "cat-3",
-    transaction_date: "2026-06-15",
-    notes: null,
-    created_at: "2026-06-15T00:00:00Z",
-  },
-  {
-    id: "tx-17",
-    merchant: "Salary",
-    amount: 68000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-05-01",
-    notes: null,
-    created_at: "2026-05-01T00:00:00Z",
-  },
-  {
-    id: "tx-18",
-    merchant: "Monthly Expenses",
-    amount: 21000,
-    transaction_type: "expense",
-    category_id: null,
-    transaction_date: "2026-05-15",
-    notes: null,
-    created_at: "2026-05-15T00:00:00Z",
-  },
-  {
-    id: "tx-19",
-    merchant: "Salary",
-    amount: 68000,
-    transaction_type: "income",
-    category_id: null,
-    transaction_date: "2026-04-01",
-    notes: null,
-    created_at: "2026-04-01T00:00:00Z",
-  },
-  {
-    id: "tx-20",
-    merchant: "Monthly Expenses",
-    amount: 18500,
-    transaction_type: "expense",
-    category_id: null,
-    transaction_date: "2026-04-15",
-    notes: null,
-    created_at: "2026-04-15T00:00:00Z",
-  },
-];
+const SEED_TRANSACTIONS: Transaction[] = [];
 
-const SEED_BUDGETS: Budget[] = [
-  {
-    id: "bud-1",
-    name: "Food & Dining",
-    amount: 8000,
-    spent: 5820,
-    period: "monthly",
-    category_id: "cat-1",
-    created_at: "2026-09-01T00:00:00Z",
-  },
-  {
-    id: "bud-2",
-    name: "Transport",
-    amount: 3000,
-    spent: 1840,
-    period: "monthly",
-    category_id: "cat-2",
-    created_at: "2026-09-01T00:00:00Z",
-  },
-  {
-    id: "bud-3",
-    name: "Shopping",
-    amount: 5000,
-    spent: 5400,
-    period: "monthly",
-    category_id: "cat-3",
-    created_at: "2026-09-01T00:00:00Z",
-  },
-  {
-    id: "bud-4",
-    name: "Entertainment",
-    amount: 2000,
-    spent: 649,
-    period: "monthly",
-    category_id: "cat-4",
-    created_at: "2026-09-01T00:00:00Z",
-  },
-];
+const SEED_BUDGETS: Budget[] = [];
 
-const SEED_RECURRING: RecurringExpense[] = [
-  {
-    id: "re-1",
-    name: "Netflix",
-    amount: 649,
-    frequency: "monthly",
-    next_date: "2026-10-06",
-    status: "active",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "re-2",
-    name: "BSNL Broadband",
-    amount: 999,
-    frequency: "monthly",
-    next_date: "2026-10-12",
-    status: "active",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "re-3",
-    name: "Gym Membership",
-    amount: 1500,
-    frequency: "monthly",
-    next_date: "2026-10-01",
-    status: "active",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "re-4",
-    name: "Spotify",
-    amount: 119,
-    frequency: "monthly",
-    next_date: "2026-10-08",
-    status: "paused",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-];
+const SEED_RECURRING: RecurringExpense[] = [];
 
-const SEED_GOALS: SavingsGoal[] = [
-  {
-    id: "g-1",
-    name: "Emergency Fund",
-    target_amount: 200000,
-    current_amount: 85000,
-    color: "#00c878",
-    target_date: "2027-06-01",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "g-2",
-    name: "New Laptop",
-    target_amount: 80000,
-    current_amount: 32000,
-    color: "#38bdf8",
-    target_date: "2027-01-01",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "g-3",
-    name: "Vacation - Goa",
-    target_amount: 50000,
-    current_amount: 50000,
-    color: "#ff7b00",
-    target_date: "2026-12-01",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-  {
-    id: "g-4",
-    name: "Home Down Payment",
-    target_amount: 1000000,
-    current_amount: 120000,
-    color: "#9b5de5",
-    target_date: "2030-01-01",
-    created_at: "2026-01-01T00:00:00Z",
-  },
-];
+const SEED_GOALS: SavingsGoal[] = [];
 
 const DEFAULT_PROFILE: Profile = {
   display_name: "",
   currency: "₹",
   monthly_income: 90000,
   is_onboarded: false,
+  tour_completed: false,
 };
 
 // ─── Storage helpers ─────────────────────────────────────────────────────────
@@ -467,6 +165,7 @@ class LocalStore {
   private categories = load("samriddhi_categories", SEED_CATEGORIES);
   private recurring = load("samriddhi_recurring", SEED_RECURRING);
   private goals = load("samriddhi_goals", SEED_GOALS);
+  private notifications = load("samriddhi_notifications", [] as Notification[]);
 
   subscribe(cb: () => void) {
     this.listeners.add(cb);
@@ -498,6 +197,12 @@ class LocalStore {
       b.transaction_date.localeCompare(a.transaction_date),
     );
     save("samriddhi_transactions", this.transactions);
+    
+    this.addNotification({
+      title: tx.transaction_type === "expense" ? "New Expense Added" : "Income Received",
+      description: `Recorded ${this.profile.currency}${tx.amount.toLocaleString("en-IN")} for ${tx.merchant}.`,
+    });
+
     this.notify();
     return item;
   }
@@ -597,6 +302,32 @@ class LocalStore {
     this.notify();
   }
 
+  // Notifications
+  getNotifications(): Notification[] {
+    return this.notifications;
+  }
+  addNotification(n: Omit<Notification, "id" | "created_at" | "is_read">): void {
+    const item: Notification = {
+      ...n,
+      id: uuid(),
+      is_read: false,
+      created_at: new Date().toISOString(),
+    };
+    this.notifications = [item, ...this.notifications];
+    save("samriddhi_notifications", this.notifications);
+    this.notify();
+  }
+  markNotificationAsRead(id: string): void {
+    this.notifications = this.notifications.map((n) => (n.id === id ? { ...n, is_read: true } : n));
+    save("samriddhi_notifications", this.notifications);
+    this.notify();
+  }
+  markAllNotificationsAsRead(): void {
+    this.notifications = this.notifications.map((n) => ({ ...n, is_read: true }));
+    save("samriddhi_notifications", this.notifications);
+    this.notify();
+  }
+
   // Reset financial data (keeps profile)
   resetFinancialData(): void {
     localStorage.removeItem("samriddhi_transactions");
@@ -604,18 +335,21 @@ class LocalStore {
     localStorage.removeItem("samriddhi_categories");
     localStorage.removeItem("samriddhi_recurring");
     localStorage.removeItem("samriddhi_goals");
+    localStorage.removeItem("samriddhi_notifications");
 
     this.transactions = SEED_TRANSACTIONS;
     this.budgets = SEED_BUDGETS;
     this.categories = SEED_CATEGORIES;
     this.recurring = SEED_RECURRING;
     this.goals = SEED_GOALS;
+    this.notifications = [];
 
     save("samriddhi_transactions", this.transactions);
     save("samriddhi_budgets", this.budgets);
     save("samriddhi_categories", this.categories);
     save("samriddhi_recurring", this.recurring);
     save("samriddhi_goals", this.goals);
+    save("samriddhi_notifications", this.notifications);
 
     this.notify();
   }
@@ -636,6 +370,7 @@ class LocalStore {
     localStorage.removeItem("samriddhi_categories");
     localStorage.removeItem("samriddhi_recurring");
     localStorage.removeItem("samriddhi_goals");
+    localStorage.removeItem("samriddhi_notifications");
 
     // Reset in-memory state
     this.profile = DEFAULT_PROFILE;
@@ -644,6 +379,7 @@ class LocalStore {
     this.categories = SEED_CATEGORIES;
     this.recurring = SEED_RECURRING;
     this.goals = SEED_GOALS;
+    this.notifications = [];
 
     // Re-initialize local storage with defaults/seeds
     save("samriddhi_profile", this.profile);
@@ -652,6 +388,7 @@ class LocalStore {
     save("samriddhi_categories", this.categories);
     save("samriddhi_recurring", this.recurring);
     save("samriddhi_goals", this.goals);
+    save("samriddhi_notifications", this.notifications);
 
     this.notify();
   }
