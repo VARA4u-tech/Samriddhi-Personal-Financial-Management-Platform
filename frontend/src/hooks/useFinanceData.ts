@@ -37,5 +37,21 @@ export function useProfile() {
   return useSyncExternalStore(subscribe, snapProfile, snapProfile);
 }
 
+export function useNotifications() {
+  return useSyncExternalStore(subscribe, () => store.getNotifications(), () => store.getNotifications());
+}
+
+export function useFinanceData() {
+  return {
+    transactions: useTransactions(),
+    budgets: useBudgets(),
+    categories: useCategories(),
+    recurring: useRecurringExpenses(),
+    goals: useSavingsGoals(),
+    profile: useProfile(),
+    notifications: useNotifications(),
+  };
+}
+
 // Re-export store methods so pages can mutate without importing store directly
 export { store };
