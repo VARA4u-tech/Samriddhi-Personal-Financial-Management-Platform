@@ -643,7 +643,7 @@ export default function Index() {
                 
                 {/* Center */}
                 <span className="font-display text-lg md:text-xl font-bold tracking-wide text-black drop-shadow-sm md:flex-1 md:text-center">
-                  Crafted & Served by Vara
+                  Crafted & Served by <a href="https://github.com/VARA4u-tech/Samriddhi-Personal-Financial-Management-Platform" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">Vara</a>
                 </span>
 
                 {/* Right */}
