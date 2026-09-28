@@ -13,7 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Navigation, BrandMark, MagneticLink } from "@/components/Navigation";
 import { useProfile } from "@/hooks/useFinanceData";
 
@@ -573,15 +573,18 @@ export default function Index() {
                     Support
                   </p>
                   <div className="flex flex-col gap-1.5 sm:gap-2 font-display text-sm sm:text-base font-semibold opacity-90">
-                    <a href="#" className="hover:underline">
+                    <Link to="/help-center" className="hover:underline">
                       Help Center
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to="/contact-us" className="hover:underline">
                       Contact Us
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to="/privacy-policy" className="hover:underline">
                       Privacy Policy
-                    </a>
+                    </Link>
+                    <Link to="/terms-and-conditions" className="hover:underline">
+                      Terms & Conditions
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -629,47 +632,30 @@ export default function Index() {
               </div>
 
               {/* Bottom bar — green block spanning full width */}
-              <div className="col-span-2 lg:col-span-12 rounded-[2rem] md:rounded-full bg-flux-green p-6 text-primary-foreground flex flex-col md:flex-row items-center md:items-center justify-between gap-6 md:gap-5 text-center md:text-left">
-                <span className="flex items-center justify-center md:justify-start gap-3">
+              <div className="col-span-2 lg:col-span-12 rounded-[2rem] md:rounded-full bg-flux-green p-6 text-primary-foreground flex flex-col md:flex-row items-center justify-between gap-6 md:gap-5 text-center md:text-left">
+                {/* Left */}
+                <span className="flex items-center justify-center md:justify-start gap-3 md:flex-1">
                   <BrandMark src="/logo-footer.png" />
                   <span className="font-display text-xl font-semibold tracking-tight">
                     Samriddhi
                   </span>
                 </span>
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-display text-base font-semibold opacity-80">
+                
+                {/* Center */}
+                <span className="font-display text-lg md:text-xl font-bold tracking-wide text-black drop-shadow-sm md:flex-1 md:text-center">
+                  Crafted & Served by Vara
+                </span>
+
+                {/* Right */}
+                <div className="flex items-center justify-center gap-4 md:flex-1 md:justify-end">
+                  <span className="font-display text-base font-medium opacity-70">© 2026</span>
                   <a
-                    href="#features"
-                    className="hover:opacity-100 hover:underline underline-offset-2"
+                    href="#top"
+                    aria-label="Back to top"
+                    className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"
                   >
-                    Features
+                    <ArrowUp className="size-4" />
                   </a>
-                  <a
-                    href="#capabilities"
-                    className="hover:opacity-100 hover:underline underline-offset-2"
-                  >
-                    Capabilities
-                  </a>
-                  <a
-                    href="mailto:hello@samriddhi.app"
-                    className="hover:opacity-100 hover:underline underline-offset-2"
-                  >
-                    Email
-                  </a>
-                </div>
-                <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
-                  <span className="font-display text-base font-semibold tracking-wide flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-colors hover:bg-primary-foreground/20 text-white/80">
-                    Crafted & Served by <span className="text-white font-bold">Vara</span>
-                  </span>
-                  <div className="flex items-center justify-center gap-4">
-                    <span className="font-display text-base font-medium opacity-70">© 2026</span>
-                    <a
-                      href="#top"
-                      aria-label="Back to top"
-                      className="grid size-11 place-items-center rounded-full bg-primary-foreground/20 border border-primary-foreground/30 transition-colors hover:bg-primary-foreground/40"
-                    >
-                      <ArrowUp className="size-4" />
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
