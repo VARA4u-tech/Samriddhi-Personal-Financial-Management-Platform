@@ -6,6 +6,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PageTransition from "./components/PageTransition";
 import Onboarding from "./pages/Onboarding";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import HelpCenter from "./pages/HelpCenter";
+import ContactUs from "./pages/ContactUs";
 
 // App pages — no auth guard, direct access
 import DashboardPage from "./pages/app/Dashboard";
@@ -62,6 +66,12 @@ export default function App() {
           <Route path="/dashboard/savings" element={<SavingsGoalsPage />} />
           <Route path="/dashboard/reports" element={<ReportsPage />} />
           <Route path="/dashboard/profile" element={<ProfilePage />} />
+
+          {/* Legal & Support */}
+          <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+          <Route path="/terms-and-conditions" element={<PageTransition><TermsAndConditions /></PageTransition>} />
+          <Route path="/help-center" element={<PageTransition><HelpCenter /></PageTransition>} />
+          <Route path="/contact-us" element={<PageTransition><ContactUs /></PageTransition>} />
 
           {/* 404 */}
           <Route
