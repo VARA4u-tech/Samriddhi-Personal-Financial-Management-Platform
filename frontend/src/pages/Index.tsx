@@ -20,38 +20,38 @@ import { useProfile } from "@/hooks/useFinanceData";
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  ["01", "Smart Budgets", "Set custom limits and track your spending in real-time."],
+  ["01", "Manual Budgets", "Set custom limits and track your spending manually without linking banks."],
   [
     "02",
-    "Automated Tracking",
-    "Categorize transactions and manage recurring expenses effortlessly.",
+    "Privacy Focused",
+    "Your data is stored locally in your browser. No remote databases.",
   ],
-  ["03", "Savings Goals", "Define your targets and watch your wealth grow step-by-step."],
-  ["04", "Deep Analytics", "Gain actionable insights into your financial habits and trends."],
+  ["03", "Savings & Goals", "Define your targets and log your progress step-by-step."],
+  ["04", "Financial Notes", "Keep a simple personal record of income, expenses, and general notes."],
 ];
 
 const projects = [
   {
     name: "Unified Dashboard",
-    type: "Overview / Analytics",
+    type: "Overview / Planning",
     className: "md:col-span-7",
     color: "bg-flux-orange",
   },
   {
-    name: "Transaction History",
-    type: "Tracking / Categorization",
+    name: "Expense Recording",
+    type: "Manual Entry",
     className: "md:col-span-5",
     color: "bg-flux-violet",
   },
   {
-    name: "Smart Insights",
-    type: "AI / Recommendations",
+    name: "Local Storage",
+    type: "Privacy / Security",
     className: "md:col-span-5",
     color: "bg-flux-green",
   },
   {
-    name: "Comprehensive Reports",
-    type: "Export / Print",
+    name: "Financial Notes",
+    type: "Organization",
     className: "md:col-span-7",
     color: "bg-flux-pink",
   },
@@ -198,7 +198,7 @@ export default function Index() {
             <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center">
               <p className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-flux-orange">
                 <span className="size-1.5 rounded-full bg-flux-orange" />
-                Personal Financial Management · Est. 2026
+                Personal Finance Notes · Privacy First
               </p>
 
               <h1 className="max-w-4xl font-display text-[clamp(2.5rem,10vw,7rem)] font-medium leading-[0.85] tracking-[-0.06em] text-balance">
@@ -208,7 +208,7 @@ export default function Index() {
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="block"
                 >
-                  Take control
+                  Organize
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 40 }}
@@ -216,7 +216,7 @@ export default function Index() {
                   transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="block"
                 >
-                  of your <span className="text-flux-orange">finances</span>,
+                  your <span className="text-flux-orange">finances</span>,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 40 }}
@@ -224,13 +224,12 @@ export default function Index() {
                   transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   className="block"
                 >
-                  <em className="font-normal text-flux-pink">build wealth.</em>
+                  <em className="font-normal text-flux-pink">privately.</em>
                 </motion.span>
               </h1>
 
               <p className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-muted-foreground">
-                Track transactions, manage budgets, and achieve savings goals with powerful
-                analytics. Start your journey to financial freedom today.
+                A simple, privacy-focused tool for recording and organizing your personal financial information. No bank connections, just your manual notes stored locally in your browser.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
@@ -332,22 +331,22 @@ export default function Index() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,var(--color-flux-sand)_0_7%,transparent_7.5%),linear-gradient(140deg,transparent_0_58%,var(--color-flux-violet)_58%_72%,transparent_72%)] opacity-70" />
               <div className="relative flex h-full flex-col justify-between">
                 <span className="font-display text-4xl font-semibold leading-none sm:text-7xl">
-                  Grow
+                  Store
                   <br />
-                  your
+                  it
                   <br />
-                  <em className="font-normal">wealth.</em>
+                  <em className="font-normal">locally.</em>
                 </span>
                 <span className="text-xs uppercase tracking-[0.2em]">
-                  Complete financial platform
+                  Absolute Privacy
                 </span>
               </div>
             </div>
             {[
-              ["Secure", "Authentication", "bg-flux-pink text-primary-foreground"],
-              ["Automated", "Recurring Expenses", "bg-flux-lime text-primary-foreground"],
-              ["Categorized", "Smart labeling", "bg-flux-violet text-primary-foreground"],
-              ["Analytics", "Financial Reports", "bg-flux-green text-primary-foreground"],
+              ["Local", "Browser Storage", "bg-flux-pink text-primary-foreground"],
+              ["Private", "No Bank Logins", "bg-flux-lime text-primary-foreground"],
+              ["Manual", "Note Taking", "bg-flux-violet text-primary-foreground"],
+              ["Simple", "Record Keeping", "bg-flux-green text-primary-foreground"],
             ].map(([title, caption, classes], index) => (
               <div
                 key={title}
@@ -370,9 +369,9 @@ export default function Index() {
           <div className="flux-marquee flex w-max items-center gap-8 whitespace-nowrap font-display text-2xl font-medium uppercase tracking-[-0.03em] text-muted-foreground sm:text-3xl">
             {Array.from({ length: 3 }).map((_, index) => (
               <span key={index} className="flex items-center gap-8">
-                Track Transactions <span className="text-flux-orange">✳</span> Set Budgets{" "}
-                <span className="text-flux-pink">✳</span> Achieve Goals{" "}
-                <span className="text-flux-lime">✳</span> Gain Insights{" "}
+                Manual Entry <span className="text-flux-orange">✳</span> Local Storage{" "}
+                <span className="text-flux-pink">✳</span> Absolute Privacy{" "}
+                <span className="text-flux-lime">✳</span> No Bank Connections{" "}
                 <span className="text-flux-violet">✳</span>
               </span>
             ))}
@@ -382,9 +381,9 @@ export default function Index() {
         <section className="border-y border-foreground/10 py-16 sm:py-24" data-gsap-reveal>
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <p className="max-w-5xl font-display text-[clamp(2.2rem,5.4vw,5.4rem)] font-medium leading-[0.95] tracking-[-0.045em]">
-              We transform your financial data into clear, actionable{" "}
-              <span className="text-flux-orange">insights</span> — empowering you to build a secure{" "}
-              <span className="text-flux-pink">future.</span>
+              Your financial data remains strictly on your{" "}
+              <span className="text-flux-orange">device</span> — giving you a secure, private place to record your{" "}
+              <span className="text-flux-pink">finances.</span>
             </p>
           </div>
         </section>
@@ -453,18 +452,16 @@ export default function Index() {
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-12">
             <div className="md:col-span-7">
               <blockquote className="max-w-3xl font-display text-4xl font-medium leading-[0.95] tracking-[-0.04em] sm:text-6xl">
-                "Samriddhi gave me the clarity I needed to take control of my finances and actually
-                reach my savings goals."
+                "Finally, a simple financial note-taking app that doesn't demand my bank passwords or track my every move."
               </blockquote>
-              <p className="mt-8 text-sm text-muted-foreground">Alex Chen — Early Adopter</p>
+              <p className="mt-8 text-sm text-muted-foreground">Alex Chen — Privacy Advocate</p>
             </div>
             <div className="md:col-span-5 md:border-l md:border-foreground/10 md:pl-10">
               <p className="mb-5 text-xs uppercase tracking-[0.2em] text-flux-orange">
-                The Platform
+                Privacy First
               </p>
               <p className="max-w-sm text-lg leading-relaxed text-muted-foreground">
-                A comprehensive suite of tools designed to simplify your financial life. From daily
-                transactions to long-term goals, we've got you covered.
+                This is not a financial tracking service. It is a simple tool for manual organization. Your data never leaves your browser's local storage.
               </p>
             </div>
           </div>
@@ -507,7 +504,7 @@ export default function Index() {
                     </div>
                   </div>
                   <span className="font-display text-xs uppercase tracking-[0.2em] opacity-70">
-                    Personal Financial Management
+                    Personal Finance Notes
                   </span>
                 </div>
               </div>
@@ -620,7 +617,7 @@ export default function Index() {
                 </div>
                 <div className="relative z-10">
                   <p className="font-display mb-4 sm:mb-5 text-sm opacity-70 max-w-xs">
-                    Join thousands getting smarter about their finances. No spam, ever.
+                    Get updates about new features and privacy improvements. No spam, ever.
                   </p>
                   <form
                     onSubmit={(e) => {
