@@ -12,7 +12,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Navigation, BrandMark, MagneticLink } from "@/components/Navigation";
 import { useProfile } from "@/hooks/useFinanceData";
@@ -114,7 +114,8 @@ function ProjectTile({ project, index }: { project: (typeof projects)[number]; i
 }
 
 export default function Index() {
-  const heroRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [email, setEmail] = useState("");
   const prefersReducedMotion = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
   const navigate = useNavigate();
@@ -145,7 +146,7 @@ export default function Index() {
           },
         );
       });
-    }, heroRef);
+    }, containerRef);
     return () => {
       cancelAnimationFrame(frame);
       lenis?.destroy();
@@ -154,7 +155,7 @@ export default function Index() {
   }, [prefersReducedMotion]);
 
   useEffect(() => {
-    const root = heroRef.current;
+    const root = containerRef.current;
     if (!root || prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
     const tiltCards = Array.from(root.querySelectorAll<HTMLElement>("[data-tilt]"));
     const cleanups = tiltCards.map((card) => {
@@ -180,7 +181,7 @@ export default function Index() {
   }, [prefersReducedMotion]);
 
   return (
-    <div ref={heroRef} className="min-h-screen overflow-hidden bg-background text-foreground">
+    <div ref={containerRef} className="min-h-screen overflow-hidden bg-background text-foreground">
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-flux-orange via-flux-pink to-flux-violet z-50 origin-left"
         style={{ scaleX: scrollYProgress }}
@@ -555,13 +556,14 @@ export default function Index() {
                   <ul className="space-y-1.5 sm:space-y-2 font-display text-sm sm:text-base font-medium">
                     {["Instagram", "Twitter", "LinkedIn"].map((label) => (
                       <li key={label}>
-                        <a
-                          href="#top"
+                        <button
+                          type="button"
+                          onClick={(e) => e.preventDefault()}
                           className="group inline-flex items-center gap-1.5 hover:underline underline-offset-2"
                         >
                           {label}
                           <ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                        </a>
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -621,11 +623,17 @@ export default function Index() {
                     Join thousands getting smarter about their finances. No spam, ever.
                   </p>
                   <form
-                    onSubmit={(e) => e.preventDefault()}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setEmail("");
+                    }}
                     className="flex flex-col sm:flex-row gap-3"
                   >
                     <input
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      aria-label="Email address for newsletter"
                       placeholder="your@email.com"
                       className="font-display flex-1 rounded-full border border-black/30 bg-black/20 px-5 py-3 text-sm text-black outline-none placeholder:text-black placeholder:opacity-60 focus:border-black/60 transition-colors"
                     />
