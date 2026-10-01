@@ -227,17 +227,25 @@ export default function Index() {
                 </motion.span>
               </h1>
 
-              <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-7">
-                <a href="#features" className="group flex items-center gap-3 text-sm font-semibold">
-                  <span className="grid size-11 place-items-center rounded-full border border-foreground/20 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <p className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-muted-foreground">
+                Track transactions, manage budgets, and achieve savings goals with powerful
+                analytics. Start your journey to financial freedom today.
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                <button
+                  onClick={() => navigate(getStartedLink)}
+                  className="group flex items-center justify-center gap-2 rounded-full bg-flux-orange px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-105 active:scale-95"
+                >
+                  {profile.is_onboarded ? "Go to Dashboard" : "Get Started"}
+                  <ArrowUpRight className="size-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </button>
+                <a href="#features" className="group flex items-center gap-3 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
+                  <span className="grid size-10 place-items-center rounded-full border border-foreground/20 transition-colors group-hover:bg-foreground group-hover:text-background">
                     <ArrowDown className="size-4" />
                   </span>
                   Explore features
                 </a>
-                <p className="max-w-sm text-lg leading-relaxed text-muted-foreground sm:border-l sm:border-foreground/20 sm:pl-7">
-                  Track transactions, manage budgets, and achieve savings goals with powerful
-                  analytics.
-                </p>
               </div>
             </div>
 
@@ -482,16 +490,16 @@ export default function Index() {
                       <em className="font-normal">journey</em>
                       <ArrowUpRight className="ml-2 inline size-[0.5em] -translate-y-1 align-top transition-transform group-hover:translate-x-2 group-hover:-translate-y-3" />
                     </a>
-                    <div className="mt-6 flex flex-wrap items-center gap-3">
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
                       <button
                         onClick={() => navigate(getStartedLink)}
-                        className="font-display rounded-full bg-primary-foreground px-5 sm:px-7 py-3 sm:py-3.5 text-sm font-semibold text-flux-orange transition-opacity hover:opacity-80"
+                        className="font-display rounded-full bg-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-flux-orange shadow-lg shadow-black/10 transition-transform hover:scale-105 active:scale-95"
                       >
-                        {profile.is_onboarded ? "Dashboard" : "Get Started"}
+                        {profile.is_onboarded ? "Go to Dashboard" : "Get Started Free"}
                       </button>
                       <MagneticLink
                         href="mailto:hello@samriddhi.app"
-                        className="font-display rounded-full border border-primary-foreground/40 px-5 sm:px-7 py-3 sm:py-3.5 text-sm font-medium transition-colors hover:bg-primary-foreground/10"
+                        className="font-display rounded-full border border-primary-foreground/40 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium transition-colors hover:bg-primary-foreground/10"
                       >
                         hello@samriddhi.app
                       </MagneticLink>
