@@ -59,9 +59,8 @@ export default function TermsAndConditions() {
             <section>
               <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">2. Service Description</h2>
               <p className="leading-relaxed">
-                Samriddhi is a free, open-source personal financial management platform. It provides tools for 
-                tracking income, expenses, budgets, and savings goals. The service is provided "as is" and 
-                we make no guarantees regarding its continuous availability or feature set.
+                Samriddhi is a free, open-source personal financial note-taking tool. It provides tools for 
+                manually recording income, expenses, budgets, and savings goals. It is <strong>not</strong> a financial tracking service, banking application, or accounting system. The service is provided "as is" and we make no guarantees regarding its continuous availability.
               </p>
             </section>
 
@@ -75,12 +74,9 @@ export default function TermsAndConditions() {
             </section>
 
             <section>
-              <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">4. Disclaimer of Warranties</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">4. No Financial Advice & Disclaimers</h2>
               <p className="leading-relaxed">
-                The application and its content are provided on an "as is" basis. Samriddhi makes no warranties, 
-                expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, 
-                implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement 
-                of intellectual property or other violation of rights.
+                This tool is provided for personal organization and record-keeping purposes only. It does not provide financial, investment, tax, legal, or accounting advice. The application is provided on an "as is" basis without warranties of any kind.
               </p>
             </section>
 

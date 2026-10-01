@@ -52,9 +52,9 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">1. Introduction</h2>
               <p className="leading-relaxed">
-                At Samriddhi, your privacy is our absolute priority. We built this application with a 
-                <strong> 100% local, client-side architecture</strong>. This means your financial data 
-                is stored entirely on your device, and we do not have access to it.
+                At Samriddhi, your privacy is our absolute priority. This application is a 
+                <strong> manual financial note-taking tool</strong> designed for local use. 
+                Your financial notes are stored entirely on your device's browser, and we do not have access to them.
               </p>
             </section>
 
@@ -62,8 +62,8 @@ export default function PrivacyPolicy() {
               <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">2. Data We Do NOT Collect</h2>
               <p className="leading-relaxed mb-2">Because Samriddhi operates locally in your browser's Local Storage, we do not collect, transmit, or store:</p>
               <ul className="list-disc pl-5 space-y-2 text-white/60">
-                <li>Your financial transactions, budgets, or savings goals.</li>
-                <li>Your personal identity, bank account details, or passwords.</li>
+                <li>Your manually entered financial notes, budgets, or savings goals.</li>
+                <li>Your personal identity, bank account details, or passwords. (Please do not enter highly sensitive information).</li>
                 <li>Analytics data regarding your financial habits.</li>
               </ul>
             </section>
@@ -72,27 +72,24 @@ export default function PrivacyPolicy() {
               <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">3. How Your Data is Stored</h2>
               <p className="leading-relaxed">
                 All data generated while using Samriddhi is saved in your web browser's Local Storage. 
-                If you clear your browser data or uninstall your browser, your financial data will be permanently deleted 
-                unless you have manually exported a backup. You have total control over your data.
+                If you clear your browser data, use incognito mode, or uninstall your browser, your financial notes will be permanently deleted 
+                unless you have manually exported a backup. You are entirely responsible for maintaining your own backups.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">4. Third-Party Services</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">4. Third-Party Services & Tracking</h2>
               <p className="leading-relaxed">
-                Samriddhi is hosted on Vercel. While we do not track you, our hosting provider may collect standard 
-                web server logs (such as IP addresses and browser types) for security and performance monitoring. 
-                Future features (like AI insights) will clearly state if they require transmitting data to an external API 
-                and will require your explicit opt-in consent.
+                Samriddhi does not connect to banks, financial institutions, or automatic transaction tracking services. 
+                While the application is hosted on Vercel, which may collect standard web server logs (such as IP addresses) 
+                for security, your actual financial notes never leave your device.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">5. Changes to this Policy</h2>
               <p className="leading-relaxed">
-                We may update our Privacy Policy from time to time. Since we do not collect your email address, 
-                we will notify you of any changes by posting the new Privacy Policy on this page and updating 
-                the "Last updated" date.
+                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
               </p>
             </section>
           </div>
